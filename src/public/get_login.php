@@ -1,15 +1,18 @@
 <div class="container">
     <input type="checkbox" id="check">
-    <div class="login form">
+    <label class="login form">
         <header>Login</header>
         <form action='post_login.php' method="post">
-            <label for="name" style="color: crimson" ><?php if(!empty($errors['email'])){echo 'Invalid email format';}?></label>
+            <label for="email" style="color: crimson" ><?php if(!empty($errors['email'])){echo $errors['email'];}?></label>
+            <label for="email"  style="color: crimson" ><?php if(isset($noReg)){echo $noReg;}?></label>
             <input type="text" placeholder="Enter your email" name="email">
-            <label for="password" style="color: crimson" ><?php if(!empty($errors['password'])){echo 'Password must contain as many as 6 characters including lower-case, upper-case, numbers and symbols.';}?></label>
+            <label for="password" style="color: crimson" ><?php if(!empty($errors['password'])){echo $errors['password'];}?></label>
+            <label for="password" style="color: crimson" ><?php if(isset( $incorrectPassword )){echo  $incorrectPassword ;}?></label>
             <input type="password" placeholder="Enter your password" name="password">
             <button type="submit" class="button" value="Login">Login</button>
         </form>
         <div class="signup">
+            <div style="color: crimson" ><?php if(isset($noReg)){echo $noReg;}?></div>
         <span class="signup">Don't have an account?
        <a href="get_registration.php">Registration</a>
         </span>

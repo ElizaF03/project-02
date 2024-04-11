@@ -3,13 +3,13 @@
     <div class="registration form">
         <header>Registration</header>
         <form action="post_registration.php" method="post">
-            <label for="name" style="color: crimson" ><?php if(!empty($errors['name'])){echo 'Name is too short';}?></label>
+            <label for="name" style="color: crimson" ><?php if(!empty($errors['name'])){echo $errors['name'];}?></label>
             <input type="text" name="name" placeholder="Enter your name" value="<?php if(!empty($_POST['name'])){echo $_POST['name'];}?>">
-            <label for="name" style="color: crimson" ><?php if(!empty($errors['email'])){echo 'Invalid email format';}?></label>
+            <label for="name" style="color: crimson" ><?php if(!empty($errors['email'])){echo $errors['email'];}?></label>
             <input type="text" name="email" placeholder="Enter your email" value="<?php if(!empty($_POST['email'])){echo $_POST['email'];}?>">
-            <label for="password" style="color: crimson" ><?php if(!empty($errors['password'])){echo 'Password must contain as many as 6 characters including lower-case, upper-case, numbers and symbols.';}?></label>
+            <label for="password" style="color: crimson" ><?php if(!empty($errors['password'])){echo $errors['password'];}?></label>
             <input type="password" name="password" placeholder="Create a password">
-            <label for="repeat-password" style="color: crimson" ><?php if(!empty($errors['pswRepeat'])){echo 'Errors matching password';}?></label>
+            <label for="repeat-password" style="color: crimson" ><?php if(!empty($errors['pswRepeat'])){echo $errors['pswRepeat'];}?></label>
             <input type="password" name="repeat-password" placeholder="Confirm your password">
             <button type="submit" class="button" value="Registration">Register now</button>
         </form>
