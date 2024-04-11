@@ -25,9 +25,6 @@ if(empty($errors)){
     $password=password_hash($password, PASSWORD_DEFAULT);
     $stmt = $pdo->prepare('INSERT INTO users (name, email, password) VALUES(:name, :email, :password)');
     $stmt->execute(array('name' => $name, 'email' => $email, 'password' => $password));
-    $stmt=$pdo->query("SELECT * FROM users WHERE email = '$email'");
-    $result=$stmt->fetchAll();
-print_r($result);
 }
 
  require_once './get_registration.php';

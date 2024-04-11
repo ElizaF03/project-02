@@ -1,21 +1,17 @@
 <div class="container">
     <input type="checkbox" id="check">
-    <div class="registration form">
-        <header>Registration</header>
-        <form action="post_registration.php" method="post">
-            <label for="name" style="color: crimson" ><?php if(!empty($errors['name'])){echo 'Name is too short';}?></label>
-            <input type="text" name="name" placeholder="Enter your name" value="<?php if(!empty($_POST['name'])){echo $_POST['name'];}?>">
+    <div class="login form">
+        <header>Login</header>
+        <form action='post_login.php' method="post">
             <label for="name" style="color: crimson" ><?php if(!empty($errors['email'])){echo 'Invalid email format';}?></label>
-            <input type="text" name="email" placeholder="Enter your email" value="<?php if(!empty($_POST['email'])){echo $_POST['email'];}?>">
+            <input type="text" placeholder="Enter your email" name="email">
             <label for="password" style="color: crimson" ><?php if(!empty($errors['password'])){echo 'Password must contain as many as 6 characters including lower-case, upper-case, numbers and symbols.';}?></label>
-            <input type="password" name="password" placeholder="Create a password">
-            <label for="repeat-password" style="color: crimson" ><?php if(!empty($errors['pswRepeat'])){echo 'Errors matching password';}?></label>
-            <input type="password" name="repeat-password" placeholder="Confirm your password">
-            <button type="submit" class="button" value="Registration">Register now</button>
+            <input type="password" placeholder="Enter your password" name="password">
+            <button type="submit" class="button" value="Login">Login</button>
         </form>
         <div class="signup">
-        <span class="signup">Already have an account?
-    <a href="get_login.php">Login</a>
+        <span class="signup">Don't have an account?
+       <a href="get_registration.php">Registration</a>
         </span>
         </div>
     </div>
