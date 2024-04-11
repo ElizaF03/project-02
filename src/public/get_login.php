@@ -12,7 +12,6 @@
             <button type="submit" class="button" value="Login">Login</button>
         </form>
         <div class="signup">
-            <div style="color: crimson" ><?php if(isset($noReg)){echo $noReg;}?></div>
         <span class="signup">Don't have an account?
        <a href="get_registration.php">Registration</a>
         </span>

@@ -16,7 +16,6 @@ if (preg_match("/^[a-zA-Z0-9]+$/", $password) || strlen($password) < 6) {
 if (empty($errors)) {
     $pdo = new PDO('pgsql:host=db;port=5432;dbname=dbname', 'dbuser', 'dbpwd');
     $stmt = $pdo->prepare("SELECT * FROM users WHERE email = :email");
-
     $stmt->execute(['email' => $email]);
     $user = $stmt->fetch();
     if ($user) {
@@ -25,15 +24,10 @@ if (empty($errors)) {
             header('Location: main.php');
         } else {
             $incorrectPassword = 'Incorrect password';
-            require_once './get_login.php';
         }
     } else {
-        $noReg= 'User is not registered';
-        require_once './get_login.php';
+        $noReg = 'User is not registered';
     }
-
-} else {
-    require_once './get_login.php';
 }
-
+require_once './get_login.php';
 
