@@ -20,7 +20,8 @@ if (empty($errors)) {
     $user = $stmt->fetch();
     if ($user) {
         if (password_verify($password, $user['password'])) {
-            session_start();
+           session_start();
+           $_SESSION['id'] = $user['id'];
             header('Location: main.php');
         } else {
             $incorrectPassword = 'Incorrect password';

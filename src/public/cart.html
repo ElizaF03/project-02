@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<article class="order-panel">
+    <header class="user-info">
+        <svg t="1586156234890" class="user" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+             p-id="2663" width="18" height="18">
+            <path
+                    d="M917.965523 917.331585c0 22.469758-17.891486 40.699957-39.913035 40.699957-22.058388 0-39.913035-18.2302-39.913035-40.699957l-0.075725-0.490164-1.087774 0c-18.945491-157.665903-148.177807-280.296871-306.821991-285.4748-3.412726 0.151449-6.751774 0.562818-10.240225 0.562818-3.450589 0-6.789637-0.410346-10.202363-0.524956-158.606321 5.139044-287.839661 127.806851-306.784128 285.436938l-1.014096 0 0.075725 0.490164c0 22.469758-17.854647 40.699957-39.913035 40.699957s-39.915082-18.2302-39.915082-40.699957l-0.373507-3.789303c0-6.751774 2.026146-12.903891 4.91494-18.531052 21.082154-140.712789 111.075795-258.241552 235.432057-312.784796C288.420387 530.831904 239.989351 444.515003 239.989351 346.604042c0-157.591201 125.33352-285.361213 279.924387-285.361213 154.62873 0 279.960203 127.770012 279.960203 285.361213 0 97.873098-48.391127 184.15316-122.103966 235.545644 124.843356 54.732555 215.099986 172.863023 235.808634 314.211285 2.437515 5.290493 4.01443 10.992355 4.01443 17.181311L917.965523 917.331585zM719.822744 346.679767c0-112.576985-89.544409-203.808826-199.983707-203.808826-110.402459 0-199.944821 91.232864-199.944821 203.808826s89.542362 203.808826 199.944821 203.808826C630.278335 550.488593 719.822744 459.256752 719.822744 346.679767z"
+                    p-id="2664"></path>
+        </svg>
+        <button class="btn btn-warning buy-count">3</button>
+    </header>
+    <section class="section" id="order">
+        <div class="section-title">My Order 😎</div>
+        <div class="order-info">
+            <div class="address">
+                <div class="address-name">625 St Marks Ave</div>
+                <a href="#" class="address-edit">Edit</a>
+            </div>
+            <div class="delivery">
+                <div class="delivery-time">
+                    <button class="btn time-btn">
+                        <svg t="1586139290823" class="clock" viewBox="0 0 1024 1024" version="1.1"
+                             xmlns="http://www.w3.org/2000/svg" p-id="2356" width="18" height="18">
+                            <path
+                                    d="M512 42.65984q95.66208 0 182.49728 37.1712t149.66784 100.00384 100.00384 149.66784 37.1712 182.49728-37.1712 182.49728-100.00384 149.66784-149.66784 100.00384-182.49728 37.1712-182.49728-37.1712-149.66784-100.00384-100.00384-149.66784-37.1712-182.49728 37.1712-182.49728 100.00384-149.66784 149.66784-100.00384 182.49728-37.1712zM512 128q-78.00832 0-149.17632 30.49472t-122.49088 81.83808-81.83808 122.49088-30.49472 149.17632 30.49472 149.17632 81.83808 122.49088 122.49088 81.83808 149.17632 30.49472 149.17632-30.49472 122.49088-81.83808 81.83808-122.49088 30.49472-149.17632-30.49472-149.17632-81.83808-122.49088-122.49088-81.83808-149.17632-30.49472zM512 213.34016q17.67424 0 30.16704 12.4928t12.4928 30.16704l0 238.32576 115.67104 115.32288q12.32896 12.32896 12.32896 30.33088t-12.32896 30.33088-30.33088 12.32896-30.33088-12.32896l-128-128q-12.32896-12.32896-12.32896-30.33088l0-256q0-17.67424 12.4928-30.16704t30.16704-12.4928z"
+                                    p-id="2357"></path>
+                        </svg>
+                    </button>
+                    <span class="time">35min</span>
+                </div>
+                <a href="#" class="delivery-choose-time">Choose time</a>
+            </div>
+        </div>
+        <ul class="food-list">
+            <li class="food-list__item">
+                <img class="food-image" src="https://i.loli.net/2020/04/06/7oZgORNCnGE5qhU.png" />
+                <div class="food-buy-amount">1 x</div>
+                <div class="food-name">Beach BBQBurger</div>
+                <div class="food-price">$14.99</div>
+            </li>
+            <li class="food-list__item">
+                <img class="food-image" src="https://i.loli.net/2020/04/06/EZJyVICMS6GYueL.png" />
+                <div class="food-buy-amount">1 x</div>
+                <div class="food-name">French Fries</div>
+                <div class="food-price">$9.99</div>
+            </li>
+            <li class="food-list__item">
+                <img class="food-image" src="https://i.loli.net/2020/04/06/pIWNyMlqCSZiLtr.png" />
+                <div class="food-buy-amount">1 x</div>
+                <div class="food-name">Cheese Sauce</div>
+                <div class="food-price">$0.99</div>
+            </li>
+            <li class="food-list__item">
+                <img class="food-image" src="https://i.loli.net/2020/04/06/BN2JIuHAC6Gh3eR.png" />
+                <div class="food-name">Delivery</div>
+                <div class="food-price">$0.00</div>
+            </li>
+        </ul>
+        <div class="total-price">
+            <div class="total">Total:</div>
+            <div class="price">$25.97</div>
+        </div>
+        <div class="buy-action">
+            <div class="person-number-input">
+                <div class="persons">Persons</div>
+                <div class="input-group input-spinner">
+                    <button class="btn minus" onclick="document.querySelector('#count').value--">
+                        <svg t="1585835162360" class="icon" viewBox="0 0 1025 1024" version="1.1"
+                             xmlns="http://www.w3.org/2000/svg" p-id="3867" width="14" height="14" fill="currentColor">
+                            <path
+                                    d="M973.154 563.218 51.222 563.218c-28.275 0-51.222-22.946-51.222-51.214 0-28.276 22.946-51.222 51.222-51.222L973.154 460.782c28.33 0 51.222 22.946 51.222 51.222C1024.375 540.272 1001.484 563.218 973.154 563.218L973.154 563.218z"
+                                    p-id="3868"></path>
+                        </svg>
+                    </button>
+                    <input type="text" readonly value="0" class="form-control" id="count" />
+                    <button class="btn plus" onclick="document.querySelector('#count').value++">
+                        <svg t="1585835178245" class="icon" fill="currentColor" viewBox="0 0 1024 1024" version="1.1"
+                             xmlns="http://www.w3.org/2000/svg" p-id="1204" width="14" height="14">
+                            <path
+                                    d="M970.745 459.367 566.614 459.367 566.614 55.251C566.614 25.842 542.771 2 513.361 2c-29.411 0-53.253 23.841-53.253 53.251l0 404.116L55.975 459.367c-29.411 0-53.253 23.841-53.253 53.25 0 29.41 23.842 53.253 53.253 53.253l404.133 0 0 404.115c0 29.407 23.842 53.249 53.253 53.249 29.41 0 53.253-23.842 53.253-53.249L566.614 565.87l404.131 0c29.413 0 53.255-23.843 53.255-53.253C1024 483.208 1000.158 459.367 970.745 459.367z"
+                                    p-id="1205"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <button class="btn btn-warning checkout-btn">
+                Checkout<svg width="18" height="18" class="arrow" viewBox="0 0 24 24">
+                <path d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z"></path>
+            </svg>
+            </button>
+        </div>
+    </section>
+</article>
+
+</body>
+<style>
+    @import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
+    body {
+        margin: 0;
+        min-height: 100vh;
+        font-size: 14px;
+        font-family: Roboto, sans-serif;
+        background: var(--warning-color);
+    }
+
+    :root {
+        --danger-color: rgb(250, 83, 24);
+        --danger-color-lighter: rgb(255, 247, 237);
+        --warning-color: rgb(252, 213, 97);
+        --warning-color-transparent: rgba(252, 213, 97, 0.1);
+        --secondary-color: rgb(248, 248, 247);
+        --secondary-color-darker: rgb(160, 160, 160);
+        --secondary-color-lightest: rgb(253, 253, 251);
+        --info-color: rgb(80, 62, 157);
+    }
+
+    .dashboard {
+        display: flex;
+        margin: 8px;
+        background: white;
+        border-radius: 30px;
+    }
+
+    .restaurant-panel {
+        display: grid;
+        row-gap: 72px;
+        padding: 45px 80px;
+        border-right: 1px solid var(--secondary-color);
+    }
+
+
+
+
+    .search-bar .form-control {
+        --input-bg: var(--secondary-color-lighter);
+        width: 100%;
+        border-color: transparent;
+        border-radius: 15px;
+    }
+    .search-bar .btn {
+        --btn-bg: var(--secondary-color-lighter);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 18px 6px 18px 18px;
+        border-color: transparent;
+        border-radius: 15px;
+    }
+
+    .welcome-banner {
+        position: relative;
+        padding: 64px 180px 72px 324px;
+        background: var(--danger-color-lighter);
+        border-radius: 15px;
+        white-space: nowrap;
+    }
+    .welcome-banner .delivery {
+        position: absolute;
+        top: -22px;
+        left: 40px;
+        width: 240px;
+        height: 240px;
+    }
+    .welcome-banner h1 {
+        margin: 0;
+        font-size: 18px;
+        color: var(--danger-color);
+    }
+    .welcome-banner p {
+        margin: 14px 0 0 0;
+        color: var(--secondary-color-darker);
+    }
+    .welcome-banner .learn-more {
+        position: absolute;
+        right: 36px;
+        bottom: 36px;
+        display: flex;
+        align-items: center;
+        color: var(--danger-color);
+        text-decoration: none;
+    }
+    .welcome-banner .learn-more .arrow {
+        margin-left: 12px;
+        fill: currentColor;
+    }
+
+    #restaurants .section-titles {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 60px;
+    }
+    #restaurants .section-titles .section-title {
+        font-size: 21px;
+        font-weight: bold;
+    }
+
+    .date-select {
+        display: flex;
+        align-items: center;
+        padding: 14px;
+    }
+    .date-select .clock {
+        margin-right: 9px;
+        fill: currentColor;
+    }
+    .date-select .chevron {
+        margin-left: 15px;
+        fill: currentColor;
+    }
+
+    .categories {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .category-list {
+        display: flex;
+        padding: 0;
+        margin: 0;
+        list-style-type: none;
+    }
+    .category-list__item {
+        box-sizing: border-box;
+        width: 72px;
+        padding: 6px;
+        border-radius: 36px;
+        box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.05);
+        transition: 0.3s;
+    }
+    .category-list__item:not(:last-child) {
+        margin-right: 18px;
+    }
+    .category-list__item a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+    }
+    .category-list__item .category-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 56px;
+        height: 56px;
+        background: white;
+        border: 1px solid var(--secondary-color-lighter);
+        border-radius: 50%;
+    }
+    .category-list__item .category-icon svg {
+        fill: black;
+        transform: scale(1.2);
+    }
+    .category-list__item .category-name {
+        padding: 9px 18px 36px 18px;
+        font-size: 10px;
+        font-weight: bold;
+        color: black;
+    }
+    .category-list__item:target {
+        background: var(--warning-color);
+    }
+    .category-list__item:target .category-icon {
+        border-color: transparent;
+    }
+
+    .category-more-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        border-radius: 15px;
+    }
+
+    .restaurant-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 36px 27px;
+        padding: 0;
+        margin: 0;
+        list-style-type: none;
+    }
+    .restaurant-list__item .restaurant-image {
+        width: 250px;
+        height: 125px;
+        border-radius: 15px;
+    }
+    .restaurant-list__item .restaurant-name {
+        margin-top: 27px;
+    }
+    .restaurant-list__item .restaurant-info {
+        margin-top: 12px;
+        font-size: 10px;
+    }
+    .restaurant-list__item .restaurant-rate {
+        margin-right: 9px;
+    }
+    .restaurant-list__item .restaurant-rate > * {
+        display: inline-flex;
+        vertical-align: middle;
+    }
+    .restaurant-list__item .restaurant-rate svg {
+        margin-right: 6px;
+    }
+    .restaurant-list__item .restaurant-category {
+        color: var(--secondary-color-darker);
+    }
+
+    .order-panel {
+        padding: 56px 50px 42px 48px;
+        background: var(--secondary-color-lightest);
+    }
+
+    .user-info {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+    .user-info .buy-count {
+        margin-left: 30px;
+        width: 40px;
+        height: 40px;
+        padding: 10px;
+        color: black;
+        border-radius: 15px;
+    }
+
+    #order {
+        margin-top: 64px;
+    }
+    #order .section-title {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .order-info {
+        width: 240px;
+        margin-top: 44px;
+        padding: 27px 24px 24px 24px;
+        color: white;
+        background: var(--info-color);
+        border-radius: 15px;
+    }
+    .order-info .address,
+    .order-info .delivery {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .order-info .address-edit {
+        color: var(--warning-color);
+        text-decoration: none;
+    }
+    .order-info .delivery {
+        margin-top: 20px;
+    }
+    .order-info .delivery .delivery-time {
+        display: flex;
+        align-items: center;
+    }
+    .order-info .delivery .time-btn {
+        width: 40px;
+        height: 40px;
+        padding: 10px;
+        color: var(--warning-color);
+        background: var(--warning-color-transparent);
+        border-color: transparent;
+        border-radius: 15px;
+    }
+    .order-info .delivery .time-btn svg {
+        fill: currentColor;
+    }
+    .order-info .delivery .time {
+        margin-left: 12px;
+    }
+    .order-info .delivery .delivery-choose-time {
+        color: var(--warning-color);
+        text-decoration: none;
+    }
+
+    .food-list {
+        display: grid;
+        row-gap: 33px;
+        padding: 0;
+        margin: 54px 0 0 0;
+        font-size: 10px;
+        font-weight: bold;
+        list-style-type: none;
+    }
+    .food-list__item {
+        display: grid;
+        align-items: center;
+    }
+    .food-list__item:not(:last-child) {
+        grid-template-columns: 78px 20px 106px 1fr;
+    }
+    .food-list__item:last-child {
+        grid-template-columns: 78px 20px 1fr;
+    }
+    .food-list__item .food-image {
+        width: 57px;
+        height: 32px;
+        border-radius: 5px;
+    }
+    .food-list__item .food-price {
+        color: var(--secondary-color-darker);
+        justify-self: flex-end;
+    }
+
+    .total-price {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 115px;
+        padding-bottom: 24px;
+    }
+    .total-price .price {
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    .buy-action {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 34px;
+        border-top: 2px solid var(--secondary-color-lighter);
+    }
+    .buy-action .persons {
+        font-size: 10px;
+        font-weight: bold;
+    }
+    .buy-action .input-spinner {
+        margin-top: 16px;
+    }
+    .buy-action .checkout-btn {
+        display: flex;
+        align-items: center;
+        padding: 30px;
+        color: black;
+        border-radius: 10px;
+    }
+    .buy-action .checkout-btn .arrow {
+        margin-left: 16px;
+    }
+
+    .input-spinner .btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-color: var(--secondary-color-lighter);
+        padding: 12px;
+        border-radius: 10px;
+    }
+    .input-spinner .btn:hover, .input-spinner .btn:focus, .input-spinner .btn:active {
+        border-color: var(--secondary-color-lighter);
+    }
+    .input-spinner .form-control {
+        --border-color: var(--secondary-color-lighter);
+        box-sizing: border-box;
+        max-width: 48px;
+        text-align: center;
+        border-left: none;
+        border-right: none;
+    }
+    .input-spinner .plus {
+        border-left: none;
+        padding-left: 0;
+    }
+    .input-spinner .minus {
+        padding-right: 0;
+    }
+</style>
+</html>
