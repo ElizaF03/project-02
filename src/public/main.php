@@ -1,5 +1,8 @@
 <?php
 session_start();
+if(!isset($_SESSION['user_id'])){
+   header('Location: get_login.php');
+}
 $pdo = new PDO('pgsql:host=db;port=5432;dbname=dbname', 'dbuser', 'dbpwd');
 $stmt= $pdo->query("SELECT * FROM products");
 $products = $stmt->fetchAll();
@@ -7,10 +10,8 @@ $products = $stmt->fetchAll();
 
 <head>
     <title>Food Delivery Website</title>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width"/>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/alphardex/aqua.css/dist/aqua.min.css">
-</head>
+
+    </head>
 <body>
 <main class="dashboard">
     <article class="restaurant-panel">

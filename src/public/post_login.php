@@ -21,7 +21,7 @@ if (empty($errors)) {
     if ($user) {
         if (password_verify($password, $user['password'])) {
            session_start();
-           $_SESSION['id'] = $user['id'];
+           $_SESSION['user_id'] = $user['id'];
             header('Location: main.php');
         } else {
             $incorrectPassword = 'Incorrect password';
