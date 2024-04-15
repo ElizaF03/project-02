@@ -2,7 +2,7 @@
     <input type="checkbox" id="check">
     <div class="registration form">
         <header>Registration</header>
-        <form action="post_registration.php" method="post">
+        <form action="/registration" method="post">
             <label for="name" style="color: crimson" ><?php if(!empty($errors['name'])){echo $errors['name'];}?></label>
             <input type="text" name="name" placeholder="Enter your name" value="<?php if(!empty($_POST['name'])){echo $_POST['name'];}?>">
             <label for="name" style="color: crimson" ><?php if(!empty($errors['email'])){echo $errors['email'];}?></label>
@@ -15,7 +15,7 @@
         </form>
         <div class="signup">
         <span class="signup">Already have an account?
-    <a href="get_login.php">Login</a>
+    <a href="/login">Login</a>
         </span>
         </div>
     </div>

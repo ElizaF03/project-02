@@ -2,7 +2,7 @@
     <input type="checkbox" id="check">
     <label class="login form">
         <header>Login</header>
-        <form action='post_login.php' method="post">
+        <form action='/login' method="post">
             <label for="email" style="color: crimson" ><?php if(!empty($errors['email'])){echo $errors['email'];}?></label>
             <label for="email"  style="color: crimson" ><?php if(isset($noReg)){echo $noReg;}?></label>
             <input type="text" placeholder="Enter your email" name="email">
@@ -13,11 +13,12 @@
         </form>
         <div class="signup">
         <span class="signup">Don't have an account?
-       <a href="get_registration.php">Registration</a>
+       <a href="/registration">Registration</a>
         </span>
         </div>
     </div>
 </div>
+
 <style>
 
     #check:checked ~ .registration {

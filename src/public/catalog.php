@@ -1,11 +1,12 @@
 <?php
 session_start();
 if(!isset($_SESSION['user_id'])){
-   header('Location: get_login.php');
+   header('Location: login');
 }
 $pdo = new PDO('pgsql:host=db;port=5432;dbname=dbname', 'dbuser', 'dbpwd');
 $stmt= $pdo->query("SELECT * FROM products");
 $products = $stmt->fetchAll();
+session_destroy();
 ?>
 
 <head>
@@ -20,7 +21,9 @@ $products = $stmt->fetchAll();
             <div class="section-titles">
                 <div class="section-title">Catalog</div>
             </div>
-
+            <div class="section-titles">
+                <a href="/logout" class="button">Exit</a>
+            </div>
         </section>
         <section class="section">
             <ul class="restaurant-list">
@@ -59,7 +62,10 @@ $products = $stmt->fetchAll();
         --secondary-color-lightest: rgb(253, 253, 251);
         --info-color: rgb(80, 62, 157);
     }
-
+.button{
+    color: #006653;
+    font-size: 22px;
+}
     .dashboard {
         margin: 8px;
         background: white;
