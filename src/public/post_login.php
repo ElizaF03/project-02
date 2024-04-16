@@ -1,9 +1,9 @@
 <?php
-
-if(isset($_POST['email'])){
+require_once './User.php';
+if (isset($_POST['email'])) {
     $email = $_POST['email'];
 }
-if(isset($_POST['password'])){
+if (isset($_POST['password'])) {
     $password = $_POST['password'];
 }
 
@@ -18,14 +18,12 @@ if (preg_match("/^[a-zA-Z0-9]+$/", $password) || strlen($password) < 6) {
 }
 
 if (empty($errors)) {
-    $pdo = new PDO('pgsql:host=db;port=5432;dbname=dbname', 'dbuser', 'dbpwd');
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE email = :email");
-    $stmt->execute(['email' => $email]);
-    $user = $stmt->fetch();
+    $user = new User();
+    $user = $user->getUserByEmail($email);
     if ($user) {
         if (password_verify($password, $user['password'])) {
-           session_start();
-           $_SESSION['user_id'] = $user['id'];
+            session_start();
+            $_SESSION['user_id'] = $user['id'];
             header('Location: /catalog');
         } else {
             $incorrectPassword = 'Incorrect password';

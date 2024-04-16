@@ -20,7 +20,7 @@ if($requestUri=== '/login'){
 }elseif ($requestUri=== '/catalog'){
     require_once  './catalog.php';
 }elseif ($requestUri=== '/logout'){
-    require_once  './get_login.php';
+    require_once  './logout.php';
 }else{
     require_once  './404.html';
 }

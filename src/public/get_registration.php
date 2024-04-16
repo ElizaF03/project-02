@@ -3,7 +3,7 @@
     <div class="registration form">
         <header>Registration</header>
         <form action="/registration" method="post">
-            <label for="name" style="color: crimson" ><?php if(!empty($errors['name'])){echo $errors['name'];}?></label>
+            <label for="name" style="color: crimson" ><?php if(!empty($errors['username'])){echo $errors['username'];}?></label>
             <input type="text" name="name" placeholder="Enter your name" value="<?php if(!empty($_POST['name'])){echo $_POST['name'];}?>">
             <label for="name" style="color: crimson" ><?php if(!empty($errors['email'])){echo $errors['email'];}?></label>
             <input type="text" name="email" placeholder="Enter your email" value="<?php if(!empty($_POST['email'])){echo $_POST['email'];}?>">
