@@ -1,5 +1,6 @@
 <?php
 require_once 'Model.php';
+require_once '../Controller/UserController.php';
 
 class User extends Model
 {
@@ -17,7 +18,7 @@ class User extends Model
         $stmt->execute(array('username' => $username, 'email' => $email, 'password' => $password));
     }
 
-    public function getUserByEmail(string $email): array
+    public function getUserByEmail(string $email): array|false
     {
         $stmt = $this->getPdo()->prepare("SELECT * FROM users WHERE email = :email");
         $stmt->execute(['email' => $email]);

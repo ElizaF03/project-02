@@ -1,24 +1,16 @@
 <?php
-require_once './User.php';
+require_once '../Model/User.php';
+require_once '../Controller/UserController.php';
 if (isset($_POST['email'])) {
     $email = $_POST['email'];
 }
 if (isset($_POST['password'])) {
     $password = $_POST['password'];
 }
+$user = new User();
+$userController = new UserController();
 
-
-$errors = [];
-
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    $errors['email'] = 'Invalid email format';
-}
-if (preg_match("/^[a-zA-Z0-9]+$/", $password) || strlen($password) < 6) {
-    $errors['password'] = 'Password must contain as many as 6 characters including lower-case, upper-case, numbers and symbols.';
-}
-
-if (empty($errors)) {
-    $user = new User();
+if (empty($userController->validateLogin($email, $password))) {
     $user = $user->getUserByEmail($email);
     if ($user) {
         if (password_verify($password, $user['password'])) {

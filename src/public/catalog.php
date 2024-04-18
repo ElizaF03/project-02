@@ -1,5 +1,5 @@
 <?php
-require_once './Product.php';
+require_once '../Model/Product.php';
 session_start();
 if(!isset($_SESSION['user_id'])){
    header('Location: login');
