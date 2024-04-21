@@ -11,7 +11,7 @@ class User extends Model
 
 
 
-    public function registration(string $username, string $email, string $password): void
+    public function addInfo(string $username, string $email, string $password): void
     {
         $password = password_hash($password, PASSWORD_DEFAULT);
         $stmt = $this->getPdo()->prepare('INSERT INTO users (username, email, password) VALUES(:username, :email, :password)');

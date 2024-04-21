@@ -4,10 +4,8 @@
         <header>Login</header>
         <form action='/login' method="post">
             <label for="email" style="color: crimson" ><?php if(!empty($errors['email'])){echo $errors['email'];}?></label>
-            <label for="email"  style="color: crimson" ><?php if(isset($noReg)){echo $noReg;}?></label>
-            <input type="text" placeholder="Enter your email" name="email">
+            <input type="text" placeholder="Enter your email" name="email" value="<?php if(!empty($_POST['email'])){echo $_POST['email'];}?>">
             <label for="password" style="color: crimson" ><?php if(!empty($errors['password'])){echo $errors['password'];}?></label>
-            <label for="password" style="color: crimson" ><?php if(isset( $incorrectPassword )){echo  $incorrectPassword ;}?></label>
             <input type="password" placeholder="Enter your password" name="password">
             <button type="submit" class="button" value="Login">Login</button>
         </form>
