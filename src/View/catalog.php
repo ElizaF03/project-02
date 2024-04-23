@@ -1,12 +1,4 @@
-<?php
-require_once '../Model/Product.php';
-session_start();
-if(!isset($_SESSION['user_id'])){
-   header('Location: login');
-}
-$product=new Product();
-$products = $product->getProducts();
-?>
+
 
 <head>
     <title>Food Delivery Website</title>
@@ -21,6 +13,7 @@ $products = $product->getProducts();
                 <div class="section-title">Catalog</div>
             </div>
             <div class="section-titles">
+                <a href="/cart" class="button">In cart</a>
                 <a href="/logout" class="button">Exit</a>
             </div>
         </section>
@@ -28,11 +21,15 @@ $products = $product->getProducts();
             <ul class="restaurant-list">
                 <?php foreach ($products as $product): ?>
                 <li class="restaurant-list__item">
-                    <a href="#"><img class="restaurant-image" src="<?php echo $product['img_url']; ?></div>"/></a>
-                    <div class="restaurant-name"><?php echo $product['name']; ?></div>
-                    <div class="restaurant-info">
-                        <span class="restaurant-category"><?php echo $product['price']; ?> $</span>
-                    </div>
+                    <form class="form" method="post" action="/cart">
+                        <a href="#"><img class="restaurant-image" src="<?php echo $product['img_url']; ?></div>"/></a>
+                        <div class="restaurant-name"><?php echo $product['name']; ?></div>
+                        <div class="restaurant-info">
+                            <span class="restaurant-category"><?php echo $product['price']; ?> $</span>
+                            <input type="text" value="<?php echo $product['id']; ?>" name="id-product" hidden="hidden">
+                            <button class="button" type ="submit" >Add to cart</button>
+                        </div>
+                    </form>
                 </li>
                 <?php endforeach; ?>
             </ul>
@@ -160,7 +157,13 @@ $products = $product->getProducts();
         color: black;
         font-size: 22px;
     }
-
+.button{
+    background-color: #006653;
+    margin-left: 15px;
+    color: #ffffff;
+    padding: 5px;
+    cursor: pointer;
+}
 
 </style>
 </body>

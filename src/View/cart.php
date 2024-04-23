@@ -8,20 +8,28 @@
 <article class="order-panel">
     <section class="section" id="order">
         <div class="section-title">My Order 😎</div>
+
+        <div class="section-titles">
+            <a href="/catalog" class="button">In catalog</a>
+            <a href="/logout" class="button">Exit</a>
+        </div>
         <div class="body-order">
             <div class="left-column">
                 <ul class="food-list">
+                    <?php foreach ($products as $product): ?>
                     <li class="food-list__item">
                         <div class="food-info">
                             <img class="food-image"
-                                 src="https://images.unsplash.com/photo-1590987337605-84f3ed4dc29f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
-                            <div class="food-buy-amount">10 x</div>
-                            <div class="food-name">Set #1
+                                 src=<?php echo $product['img_url']; ?>/>
+                            <div class="food-buy-amount"><?php  ?>  x</div>
+                            <div class="food-name"><?php echo $product['name']; ?>
                             </div>
                         </div>
 
-                        <div class="food-price">$38</div>
+                        <div class="food-price"><?php echo $product['price']; ?> $</div>
                     </li>
+
+                    <?php endforeach; ?>
                 </ul>
             </div>
             <div class="right-column">
@@ -71,9 +79,14 @@
         padding: 56px 50px 42px 48px;
         background: var(--secondary-color-lightest);
     }
-
-    .section-title {
-        font-size: 28px;
+    .section-titles {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        font-size: 21px;
+        font-weight: bold;
+        margin: 20px 0;
     }
 
     .body-order {
@@ -162,6 +175,12 @@
     .buy-action .checkout-btn .arrow {
         margin-left: 16px;
     }
-
+    .button{
+        background-color: #006653;
+        margin-left: 15px;
+        color: #ffffff;
+        padding: 5px;
+        cursor: pointer;
+    }
 </style>
 </html>

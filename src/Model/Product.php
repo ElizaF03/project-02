@@ -7,8 +7,13 @@ class Product extends Model
     private float $price;
     private string $img_url;
 
-    public function getProducts():array{
+    public function getAll():array{
         $stmt= $this->getPdo()->query("SELECT * FROM products");
         return $stmt->fetchAll();
+    }
+    public function getById($id): false|array
+    {
+        $stmt= $this->getPdo()->query("SELECT * FROM products WHERE id=$id");
+        return $stmt->fetch();
     }
 }

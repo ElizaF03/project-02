@@ -8,7 +8,7 @@ class UserController
         require_once '../View/get_registration.php';
     }
 
-    public function validateRegistration($username, $email, $password, $pswRepeat)
+    private function validateRegistration($username, $email, $password, $pswRepeat): array
     {
         $errors = [];
         if (strlen($username) < 2) {
@@ -18,9 +18,13 @@ class UserController
             $errors['email'] = 'Invalid email format';
         }
         $user = new User();
-        $user=$user->getUserByEmail($email);
-        if ($user['email'] === $_POST['email']) {
-            $errors['email'] = 'Email already exists';
+        $user = $user->getUserByEmail($email);
+        if ($user) {
+            if ($user['email'] === $email) {
+                $errors['email'] = 'Email already exists';
+            }
+        }elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $errors['email'] = 'Invalid email format';
         }
         if (preg_match("/^[a-zA-Z0-9]+$/", $password) || strlen($password) < 6) {
             $errors['password'] = 'Password must contain as many as 6 characters including lower-case, upper-case, numbers and symbols.';
@@ -48,12 +52,12 @@ class UserController
         }
         $errors = $this->validateRegistration($username, $email, $password, $pswRepeat);
         if (empty($errors)) {
-            {
-                $user = new User();
-                $user->addInfo($username, $email, $password);
-            }
+                    $user = new User();
+                    $user->addInfo($username, $email, $password);
+            header('Location: /login');
+        }else{
+            require_once '../View/get_registration.php';
         }
-        require_once '../View/get_registration.php';
     }
 
     public function getLogin(): void
@@ -61,7 +65,7 @@ class UserController
         require_once '../View/get_login.php';
     }
 
-    public function validateLogin(string $email, string $password): array
+    private function validateLogin(string $email, string $password): array
     {
         $errors = [];
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
