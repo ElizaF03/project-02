@@ -28,29 +28,35 @@ class CartController
         foreach ($productIds as $productId) {
             $products[] = $product->getById($productId);
         }
-
+        $result = $products;
+        foreach ($products as &$product) {
+            foreach ($userProducts as $userProduct) {
+                if ($product['id'] === $userProduct['product_id']) {
+                    $product['quantity'] = $userProduct['quantity'];
+                }
+            }
+            unset($product);
+        }
         require_once '../View/cart.php';
     }
 
     public function addProduct(): void
     {
         session_start();
-        $userProduct = new UserProduct();
-
         if (!isset($_SESSION['user_id'])) {
             header('Location: login');
         } else {
             $productId = $_POST['id-product'];
             $userId = $_SESSION['user_id'];
+            $userProduct = new UserProduct();
             $oneUserProduct = $userProduct->getOne($userId, $productId);
             if (!$oneUserProduct) {
                 $userProduct->create($userId, $productId);
             } else {
-                $userProduct->add($userId, $productId);
+                $userProduct->updateQuantity($userId, $productId);
             }
         }
         $this->showUserProducts($_SESSION['user_id']);
-
     }
 
 }

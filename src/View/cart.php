@@ -10,32 +10,34 @@
         <div class="section-title">My Order 😎</div>
 
         <div class="section-titles">
-            <a href="/catalog" class="button">In catalog</a>
+            <a href="/catalog" class="button">Catalog</a>
             <a href="/logout" class="button">Exit</a>
         </div>
         <div class="body-order">
             <div class="left-column">
                 <ul class="food-list">
+                    <?php $totalSum=0; ?>
                     <?php foreach ($products as $product): ?>
                     <li class="food-list__item">
                         <div class="food-info">
                             <img class="food-image"
                                  src=<?php echo $product['img_url']; ?>/>
-                            <div class="food-buy-amount"><?php  ?>  x</div>
+                            <div class="food-buy-amount"><?php echo $product['quantity'];?> x</div>
                             <div class="food-name"><?php echo $product['name']; ?>
                             </div>
                         </div>
-
                         <div class="food-price"><?php echo $product['price']; ?> $</div>
+                        <?php $sum= $product['price']*$product['quantity']; ?>
                     </li>
-
+                        <?php $totalSum= $totalSum+$sum; ?>
                     <?php endforeach; ?>
                 </ul>
             </div>
             <div class="right-column">
                 <div class="total-price">
                     <div class="total">Total:</div>
-                    <div class="price">$25.97</div>
+                    <div class="price">
+                        <?php echo $totalSum; ?> $</div>
                 </div>
                 <div class="buy-action">
                     <button class="btn btn-warning checkout-btn">

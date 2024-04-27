@@ -4,11 +4,12 @@ class UserProduct extends Model
 {
 
 
-    public function getAllByUserId($userId): array|null
+    public function getAllByUserId($userId): false|array
     {
         $stmt = $this->getPdo()->prepare("SELECT * FROM user_products WHERE user_id = :user_id");
         $stmt->execute(['user_id' => $userId]);
         return $stmt->fetchAll();
+
     }
 
     public function create(int $userId, int $productId, int $quantity = 1): void
@@ -22,12 +23,12 @@ class UserProduct extends Model
         $stmt = $this->getPdo()->prepare('SELECT * FROM user_products WHERE product_id =:product_id AND user_id =:user_id');
         $stmt->execute(['product_id' => $productId, 'user_id' => $userId]);
         return $stmt->fetch();
-
     }
 
-    public function add(int $userId, int $productId)
+    public function updateQuantity(int $userId, int $productId)
     {
-        $stmt = self::getPDO()->query("UPDATE user_products SET quantity = quantity+1  WHERE product_id = {$productId} AND user_id = {$userId}");
+        $stmt = $this->getPDO()->prepare('UPDATE user_products SET quantity = quantity+1  WHERE product_id =:product_id AND user_id =:user_id');
+        $stmt->execute(['product_id' => $productId, 'user_id' => $userId]);
         return $stmt->fetch();
     }
 }

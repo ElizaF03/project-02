@@ -13,7 +13,7 @@
                 <div class="section-title">Catalog</div>
             </div>
             <div class="section-titles">
-                <a href="/cart" class="button">In cart</a>
+                <a href="/cart" class="button">Cart</a>
                 <a href="/logout" class="button">Exit</a>
             </div>
         </section>
