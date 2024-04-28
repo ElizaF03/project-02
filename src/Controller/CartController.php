@@ -35,8 +35,8 @@ class CartController
                     $product['quantity'] = $userProduct['quantity'];
                 }
             }
-            unset($product);
         }
+        unset($product);
         require_once '../View/cart.php';
     }
 

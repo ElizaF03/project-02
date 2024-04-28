@@ -8,10 +8,10 @@
 
         <section class="section" id="restaurants">
             <div class="section-titles">
-                <div class="section-title">Catalog</div>
+                <div class="section-title">Favorites</div>
             </div>
             <div class="section-titles">
-                <a href="/favorites" class="button">Favorites</a>
+                <a href="/catalog" class="button">Catalog</a>
                 <a href="/cart" class="button">Cart</a>
                 <a href="/logout" class="button">Exit</a>
             </div>
@@ -33,7 +33,7 @@
                             <form class="form" method="post" action="/favorites">
                                 <input type="text" value="<?php echo $product['id']; ?>" name="id-product"
                                        hidden="hidden">
-                                <button class="button" type="submit">Add to favorites</button>
+                                <button class="button button_light" type="submit" >Remove from favorites</button>
                             </form>
                         </div>
 
@@ -173,6 +173,10 @@
         color: #ffffff;
         padding: 5px;
         cursor: pointer;
+    }
+    .button_light{
+
+        background-color: #288f7c;
     }
 
 </style>

@@ -11,6 +11,7 @@
 
         <div class="section-titles">
             <a href="/catalog" class="button">Catalog</a>
+            <a href="/favorites" class="button">Favorites</a>
             <a href="/logout" class="button">Exit</a>
         </div>
         <div class="body-order">
