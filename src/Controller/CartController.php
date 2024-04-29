@@ -1,7 +1,5 @@
 <?php
-require_once '../Model/UserProduct.php';
-require_once '../Model/User.php';
-require_once '../Model/Product.php';
+
 
 class CartController
 {

@@ -1,7 +1,4 @@
 <?php
-require_once '../Model/FavoriteProduct.php';
-require_once '../Model/User.php';
-require_once '../Model/Product.php';
 
 class FavoriteController
 {
