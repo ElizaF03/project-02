@@ -21,7 +21,7 @@ class FavoriteProduct extends Model
     }
     public function remove(int $userId, int $productId): void
     {
-        $stmt = $this->getPdo()->prepare('DELETE FROM favorite_user_products (user_id, product_id) VALUES(:user_id, :product_id)');
+        $stmt = $this->getPdo()->prepare("DELETE FROM favorite_user_products WHERE user_id=:user_id AND product_id=:product_id");
         $stmt->execute(array('user_id' => $userId, 'product_id' => $productId));
     }
 }

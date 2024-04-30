@@ -51,10 +51,30 @@ class CartController
             if (!$oneUserProduct) {
                 $userProduct->create($userId, $productId);
             } else {
-                $userProduct->updateQuantity($userId, $productId);
+                $userProduct->plusQuantity($userId, $productId);
             }
         }
         $this->showUserProducts($_SESSION['user_id']);
     }
 
+    public function removeProduct(): void
+    {
+        session_start();
+        if (!isset($_SESSION['user_id'])) {
+            header('Location: login');
+        } else {
+            $productId = $_POST['id-product'];
+            $userId = $_SESSION['user_id'];
+            $userProduct = new UserProduct();
+            $oneUserProduct = $userProduct->getOne($userId, $productId);
+            if ($oneUserProduct) {
+                if ($oneUserProduct['quantity'] === 1) {
+                    $userProduct->remove($userId, $productId);
+                } else {
+                    $userProduct->minusQuantity($userId, $productId);
+                }
+            }
+            $this->showUserProducts($_SESSION['user_id']);
+        }
+    }
 }

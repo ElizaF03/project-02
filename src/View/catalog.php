@@ -25,16 +25,27 @@
                         <div class="restaurant-name"><?php echo $product['name']; ?></div>
                         <div class="restaurant-info">
                             <span class="restaurant-category"><?php echo $product['price']; ?> $</span>
-                            <form class="form" method="post" action="/cart">
-                                <input type="text" value="<?php echo $product['id']; ?>" name="id-product"
-                                       hidden="hidden">
-                                <button class="button" type="submit">Add to cart</button>
-                            </form>
-                            <form class="form" method="post" action="/favorites">
-                                <input type="text" value="<?php echo $product['id']; ?>" name="id-product"
-                                       hidden="hidden">
-                                <button class="button" type="submit">Add to favorites</button>
-                            </form>
+                            <div class="action">
+                                <form class="form" method="post" action="/add-product">
+                                    <input type="text" value="<?php echo $product['id']; ?>" name="id-product"
+                                           hidden="hidden">
+                                    <button class="button" type="submit">+</button>
+                                </form>
+
+                                <form class="form" method="post" action="/remove-product">
+                                    <input type="text" value="<?php echo $product['id']; ?>" name="id-product"
+                                           hidden="hidden">
+                                    <button class="button" type="submit">-</button>
+                                </form>
+                                <div class="add_favorite">
+                                    <form class="form" method="post" action="/favorites">
+                                        <input type="text" value="<?php echo $product['id']; ?>" name="id-product"
+                                               hidden="hidden">
+                                        <button class="button" type="submit">Add to favorites</button>
+                                    </form>
+                                </div>
+                            </div>
+
                         </div>
 
                     </li>
@@ -65,10 +76,18 @@
         --secondary-color-lightest: rgb(253, 253, 251);
         --info-color: rgb(80, 62, 157);
     }
+.action{
+    display: flex;
+    margin-top: 10px;
 
+}
     .button {
+        display: flex;
         color: #006653;
         font-size: 22px;
+        padding: 5px;
+        min-width: 30px;
+        justify-content: center;
     }
 
     .dashboard {
