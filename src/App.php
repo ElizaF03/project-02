@@ -23,6 +23,12 @@ class App
                 'method' => 'registration',
             ]
         ],
+        '/logout' => [
+            'GET' => [
+                'class' => 'UserController',
+                'method' => 'logout',
+            ],
+        ],
         '/catalog' => [
             'GET' => [
                 'class' => 'ProductController',
@@ -33,15 +39,28 @@ class App
             'GET' => [
                 'class' => 'CartController',
                 'method' => 'getCart',
-            ]
+            ],
+
+            'POST' => [
+                'class' => 'OrderController',
+                'method' => 'getOrder',
+            ],
         ],
         '/add-product' => [
+            'GET' => [
+                'class' => 'ProductController',
+                'method' => 'getCatalog',
+            ],
             'POST' => [
                 'class' => 'CartController',
                 'method' => 'addProduct',
             ]
         ],
         '/remove-product' => [
+            'GET' => [
+                'class' => 'ProductController',
+                'method' => 'getCatalog',
+            ],
             'POST' => [
                 'class' => 'CartController',
                 'method' => 'removeProduct',
@@ -56,6 +75,18 @@ class App
                 'class' => 'FavoriteController',
                 'method' => 'addFavoriteProduct',
             ]
+        ],
+        '/form-order' => [
+            'POST' => [
+                'class' => 'OrderController',
+                'method' => 'getOrder',
+            ],
+        ],
+        '/order' => [
+            'POST' => [
+                'class' => 'OrderController',
+                'method' => 'makeOrder',
+            ],
         ],
     ];
 

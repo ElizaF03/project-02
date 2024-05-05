@@ -63,7 +63,13 @@ class UserController
     {
         require_once '../View/get_login.php';
     }
-
+    public function logout(): void
+    {
+        session_start();
+        $_SESSION['user_id'] ='';
+        session_destroy();
+        header('Location: /login');
+    }
     private function validateLogin(string $email, string $password): array
     {
         $errors = [];

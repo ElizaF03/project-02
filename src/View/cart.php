@@ -41,12 +41,15 @@
                         <?php echo $totalSum; ?> $</div>
                 </div>
                 <div class="buy-action">
-                    <button class="btn btn-warning checkout-btn">
-                        Buy
-                        <svg width="18" height="18" class="arrow" viewBox="0 0 24 24">
-                            <path d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z"></path>
-                        </svg>
-                    </button>
+                    <form action="/form-order" method="post">
+                        <button class="btn btn-warning checkout-btn">
+                            Buy
+                            <svg width="18" height="18" class="arrow" viewBox="0 0 24 24">
+                                <path d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z"></path>
+                            </svg>
+                        </button>
+                    </form>
+
                 </div>
             </div>
 

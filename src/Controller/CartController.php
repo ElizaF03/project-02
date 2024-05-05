@@ -38,6 +38,17 @@ class CartController
         require_once '../View/cart.php';
     }
 
+    public function getTotalQuantity($userId): int
+    {
+        $userProduct = new UserProduct();
+        $userProducts = $userProduct->getAllByUserId($_SESSION['user_id']);
+        $sum = 0;
+        foreach ($userProducts as $userProduct) {
+            $sum += $userProduct['quantity'];
+        }
+        return $sum;
+    }
+
     public function addProduct(): void
     {
         session_start();
@@ -54,7 +65,7 @@ class CartController
                 $userProduct->plusQuantity($userId, $productId);
             }
         }
-        $this->showUserProducts($_SESSION['user_id']);
+        header('Location: /catalog');
     }
 
     public function removeProduct(): void
@@ -74,7 +85,7 @@ class CartController
                     $userProduct->minusQuantity($userId, $productId);
                 }
             }
-            $this->showUserProducts($_SESSION['user_id']);
+            header('Location: /catalog');
         }
     }
 }
