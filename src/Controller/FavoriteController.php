@@ -8,7 +8,9 @@ class FavoriteController
         if (!isset($_SESSION['user_id'])) {
             header('Location: login');
         } else {
-            $this->showFavoriteProducts($_SESSION['user_id']);
+            $userProductController = new UserProductController();
+            $products = $userProductController->getUserProducts($_SESSION['user_id'], FavoriteProduct::class);
+            require_once './../View/favorites.php';
         }
     }
 
@@ -24,10 +26,11 @@ class FavoriteController
             $oneFavoriteProduct = $favoriteProduct->getOne($userId, $productId);
             if (!$oneFavoriteProduct) {
                 $favoriteProduct->create($userId, $productId);
-
             }
         }
-        $this->showFavoriteProducts($_SESSION['user_id']);
+        $userProductController = new UserProductController();
+        $products = $userProductController->getUserProducts($_SESSION['user_id'], FavoriteProduct::class);
+        require_once './../View/favorites.php';
     }
 
     public function removeFavoriteProduct(): void
@@ -44,23 +47,8 @@ class FavoriteController
                 $favoriteProduct->remove($userId, $productId);
             }
         }
-        $this->showFavoriteProducts($_SESSION['user_id']);
-    }
-
-    public function showFavoriteProducts($userId): void
-    {
-        $favoriteProduct = new FavoriteProduct();
-        $product = new Product();
-        $favoriteProducts = $favoriteProduct->getAllByUserId($_SESSION['user_id']);
-        $productIds = [];
-        $products = [];
-        foreach ($favoriteProducts as $favoriteProduct) {
-            $productIds[] = $favoriteProduct['product_id'];
-        }
-        foreach ($productIds as $productId) {
-            $products[] = $product->getById($productId);
-        }
-
-        require_once '../View/favorites.php';
+        $userProductController = new UserProductController();
+        $products = $userProductController->getUserProducts($_SESSION['user_id'], FavoriteProduct::class);
+        require_once './../View/favorites.php';
     }
 }
