@@ -9,11 +9,12 @@ class CartController
         if (!isset($_SESSION['user_id'])) {
             header('Location: login');
         } else {
-            $this->showUserProducts($_SESSION['user_id']);
+            $products=$this->showUserProducts($_SESSION['user_id']);
+            require_once './../View/cart.php';
         }
     }
 
-    public function showUserProducts($userId): void
+    public function showUserProducts($userId): ?array
     {
         $userProduct = new UserProduct();
         $product = new Product();
@@ -26,7 +27,6 @@ class CartController
         foreach ($productIds as $productId) {
             $products[] = $product->getById($productId);
         }
-        $result = $products;
         foreach ($products as &$product) {
             foreach ($userProducts as $userProduct) {
                 if ($product['id'] === $userProduct['product_id']) {
@@ -35,7 +35,7 @@ class CartController
             }
         }
         unset($product);
-        require_once '../View/cart.php';
+        return $products;
     }
 
     public function getTotalQuantity($userId): int

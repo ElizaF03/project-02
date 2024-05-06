@@ -3,11 +3,16 @@
 
 class Model
 {
-    private PDO $pdo;
-
+    protected PDO $pdo;
     public function getPdo(): PDO
-    {
-        return  $this->pdo = new PDO('pgsql:host=db;port=5432;dbname=dbname', 'dbuser', 'dbpwd');;
+    {$host=getenv('DB_HOST');
+        $db=getenv('DB_NAME');
+        $port=getenv('DB_PORT');
+        $user=getenv('DB_USER');
+        $password=getenv('DB_PASSWORD');
+       return $this->pdo = new PDO("pgsql:host=$host;port=$port;dbname=$db", "$user", "$password");
+
 
     }
+
 }

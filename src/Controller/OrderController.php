@@ -8,7 +8,10 @@ class OrderController
         if (!isset($_SESSION['user_id'])) {
             header('Location: login');
         } else {
-            $this->showProduct($_SESSION['user_id']);
+            //$cartController=new CartController();
+            //$products = $cartController->showUserProducts($_SESSION['user_id']);
+            $products = $this->showProduct($_SESSION['user_id']);
+            require_once '../View/order.php';
         }
     }
 
@@ -29,7 +32,7 @@ class OrderController
         if (preg_match('/((8|\+7)-?)?\(?\d{3,5}\)?-?\d{1}-?\d{1}-?\d{1}-?\d{1}-?\d{1}((-?\d{1})?-?\d{1})?/', $phone)) {
             $errors['phone'] = 'Phone number is invalid';
         }
-        if ($totalPrice == 0) {
+        if ((integer)$totalPrice === 0) {
             $errors['total-price'] = 'Empty order';
         }
         return $errors;
@@ -71,11 +74,12 @@ class OrderController
             $userProduct->removeAll($_SESSION['user_id']);
             header('Location: /cart');
         } else {
+            $products = $this->showProduct($_SESSION['user_id']);
             require_once '../View/order.php';
         }
     }
 
-    public function showProduct($userId)
+   public function showProduct($userId)
     {
         $userProduct = new UserProduct();
         $product = new Product();
@@ -88,7 +92,6 @@ class OrderController
         foreach ($productIds as $productId) {
             $products[] = $product->getById($productId);
         }
-        $result = $products;
         foreach ($products as &$product) {
             foreach ($userProducts as $userProduct) {
                 if ($product['id'] === $userProduct['product_id']) {
@@ -97,6 +100,6 @@ class OrderController
             }
         }
         unset($product);
-        require_once '../View/order.php';
+        return $products;
     }
 }
