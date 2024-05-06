@@ -71,7 +71,7 @@ class OrderController
                 $orderProduct->create($orderId, $product['product_id'], $product['quantity']);
             }
             $userProduct->removeAll($_SESSION['user_id']);
-            header('Location: /cart');
+            header('Location: /catalog');
         } else {
 
             $userProductController = new UserProductController();

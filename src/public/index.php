@@ -25,4 +25,6 @@ spl_autoload_register($autoloadController);
 spl_autoload_register($autoloadModel);
 
 $app = new App();
+$app->addRoute('/login', 'GET', 'UserController', 'getLogin');
+$app->addRoute('/login', 'POST', 'UserController', 'login');
 $app->run();

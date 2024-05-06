@@ -19,7 +19,6 @@ class UserProductController extends Model
         foreach ($products as &$product) {
             foreach ($userProducts as $userProduct) {
                     if ($product['id'] === $userProduct['product_id']) {
-
                         $product['quantity'] = $userProduct['quantity'];
                     }
                 }

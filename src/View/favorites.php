@@ -25,12 +25,12 @@
                         <div class="restaurant-name"><?php echo $product['name']; ?></div>
                         <div class="restaurant-info">
                             <span class="restaurant-category"><?php echo $product['price']; ?> $</span>
-                            <form class="form" method="post" action="/cart">
+                            <form class="form" method="post" action="/add-product">
                                 <input type="text" value="<?php echo $product['id']; ?>" name="id-product"
                                        hidden="hidden">
                                 <button class="button" type="submit">Add to cart</button>
                             </form>
-                            <form class="form" method="post" action="/favorites">
+                            <form class="form" method="post" action="/remove-favorite-product">
                                 <input type="text" value="<?php echo $product['id']; ?>" name="id-product"
                                        hidden="hidden">
                                 <button class="button button_light" type="submit" >Remove from favorites</button>

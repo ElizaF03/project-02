@@ -3,16 +3,6 @@
 class App
 {
     private array $routes = [
-        '/login' => [
-            'GET' => [
-                'class' => 'UserController',
-                'method' => 'getLogin',
-            ],
-            'POST' => [
-                'class' => 'UserController',
-                'method' => 'login',
-            ]
-        ],
         '/registration' => [
             'GET' => [
                 'class' => 'UserController',
@@ -76,6 +66,12 @@ class App
                 'method' => 'addFavoriteProduct',
             ]
         ],
+        '/remove-favorite-product' => [
+            'POST' => [
+                'class' => 'FavoriteController',
+                'method' => 'removeFavoriteProduct',
+            ],
+        ],
         '/form-order' => [
             'POST' => [
                 'class' => 'OrderController',
@@ -106,5 +102,9 @@ class App
         } else {
             require_once './View/404.html';
         }
+    }
+    public function addRoute(string $route, string $requestMethod, string $class, string $method): void{
+      $this->routes[$route][$requestMethod]=
+      ['class' => $class, 'method' => $method];
     }
 }
