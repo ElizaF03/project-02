@@ -1,5 +1,5 @@
 <?php
-
+namespace Model;
 class OrderProduct extends Model
 {
     public function create(int $orderId, int $productId, int $quantity): void

@@ -1,6 +1,5 @@
 <?php
-require_once 'Model.php';
-require_once '../Controller/UserController.php';
+namespace Model;
 
 class User extends Model
 {

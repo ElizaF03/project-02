@@ -1,5 +1,5 @@
 <?php
-require_once 'Model.php';
+namespace Model;
 class Product extends Model
 {
     private int $id;

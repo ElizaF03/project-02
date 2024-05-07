@@ -1,5 +1,10 @@
 <?php
-
+namespace Controller;
+use DateTime;
+use Model\Order;
+use Model\OrderProduct;
+use Model\Product;
+use Model\UserProduct;
 class OrderController
 {
     public function getOrder()
@@ -8,10 +13,34 @@ class OrderController
         if (!isset($_SESSION['user_id'])) {
             header('Location: login');
         } else {
-            $userProductController = new UserProductController();
-            $products=$userProductController->getUserProducts($_SESSION['user_id'], UserProduct::class);
+            $products=$this->getUserProducts($_SESSION['user_id']);
             require_once '../View/order.php';
         }
+    }
+    public function getUserProducts($userId): ?array
+    {
+        $userProduct = new userProduct();
+        $product = new Product();
+        $userProducts = $userProduct->getAllByUserId($userId);
+        $productIds = [];
+        $products = [];
+        foreach ($userProducts as $userProduct) {
+            $productIds[] = $userProduct['product_id'];
+        }
+        foreach ($productIds as $productId) {
+            $products[] = $product->getById($productId);
+        }
+        if(isset($userProduct['quantity']) ){
+            foreach ($products as &$product) {
+                foreach ($userProducts as $userProduct) {
+                    if ($product['id'] === $userProduct['product_id']) {
+                        $product['quantity'] = $userProduct['quantity'];
+                    }
+                }
+            }
+        }
+        unset($product);
+        return $products;
     }
 
     private function validate($firstName, $lastName, $address, $phone, $totalPrice): array
@@ -73,9 +102,7 @@ class OrderController
             $userProduct->removeAll($_SESSION['user_id']);
             header('Location: /catalog');
         } else {
-
-            $userProductController = new UserProductController();
-            $products=$userProductController->getUserProducts($_SESSION['user_id'], UserProduct::class);
+            $products=$this->getUserProducts($_SESSION['user_id']);
             require_once '../View/order.php';
         }
     }

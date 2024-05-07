@@ -1,6 +1,8 @@
 <?php
 
-
+namespace Controller;
+use Model\Product;
+use Model\UserProduct;
 class CartController
 {
     public function getCart(): void
@@ -9,20 +11,34 @@ class CartController
         if (!isset($_SESSION['user_id'])) {
             header('Location: login');
         } else {
-            $userProductController = new UserProductController();
-            $products=$userProductController->getUserProducts($_SESSION['user_id'], UserProduct::class);
+            $products=$this->getUserProducts($_SESSION['user_id']);
             require_once './../View/cart.php';
         }
     }
-    public function getTotalQuantity($userId): int
+    public function getUserProducts($userId): ?array
     {
-        $userProduct = new UserProduct();
-        $userProducts = $userProduct->getAllByUserId($_SESSION['user_id']);
-        $sum = 0;
+        $userProduct = new userProduct();
+        $product = new Product();
+        $userProducts = $userProduct->getAllByUserId($userId);
+        $productIds = [];
+        $products = [];
         foreach ($userProducts as $userProduct) {
-            $sum += $userProduct['quantity'];
+            $productIds[] = $userProduct['product_id'];
         }
-        return $sum;
+        foreach ($productIds as $productId) {
+            $products[] = $product->getById($productId);
+        }
+        if(isset($userProduct['quantity']) ){
+            foreach ($products as &$product) {
+                foreach ($userProducts as $userProduct) {
+                    if ($product['id'] === $userProduct['product_id']) {
+                        $product['quantity'] = $userProduct['quantity'];
+                    }
+                }
+            }
+        }
+        unset($product);
+        return $products;
     }
 
     public function addProduct(): void

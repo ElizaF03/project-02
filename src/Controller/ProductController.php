@@ -1,4 +1,7 @@
 <?php
+namespace Controller;
+use Model\Product;
+use Model\UserProduct;
 
 class ProductController
 {
@@ -10,9 +13,18 @@ class ProductController
         } else {
             $productModel = new Product();
             $products = $productModel->getAll();
-            $cartController = new CartController();
-            $sum=$cartController->getTotalQuantity($_SESSION['user_id']);
+            $sum=$this->getTotalQuantity($_SESSION['user_id']);
             require_once '../View/catalog.php';
         }
+    }
+    public function getTotalQuantity($userId): int
+    {
+        $userProduct = new UserProduct();
+        $userProducts = $userProduct->getAllByUserId($userId);
+        $sum = 0;
+        foreach ($userProducts as $userProduct) {
+            $sum += $userProduct['quantity'];
+        }
+        return $sum;
     }
 }

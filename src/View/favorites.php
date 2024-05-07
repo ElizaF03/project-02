@@ -12,7 +12,7 @@
             </div>
             <div class="section-titles">
                 <a href="/catalog" class="button">Catalog</a>
-                <a href="/cart" class="button">Cart</a>
+                <a href="/cart" class="button">Cart <span>(<?php echo $sum;?>)</span></a>
                 <a href="/logout" class="button">Exit</a>
             </div>
         </section>

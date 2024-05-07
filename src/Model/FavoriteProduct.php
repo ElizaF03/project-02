@@ -1,6 +1,5 @@
 <?php
-
-
+namespace Model;
 class FavoriteProduct extends Model
 {
     public function getOne(int $userId, int $productId): false|array
