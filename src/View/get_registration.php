@@ -26,10 +26,6 @@
         display: block;
     }
 
-    #check:checked ~ .login {
-        display: none;
-    }
-
     #check {
         display: none;
     }

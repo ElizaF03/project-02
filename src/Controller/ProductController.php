@@ -8,14 +8,27 @@ class ProductController
     public function getCatalog()
     {
         session_start();
+        $productModel = new Product();
+        $products = $productModel->getAll();
+
         if (!isset($_SESSION['user_id'])) {
-            header('Location: login');
+            $sum=0;
         } else {
-            $productModel = new Product();
-            $products = $productModel->getAll();
             $sum=$this->getTotalQuantity($_SESSION['user_id']);
-            require_once '../View/catalog.php';
+
+        }require_once '../View/catalog.php';
+    }
+    public function getProductCard()
+    {
+        session_start();
+        if (!isset($_SESSION['user_id'])) {
+            $sum=0;
+        }else{
+            $sum=$this->getTotalQuantity($_SESSION['user_id']);
         }
+        $productModel = new Product();
+        $product=$productModel->getById($_POST['id-product']);
+        require_once '../View/product-card.php';
     }
     public function getTotalQuantity($userId): int
     {

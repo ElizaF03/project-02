@@ -6,14 +6,16 @@
 </head>
 <body>
 <article class="order-panel">
-    <section class="section" id="order">
-        <div class="section-title">My Order 😎</div>
-
+    <section class="section" id="restaurants">
         <div class="section-titles">
-            <a href="/catalog" class="button">Catalog</a>
+            <div class="section-title">My Order 😎</div>
+        </div>
+        <div class="section-titles">  <a href="/catalog" class="button">Catalog</a>
             <a href="/favorites" class="button">Favorites</a>
             <a href="/logout" class="button">Exit</a>
         </div>
+    </section>
+    <section class="section" id="restaurants ">
         <div class="body-order">
             <div class="left-column">
                 <ul class="food-list">
@@ -92,7 +94,6 @@
         margin-bottom: 30px;
         font-size: 21px;
         font-weight: bold;
-        margin: 20px 0;
     }
 
     .body-order {

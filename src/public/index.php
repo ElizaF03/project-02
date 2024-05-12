@@ -3,8 +3,10 @@
 use Controller\CartController;
 use Controller\FavoriteController;
 use Controller\OrderController;
+use Controller\ProductCardController;
 use Controller\ProductController;
 use Controller\UserController;
+use Controller\ReviewController;
 
 require_once '../App.php';
 
@@ -28,6 +30,8 @@ $app->addRoute('/registration', 'GET', UserController::class, 'getRegistration')
 $app->addRoute('/registration', 'POST', UserController::class, 'registration');
 $app->addRoute('/logout', 'GET', UserController::class, 'logout');
 $app->addRoute('/catalog', 'GET', ProductController::class, 'getCatalog');
+$app->addRoute('/product-card', 'POST', ProductCardController::class, 'getProductCard');
+$app->addRoute('/add-review', 'POST', ReviewController::class, 'addReview');
 $app->addRoute('/add-product', 'GET', ProductController::class, 'getCatalog');
 $app->addRoute('/add-product', 'POST', CartController::class, 'addProduct');
 $app->addRoute('/remove-product', 'GET', ProductController::class, 'getCatalog');

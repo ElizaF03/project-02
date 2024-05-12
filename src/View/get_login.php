@@ -19,10 +19,6 @@
 
 <style>
 
-    #check:checked ~ .registration {
-        display: block;
-    }
-
     #check:checked ~ .login {
         display: none;
     }

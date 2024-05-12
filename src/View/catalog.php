@@ -12,7 +12,7 @@
             </div>
             <div class="section-titles">
                 <a href="/favorites" class="button">Favorites</a>
-                <a href="/cart" class="button">Cart <span>(<?php echo $sum;?>)</span></a>
+                <a href="/cart" class="button">Cart <span>(<?php echo $sum; ?>)</span></a>
                 <a href="/logout" class="button">Exit</a>
             </div>
         </section>
@@ -20,8 +20,14 @@
             <ul class="restaurant-list">
                 <?php foreach ($products as $product): ?>
                     <li class="restaurant-list__item">
+                        <form action="/product-card" method="post">
+                            <input type="text" value="<?php echo $product['id']; ?>" name="id-product"
+                                   hidden="hidden">
+                            <button class="button-img" type="submit"><img class="restaurant-image"
+                                                                      src="<?php echo $product['img_url']; ?>"/>
+                            </button>
+                        </form>
 
-                        <a href="#"><img class="restaurant-image" src="<?php echo $product['img_url']; ?></div>"/></a>
                         <div class="restaurant-name"><?php echo $product['name']; ?></div>
                         <div class="restaurant-info">
                             <span class="restaurant-category"><?php echo $product['price']; ?> $</span>
@@ -76,10 +82,22 @@
         --secondary-color-lightest: rgb(253, 253, 251);
         --info-color: rgb(80, 62, 157);
     }
-.action{
-    display: flex;
-    margin-top: 10px;
 
+    .action {
+        display: flex;
+        margin-top: 10px;
+
+    }
+.button-img{
+    position: relative;
+    padding: 0;
+    border: 0;
+    cursor: pointer;
+    img{
+
+        width: 100%;
+        height: 100%;
+    }
 }
     .button {
         display: flex;
@@ -113,12 +131,6 @@
         font-size: 21px;
         font-weight: bold;
     }
-
-    .date-select .chevron {
-        margin-left: 15px;
-        fill: currentColor;
-    }
-
 
     .category-list__item a {
         display: flex;
@@ -166,10 +178,6 @@
     .restaurant-list__item .restaurant-info {
         margin-top: 12px;
         font-size: 10px;
-    }
-
-    .restaurant-list__item .restaurant-rate {
-        margin-right: 9px;
     }
 
     .restaurant-list__item .restaurant-rate > * {

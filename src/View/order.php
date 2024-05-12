@@ -1,7 +1,17 @@
 <div class="container">
     <input type="checkbox" id="check">
     <div class="registration form">
-        <header>Order</header>
+
+        <section class="section" id="restaurants">
+            <div class="section-titles">
+                <div class="section-title">Order</div>
+            </div>
+            <div class="section-titles">
+                <a href="/catalog" class="button">Catalog</a>
+                <a href="/favorites" class="button">Favorites</a>
+                <a href="/logout" class="button">Exit</a>
+            </div>
+        </section>
         <form action="/order" method="post">
             <div class="form-wrapper">
                 <div class="input-wrapper">
@@ -61,7 +71,7 @@
 
                 </div>
             </div>
-            <button type="submit" class="button" value="makeOrder">Make Order</button>
+            <button type="submit" class="button-order" value="makeOrder">Make Order</button>
         </form>
     </div>
 </div>
@@ -71,10 +81,6 @@
         display: block;
     }
 
-    #check:checked ~ .login {
-        display: none;
-    }
-
     #check {
         display: none;
     }
@@ -82,10 +88,12 @@
     .container .form {
         padding: 2rem;
     }
-.form-wrapper{
-    display: flex;
-    gap: 30px;
-}
+
+    .form-wrapper {
+        display: flex;
+        gap: 30px;
+    }
+
     .form header {
         font-size: 2rem;
         font-weight: 500;
@@ -104,7 +112,7 @@
         outline: none;
     }
 
-    .button {
+    .button-order {
         height: 60px;
         width: 100%;
         padding: 0 15px;
@@ -123,26 +131,6 @@
         box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
     }
 
-    .form a {
-        font-size: 16px;
-        color: #009579;
-        text-decoration: none;
-    }
-
-    .form a:hover {
-        text-decoration: underline;
-    }
-
-    .form input.button {
-        color: #fff;
-        background: #009579;
-        font-size: 1.2rem;
-        font-weight: 500;
-        letter-spacing: 1px;
-        margin-top: 1.7rem;
-        cursor: pointer;
-        transition: 0.4s;
-    }
 
     .form input.button:hover {
         background: #006653;
@@ -157,7 +145,6 @@
     .signup label:hover {
         text-decoration: underline;
     }
-
 
 
     .food-list {
@@ -195,10 +182,6 @@
         align-items: center;
     }
 
-    .food-name {
-
-    }
-
     .food-list__item .food-price {
         color: var(--secondary-color-darker);
         margin-left: 45px;
@@ -220,5 +203,30 @@
     .total-price .total {
         font-size: 22px;
     }
+
+    .button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 22px;
+        font-weight: bold;
+        margin-left: 15px;
+        font-family: Roboto, sans-serif;
+        padding: 5px;
+        cursor: pointer;
+        background: #006653;
+        color: #ffffff;
+        text-decoration: underline;
+    }
+
+    .section-titles {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        font-size: 21px;
+        font-weight: bold;
+    }
+
 
 </style>
