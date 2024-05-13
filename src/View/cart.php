@@ -19,7 +19,6 @@
         <div class="body-order">
             <div class="left-column">
                 <ul class="food-list">
-                    <?php $totalSum=0; ?>
                     <?php foreach ($products as $product): ?>
                     <li class="food-list__item">
                         <div class="food-info">
@@ -30,9 +29,8 @@
                             </div>
                         </div>
                         <div class="food-price"><?php echo $product['price']; ?> $</div>
-                        <?php $sum= $product['price']*$product['quantity']; ?>
                     </li>
-                        <?php $totalSum= $totalSum+$sum; ?>
+
                     <?php endforeach; ?>
                 </ul>
             </div>
@@ -40,7 +38,7 @@
                 <div class="total-price">
                     <div class="total">Total:</div>
                     <div class="price">
-                        <?php echo $totalSum; ?> $</div>
+                        <?php echo $totalPrice; ?> $</div>
                 </div>
                 <div class="buy-action">
                     <form action="/form-order" method="post">

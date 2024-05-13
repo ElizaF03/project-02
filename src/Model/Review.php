@@ -4,10 +4,10 @@ namespace Model;
 
 class Review extends Model
 {
-    public function create($userId, $productId, $review)
+    public function create($userId, $productId, $grade, $review): void
     {
-        $stmt = $this->getPdo()->prepare('INSERT INTO reviews(user_id, product_id, review) VALUES(:user_id, :product_id, :review)');
-        $stmt->execute(array('user_id' => $userId, 'product_id' => $productId, 'review' => $review));
+        $stmt = $this->getPdo()->prepare('INSERT INTO reviews(user_id, product_id, grade, review) VALUES(:user_id, :product_id, :grade, :review)');
+        $stmt->execute(array('user_id' => $userId, 'product_id' => $productId, 'grade'=>$grade, 'review' => $review));
     }
 
     public function getByProductId($productId): false|array

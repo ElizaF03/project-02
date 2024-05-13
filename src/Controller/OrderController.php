@@ -14,6 +14,7 @@ class OrderController
             header('Location: login');
         } else {
             $products=$this->getUserProducts($_SESSION['user_id']);
+            $totalPrice=$this->calcTotalPrice($products);
             require_once '../View/order.php';
         }
     }
@@ -43,6 +44,14 @@ class OrderController
         return $products;
     }
 
+    public function calcTotalPrice($products): float|int
+    {
+        $totalPrice = 0;
+        foreach ($products as $product) {
+            $totalPrice += $product['quantity'] * $product['price'];
+        }
+        return $totalPrice;
+    }
     private function validate($firstName, $lastName, $address, $phone, $totalPrice): array
     {
         $errors = [];

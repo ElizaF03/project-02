@@ -12,14 +12,15 @@ class CartController
             header('Location: login');
         } else {
             $products=$this->getUserProducts($_SESSION['user_id']);
+            $totalPrice=$this->calcTotalPrice($products);
             require_once './../View/cart.php';
         }
     }
     public function getUserProducts($userId): ?array
     {
-        $userProduct = new userProduct();
+        $userProductModel = new userProduct();
         $product = new Product();
-        $userProducts = $userProduct->getAllByUserId($userId);
+        $userProducts = $userProductModel->getAllByUserId($userId);
         $productIds = [];
         $products = [];
         foreach ($userProducts as $userProduct) {
@@ -41,6 +42,14 @@ class CartController
         return $products;
     }
 
+    public function calcTotalPrice($products): float|int
+    {
+        $totalPrice = 0;
+        foreach ($products as $product) {
+            $totalPrice += $product['quantity'] * $product['price'];
+        }
+        return $totalPrice;
+    }
     public function addProduct(): void
     {
         session_start();

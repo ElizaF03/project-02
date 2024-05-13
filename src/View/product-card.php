@@ -12,9 +12,10 @@
                 <a href="/favorites" class="button">Favorites</a>
 
                 <a href="/catalog" class="button">Catalog</a>
-           <!--  <a href="/cart" class="button">Cart <span>(<?php echo $sum;?>)</span></a>  -->
+                <!--  <a href="/cart" class="button">Cart <span>(<?php echo $sum; ?>)</span></a>  -->
                 <a href="/logout" class="button">Exit</a>
-            </div><div class="section-titles">
+            </div>
+            <div class="section-titles">
                 <div class="section-title"><?php echo $product['name']; ?></div>
             </div>
         </section>
@@ -23,7 +24,7 @@
                 <img class="restaurant-image" src="<?php echo $product['img_url']; ?>"/>
 
                 <div class="restaurant-info">
-                    <span class="restaurant-price"><?php echo $product['price']; ?> $</span>
+                    <span class="restaurant-price">Price: <?php echo $product['price']; ?> $</span>
                     <div class="action">
                         <form class="form" method="post" action="/add-product">
                             <input type="text" value="<?php echo $product['id']; ?>" name="id-product"
@@ -47,26 +48,45 @@
                     </div>
 
                 </div>
-
+                <div class="rating">
+                    Rating: <span><?php echo $rating; ?></span>
+                </div>
             </section>
             <section class="reviews">
                 <form class="form" method="post" action="/add-review">
+                    <label class="label-grade">Your grade
+                        <select name="grade" class="select-grade">
+                            <option value="5" selected>5</option>
+                            <option value="4">4</option>
+                            <option value="3">3</option>
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                        </select>
+                    </label>
+
                     <input type="text" value="<?php echo $product['id']; ?>" name="id-product"
                            hidden="hidden">
-                    <textarea name="review" id="review" cols="30" rows="10"  placeholder="Enter your review"></textarea>
+                    <textarea class="textarea" name="review" id="review" cols="30" rows="10"
+                              placeholder="Enter your review"></textarea>
                     <button class="button" type="submit">Add review</button>
                 </form>
                 <ul class="reviews_items">
                     <?php foreach ($reviews as $review): ?>
-                    <li class="reviews_item">
+                        <li class="reviews_item">
 
-                        <div class="review_name_user">
-                           Id= <?php echo $review['user_id']; ?>
-                        </div>
-                        <div class="review_text">
-                            <?php echo $review['review']; ?>
-                        </div>
-                    </li>
+                            <div class="review_name_user">
+                                User Id: <?php echo $review['user_id']; ?>
+                            </div>
+                            <div class="review_body">
+
+                                <div class="review_text">
+                                    <?php echo $review['review']; ?>
+                                </div>
+                                <div class="review_grade">
+                                    Grade: <?php echo $review['grade']; ?>
+                                </div>
+                            </div>
+                        </li>
                     <?php endforeach; ?>
                 </ul>
             </section>
@@ -96,40 +116,104 @@
         --secondary-color-lightest: rgb(253, 253, 251);
         --info-color: rgb(80, 62, 157);
     }
-    .action{
+
+    .action {
         display: flex;
         margin-top: 10px;
 
     }
-    .wrapper{
+
+    .rating {
+        font-size: 22px;
+        margin-top: 15px;
+        color: #006653;
+        font-weight: bold;
+        text-decoration: underline;
+    }
+
+    .wrapper {
         display: flex;
         gap: 50px;
     }
-    .reviews{
+
+    .label-grade {
+        font-size: 18px;
+        color: #006653;
+        font-weight: bold;
+    }
+
+    .select-grade {
+        margin-left: 10px;
+        font-size: 18px;
+        border: #039a7e solid 1px;
+        border-radius: 7px;
+        padding: 0 4px;
+
+    }
+
+    .reviews {
         width: 900px;
-        textarea{
+
+        textarea {
             width: 100%;
             padding: 10px;
             margin-bottom: 30px;
             resize: none;
         }
-        form{
+
+        form {
             margin-bottom: 50px;
         }
-        li{
+
+        li {
             margin-bottom: 15px;
         }
     }
-    .restaurant-price{
-        font-size: 22px;
+
+    .reviews_item {
+        border: #039a7e solid 1px;
+        padding: 8px;
+        border-radius: 10px;
     }
-    .review_name_user{
+
+    .textarea {
+        border: #039a7e solid 1px;
+        padding: 8px;
+        border-radius: 10px;
+        margin-top: 15px;
+    }
+
+    .restaurant-price {
+        font-size: 24px;
+        font-weight: bold;
+        text-decoration: underline;
+        display: inline-block;
+        margin: 15px 10px;
+    }
+
+    .review_name_user {
         font-size: 18px;
+        color: #288f7c;
         margin-bottom: 10px;
     }
-    .review_text{
+
+    .review_body {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 15px;
+    }
+
+    .review_grade {
+        min-width: 70px;
+        font-weight: bold;
+        color: #006653;
+    }
+
+    .review_text {
         font-size: 20px;
     }
+
     .button {
         display: flex;
         color: #006653;

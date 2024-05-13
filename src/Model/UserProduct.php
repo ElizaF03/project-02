@@ -4,7 +4,7 @@ class UserProduct extends Model
 {
 
 
-    public function getAllByUserId($userId): false|array
+    public function getAllByUserId($userId): array|false
     {
         $stmt = $this->getPdo()->prepare("SELECT * FROM user_products WHERE user_id = :user_id");
         $stmt->execute(['user_id' => $userId]);
