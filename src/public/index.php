@@ -8,39 +8,30 @@ use Controller\ProductController;
 use Controller\UserController;
 use Controller\ReviewController;
 
-require_once '../App.php';
+require_once '../Autoloader.php';
 
-$autoload = function (string $className) {
-    $className = str_replace('\\', '/', $className);
-    $path = "../$className.php";
-    if (file_exists($path)) {
-        require_once $path;
-        return true;
-    } else {
-        return false;
-    }
-};
+$path=dirname(__DIR__);
+Autoloader::registarte($path);
 
-spl_autoload_register($autoload);
 
 $app = new App();
-$app->addRoute('/login', 'GET', UserController::class, 'getLogin');
-$app->addRoute('/login', 'POST', UserController::class, 'login');
-$app->addRoute('/registration', 'GET', UserController::class, 'getRegistration');
-$app->addRoute('/registration', 'POST', UserController::class, 'registration');
-$app->addRoute('/logout', 'GET', UserController::class, 'logout');
-$app->addRoute('/catalog', 'GET', ProductController::class, 'getCatalog');
-$app->addRoute('/product-card', 'POST', ProductCardController::class, 'getProductCard');
-$app->addRoute('/add-review', 'POST', ReviewController::class, 'addReview');
-$app->addRoute('/add-product', 'GET', ProductController::class, 'getCatalog');
-$app->addRoute('/add-product', 'POST', CartController::class, 'addProduct');
-$app->addRoute('/remove-product', 'GET', ProductController::class, 'getCatalog');
-$app->addRoute('/remove-product', 'POST', CartController::class, 'removeProduct');
-$app->addRoute('/favorites', 'GET', FavoriteController::class, 'getFavoriteProducts');
-$app->addRoute('/favorites', 'POST', FavoriteController::class, 'addFavoriteProduct');
-$app->addRoute('/remove-favorite-product', 'POST', FavoriteController::class, 'removeFavoriteProduct');
-$app->addRoute('/cart', 'GET', CartController::class, 'getCart');
-$app->addRoute('/cart', 'POST', OrderController::class, 'getOrder');
-$app->addRoute('/form-order', 'POST', OrderController::class, 'getOrder');
-$app->addRoute('/order', 'POST', OrderController::class, 'makeOrder');
+$app->get('/login', UserController::class, 'getLogin');
+$app->post('/login', UserController::class, 'login');
+$app->get('/registration', UserController::class, 'getRegistration');
+$app->post('/registration', UserController::class, 'registration');
+$app->get('/logout', UserController::class, 'logout');
+$app->get('/catalog', ProductController::class, 'getCatalog');
+$app->post('/product-card', ProductCardController::class, 'getProductCard');
+$app->post('/add-review', ReviewController::class, 'addReview');
+$app->get('/add-product', ProductController::class, 'getCatalog');
+$app->post('/add-product', CartController::class, 'addProduct');
+$app->get('/remove-product', ProductController::class, 'getCatalog');
+$app->post('/remove-product', CartController::class, 'removeProduct');
+$app->get('/favorites', FavoriteController::class, 'getFavoriteProducts');
+$app->post('/favorites', FavoriteController::class, 'addFavoriteProduct');
+$app->post('/remove-favorite-product', FavoriteController::class, 'removeFavoriteProduct');
+$app->get('/cart', CartController::class, 'getCart');
+$app->post('/cart', OrderController::class, 'getOrder');
+$app->post('/form-order', OrderController::class, 'getOrder');
+$app->post('/order', OrderController::class, 'makeOrder');
 $app->run();
