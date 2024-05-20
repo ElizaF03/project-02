@@ -11,10 +11,9 @@ class ProductCardController
     public function getProductCard()
     {
         session_start();
-        $productModel = new Product();
         $review = new Review();
         $reviews=$review->getByProductId($_POST['id-product']);
-        $product=$productModel->getById($_POST['id-product']);
+        $product=Product::getById($_POST['id-product']);
         if($reviews){
             $rating=$this->calcRating($reviews);
         }else{

@@ -25,8 +25,7 @@ class ReviewController
             }
             $reviews = $reviewModel->getByProductId($productId);
             $rating=$this->calcRating($reviews);
-            $productModel = new Product();
-            $product = $productModel->getById($_POST['id-product']);
+            $product = Product::getById($_POST['id-product']);
 
             require_once '../View/product-card.php';
         }

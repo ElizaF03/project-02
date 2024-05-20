@@ -19,10 +19,10 @@ class UserController
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $errors['email'] = 'Invalid email format';
         }
-        $user = new User();
-        $user = $user->getUserByEmail($email);
+
+        $user = User::getUserByEmail($email);
         if ($user) {
-            if ($user['email'] === $email) {
+            if ($user->getEmail()=== $email) {
                 $errors['email'] = 'Email already exists';
             }
         }elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -54,8 +54,7 @@ class UserController
         }
         $errors = $this->validateRegistration($username, $email, $password, $pswRepeat);
         if (empty($errors)) {
-                    $user = new User();
-                    $user->addInfo($username, $email, $password);
+                    User::addInfo($username, $email, $password);
             header('Location: /login');
         }else{
             require_once '../View/get_registration.php';
@@ -95,12 +94,11 @@ class UserController
         }
         $errors = $this->validateLogin($email, $password);
         if (empty($errors)) {
-            $user = new User();
-            $user = $user->getUserByEmail($email);
+            $user = User::getUserByEmail($email);
             if ($user) {
-                if (password_verify($password, $user['password'])) {
+                if (password_verify($password, $user->getPassword())) {
                     session_start();
-                    $_SESSION['user_id'] = $user['id'];
+                    $_SESSION['user_id'] = $user->getId();
                     header('Location: /catalog');
                 } else {
                     $errors['password'] = 'Incorrect password';

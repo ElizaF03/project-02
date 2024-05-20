@@ -21,31 +21,31 @@
                 <?php foreach ($products as $product): ?>
                     <li class="restaurant-list__item">
                         <form action="/product-card" method="post">
-                            <input type="text" value="<?php echo $product['id']; ?>" name="id-product"
+                            <input type="text" value="<?php echo $product->getId(); ?>" name="id-product"
                                    hidden="hidden">
                             <button class="button-img" type="submit"><img class="restaurant-image"
-                                                                      src="<?php echo $product['img_url']; ?>"/>
+                                                                      src="<?php echo $product->getImgUrl(); ?>"/>
                             </button>
                         </form>
 
-                        <div class="restaurant-name"><?php echo $product['name']; ?></div>
+                        <div class="restaurant-name"><?php echo $product->getName(); ?></div>
                         <div class="restaurant-info">
-                            <span class="restaurant-category"><?php echo $product['price']; ?> $</span>
+                            <span class="restaurant-category"><?php echo $product->getPrice(); ?> $</span>
                             <div class="action">
                                 <form class="form" method="post" action="/add-product">
-                                    <input type="text" value="<?php echo $product['id']; ?>" name="id-product"
+                                    <input type="text" value="<?php echo $product->getId(); ?>" name="id-product"
                                            hidden="hidden">
                                     <button class="button" type="submit">+</button>
                                 </form>
 
                                 <form class="form" method="post" action="/remove-product">
-                                    <input type="text" value="<?php echo $product['id']; ?>" name="id-product"
+                                    <input type="text" value="<?php echo $product->getId(); ?>" name="id-product"
                                            hidden="hidden">
                                     <button class="button" type="submit">-</button>
                                 </form>
                                 <div class="add_favorite">
                                     <form class="form" method="post" action="/favorites">
-                                        <input type="text" value="<?php echo $product['id']; ?>" name="id-product"
+                                        <input type="text" value="<?php echo $product->getId(); ?>" name="id-product"
                                                hidden="hidden">
                                         <button class="button" type="submit">Add to favorites</button>
                                     </form>

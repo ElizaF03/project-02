@@ -18,24 +18,22 @@ class OrderController
             require_once '../View/order.php';
         }
     }
-    public function getUserProducts($userId): ?array
+    public function getUserProducts(int $userId): ?array
     {
-        $userProduct = new userProduct();
-        $product = new Product();
-        $userProducts = $userProduct->getAllByUserId($userId);
+        $userProducts = UserProduct::getAllByUserId($userId);
         $productIds = [];
         $products = [];
         foreach ($userProducts as $userProduct) {
             $productIds[] = $userProduct['product_id'];
         }
         foreach ($productIds as $productId) {
-            $products[] = $product->getById($productId);
+            $products[] = Product::getById($productId);
         }
         if(isset($userProduct['quantity']) ){
             foreach ($products as &$product) {
                 foreach ($userProducts as $userProduct) {
-                    if ($product['id'] === $userProduct['product_id']) {
-                        $product['quantity'] = $userProduct['quantity'];
+                    if ($product->getId()=== $userProduct->getId()) {
+                        $product['quantity'] = $userProduct->getQuantity();
                     }
                 }
             }
@@ -100,15 +98,14 @@ class OrderController
             $date = new DateTime();
             $date = $date->format('Y-m-d H:i:s');
             $order->addInfo($_SESSION['user_id'], $firstName, $lastName, $address, $phone, $totalPrice, $date);
-            $userProduct = new UserProduct();
-            $userProducts = $userProduct->getAllByUserId($_SESSION['user_id']);
+            $userProducts = UserProduct::getAllByUserId($_SESSION['user_id']);
             $order = $order->getOrder($_SESSION['user_id']);
             $orderId = $order['id'];
             $orderProduct = new OrderProduct();
             foreach ($userProducts as $product) {
                 $orderProduct->create($orderId, $product['product_id'], $product['quantity']);
             }
-            $userProduct->removeAll($_SESSION['user_id']);
+            UserProduct::removeAll($_SESSION['user_id']);
             header('Location: /catalog');
         } else {
             $products=$this->getUserProducts($_SESSION['user_id']);

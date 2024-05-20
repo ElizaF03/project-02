@@ -18,20 +18,18 @@ class FavoriteController
             require_once './../View/favorites.php';
         }
     }
-    public function getTotalQuantity($userId): int
+    public function getTotalQuantity(int $userId): int
     {
-        $userProduct = new UserProduct();
-        $userProducts = $userProduct->getAllByUserId($userId);
+        $userProducts = UserProduct::getAllByUserId($userId);
         $sum = 0;
         foreach ($userProducts as $userProduct) {
-            $sum += $userProduct['quantity'];
+            $sum += $userProduct->getQuantity();
         }
         return $sum;
     }
     public function getUserProducts($userId): ?array
     {
         $favoriteProduct = new favoriteProduct();
-        $product = new Product();
         $userProducts = $favoriteProduct->getAllByUserId($userId);
         $productIds = [];
         $products = [];
@@ -39,12 +37,12 @@ class FavoriteController
             $productIds[] = $userProduct['product_id'];
         }
         foreach ($productIds as $productId) {
-            $products[] = $product->getById($productId);
+            $products[] = Product::getById($productId);
         }
         if(isset($userProduct['quantity']) ){
             foreach ($products as &$product) {
                 foreach ($userProducts as $userProduct) {
-                    if ($product['id'] === $userProduct['product_id']) {
+                    if ($product->getId() === $userProduct['product_id']) {
                         $product['quantity'] = $userProduct['quantity'];
                     }
                 }
