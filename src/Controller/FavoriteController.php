@@ -44,8 +44,8 @@ class FavoriteController
                 FavoriteProduct::create($userId, $productId);
             }
         }
-        $products = $this->getUserProducts($_SESSION['user_id']);
-        $sum=$this->getTotalQuantity($_SESSION['user_id']);
+        $products = $this->getUserProducts($userId);
+        $sum=$this->getTotalQuantity($userId);
         require_once './../View/favorites.php';
     }
 
@@ -62,8 +62,8 @@ class FavoriteController
                 FavoriteProduct::remove($userId, $productId);
             }
         }
-        $products = $this->getUserProducts($_SESSION['user_id']);
-        $sum=$this->getTotalQuantity($_SESSION['user_id']);
+        $products = $this->getUserProducts($userId);
+        $sum=$this->getTotalQuantity($userId);
         require_once './../View/favorites.php';
     }
 }

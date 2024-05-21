@@ -18,21 +18,20 @@ class ReviewController
             $userId = $_SESSION['user_id'];
             $grade = $_POST['grade'];
             $reviewText = $_POST['review'];
-            $reviewModel = new Review();
-            $review=$reviewModel->getOne($userId, $productId);
+            $review=Review::getOne($userId, $productId);
             if(!$review){
-                $reviewModel->create($userId, $productId,$grade, $reviewText);
+                Review::create($userId, $productId,$grade, $reviewText);
             }
-            $reviews = $reviewModel->getByProductId($productId);
+            $reviews = Review::getByProductId($productId);
             $rating=$this->calcRating($reviews);
-            $product = Product::getById($_POST['id-product']);
-
+            $product = Product::getById($productId);
             require_once '../View/product-card.php';
         }
 
     }
 
-    public function calcRating($reviews){
+    public function calcRating($reviews): float|int
+    {
         $grades=[];
         foreach ($reviews as $review){
             $grades[]=$review['grade'];

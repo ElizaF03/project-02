@@ -1,5 +1,5 @@
 <head>
-    <title><?php echo $product['name']; ?></title>
+    <title><?php echo $product->getName(); ?></title>
 
 </head>
 <body>
@@ -16,30 +16,30 @@
                 <a href="/logout" class="button">Exit</a>
             </div>
             <div class="section-titles">
-                <div class="section-title"><?php echo $product['name']; ?></div>
+                <div class="section-title"><?php echo $product->getName(); ?></div>
             </div>
         </section>
         <div class="wrapper">
             <section class="section">
-                <img class="restaurant-image" src="<?php echo $product['img_url']; ?>"/>
+                <img class="restaurant-image" src="<?php echo $product->getImgUrl(); ?>"/>
 
                 <div class="restaurant-info">
-                    <span class="restaurant-price">Price: <?php echo $product['price']; ?> $</span>
+                    <span class="restaurant-price">Price: <?php echo $product->getPrice(); ?> $</span>
                     <div class="action">
                         <form class="form" method="post" action="/add-product">
-                            <input type="text" value="<?php echo $product['id']; ?>" name="id-product"
+                            <input type="text" value="<?php echo $product->getId(); ?>" name="id-product"
                                    hidden="hidden">
                             <button class="button" type="submit">+</button>
                         </form>
 
                         <form class="form" method="post" action="/remove-product">
-                            <input type="text" value="<?php echo $product['id']; ?>" name="id-product"
+                            <input type="text" value="<?php echo $product->getId(); ?>" name="id-product"
                                    hidden="hidden">
                             <button class="button" type="submit">-</button>
                         </form>
                         <div class="add_favorite">
                             <form class="form" method="post" action="/favorites">
-                                <input type="text" value="<?php echo $product['id']; ?>" name="id-product"
+                                <input type="text" value="<?php echo $product->getId(); ?>" name="id-product"
                                        hidden="hidden">
                                 <button class="button" type="submit">Add to favorites</button>
                             </form>
@@ -64,7 +64,7 @@
                         </select>
                     </label>
 
-                    <input type="text" value="<?php echo $product['id']; ?>" name="id-product"
+                    <input type="text" value="<?php echo $product->getId(); ?>" name="id-product"
                            hidden="hidden">
                     <textarea class="textarea" name="review" id="review" cols="30" rows="10"
                               placeholder="Enter your review"></textarea>
@@ -75,15 +75,15 @@
                         <li class="reviews_item">
 
                             <div class="review_name_user">
-                                User Id: <?php echo $review['user_id']; ?>
+                                User Id: <?php echo $review->getUserId(); ?>
                             </div>
                             <div class="review_body">
 
                                 <div class="review_text">
-                                    <?php echo $review['review']; ?>
+                                    <?php echo $review->getReview(); ?>
                                 </div>
                                 <div class="review_grade">
-                                    Grade: <?php echo $review['grade']; ?>
+                                    Grade: <?php echo $review->getGrade(); ?>
                                 </div>
                             </div>
                         </li>

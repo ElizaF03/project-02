@@ -11,8 +11,7 @@ class ProductCardController
     public function getProductCard()
     {
         session_start();
-        $review = new Review();
-        $reviews=$review->getByProductId($_POST['id-product']);
+        $reviews=Review::getByProductId($_POST['id-product']);
         $product=Product::getById($_POST['id-product']);
         if($reviews){
             $rating=$this->calcRating($reviews);
@@ -25,7 +24,7 @@ class ProductCardController
     public function calcRating($reviews){
         $grades=[];
         foreach ($reviews as $review){
-            $grades[]=$review['grade'];
+            $grades[]=$review->getGrade();
         }
         return array_sum($grades)/count($grades);
     }

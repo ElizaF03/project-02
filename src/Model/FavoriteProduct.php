@@ -6,20 +6,15 @@ class FavoriteProduct extends Model
 
 {
     private int $id;
-    private int $productId;
     private int $userId;
-    private string $name;
-    private float $price;
-    private string $img_url;
+    private Product $product;
 
-    public function __construct(int $id, int $productId, int $userId, string $name, float $price, string $img_url)
+
+    public function __construct(int $id,int $userId, Product $product)
     {
         $this->id = $id;
-        $this->productId = $productId;
         $this->userId = $userId;
-        $this->name = $name;
-        $this->price = $price;
-        $this->img_url = $img_url;
+        $this->product = $product;
     }
 
     public function getId(): int
@@ -27,23 +22,14 @@ class FavoriteProduct extends Model
         return $this->id;
     }
 
-    public function getProductId(): int
-    {
-        return $this->productId;
-    }
-
     public function getUserId(): int
     {
         return $this->userId;
     }
-    public function getName(): string{
-        return $this->name;
-    }
-    public function getPrice(): float{
-        return $this->price;
-    }
-    public function getImgUrl(): string{
-        return $this->img_url;
+
+    public function getProduct(): Product
+    {
+        return $this->product;
     }
 
     public static function getOne(int $userId, int $productId): ?FavoriteProduct
@@ -51,8 +37,8 @@ class FavoriteProduct extends Model
         $stmt = self::getPdo()->prepare('SELECT * FROM favorite_user_products JOIN products ON favorite_user_products.product_id=products.id WHERE product_id =:product_id AND user_id =:user_id');
         $stmt->execute(['product_id' => $productId, 'user_id' => $userId]);
         $result = $stmt->fetch();
-
-        $obj = new self($result["id"], $result['user_id'], $result['product_id'], $result['name'], $result['price'], $result['img_url']);
+        $product =  Product::getById($result['product_id']);
+        $obj = new self($result["id"], $result['user_id'], $product);
         return $obj;
     }
 
@@ -62,7 +48,8 @@ class FavoriteProduct extends Model
         $stmt->execute(['user_id' => $userId]);
         $favoriteProducts = $stmt->fetchAll();
         foreach ($favoriteProducts as $favoriteProduct) {
-            $result[$favoriteProduct['id']] = new self ($favoriteProduct["id"], $favoriteProduct['user_id'], $favoriteProduct['product_id'],$favoriteProduct['name'], $favoriteProduct['price'], $favoriteProduct['img_url']);
+            $product =  Product::getById($favoriteProduct['product_id']);
+            $result[$favoriteProduct['id']] = new self ($favoriteProduct["id"], $favoriteProduct['user_id'], $product);
         }
         return $result;
     }

@@ -1,6 +1,7 @@
 <?php
 
 namespace Model;
+
 use AllowDynamicProperties;
 
 #[AllowDynamicProperties] class Product extends Model
@@ -10,15 +11,12 @@ use AllowDynamicProperties;
     private float $price;
     private string $img_url;
 
-
-
     public function __construct(int $id, string $name, float $price, string $img_url)
     {
         $this->id = $id;
         $this->name = $name;
         $this->price = $price;
         $this->img_url = $img_url;
-
     }
 
     public function getId(): int
@@ -41,16 +39,20 @@ use AllowDynamicProperties;
         return $this->img_url;
     }
 
+    private static function hydrate(array $data): Product
+    {
+        $obj = new self($data["id"], $data["name"], $data["price"], $data["img_url"]);
+        return $obj;
+    }
 
     public static function getAll(): array
     {
         $stmt = self::getPdo()->query("SELECT * FROM products");
         $products = $stmt->fetchAll();
         foreach ($products as $product) {
-            $result[$product['id']] = new self ($product['id'], $product['name'], $product['price'], $product['img_url']);
+            $result[$product['id']] = self::hydrate($product);
         }
-            return $result;
-
+        return $result;
     }
 
     public static function getById(int $id): ?Product
@@ -61,9 +63,8 @@ use AllowDynamicProperties;
         if ($product === false) {
             return null;
         } else {
-            $obj = new self($product["id"], $product["name"], $product["price"], $product["img_url"]);
+            $obj = self::hydrate($product);
             return $obj;
         }
-
     }
 }
