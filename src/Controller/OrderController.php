@@ -94,12 +94,11 @@ class OrderController
         }
         $errors = $this->validate($firstName, $lastName, $address, $phone, $totalPrice);
         if (empty($errors)) {
-            $order = new Order();
             $date = new DateTime();
             $date = $date->format('Y-m-d H:i:s');
-            $order->addInfo($_SESSION['user_id'], $firstName, $lastName, $address, $phone, $totalPrice, $date);
+            Order::addInfo($_SESSION['user_id'], $firstName, $lastName, $address, $phone, $totalPrice, $date);
             $userProducts = UserProduct::getAllByUserId($_SESSION['user_id']);
-            $order = $order->getOrder($_SESSION['user_id']);
+            $order = Order::getOrder($_SESSION['user_id']);
             $orderId = $order['id'];
             $orderProduct = new OrderProduct();
             foreach ($userProducts as $product) {

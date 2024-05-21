@@ -13,15 +13,10 @@ class CartController
         if (!isset($_SESSION['user_id'])) {
             header('Location: login');
         } else {
-            $userProducts = $this->getUserProducts($_SESSION['user_id']);
+            $userProducts = UserProduct::getAllByUserId($_SESSION['user_id']);
             $totalPrice = $this->calcTotalPrice($userProducts);
             require_once './../View/cart.php';
         }
-    }
-
-    public function getUserProducts($userId): array
-    {
-        return UserProduct::getAllByUserId($userId);
     }
 
     public function calcTotalPrice($userProducts): float|int
@@ -30,7 +25,6 @@ class CartController
         foreach ($userProducts as $userProduct) {
             $totalPrice += $userProduct->getQuantity() * $userProduct->getProduct()->getPrice();
         }
-
         return $totalPrice;
     }
 

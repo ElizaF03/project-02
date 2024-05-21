@@ -29,27 +29,7 @@ class FavoriteController
     }
     public function getUserProducts($userId): ?array
     {
-        $favoriteProduct = new favoriteProduct();
-        $userProducts = $favoriteProduct->getAllByUserId($userId);
-        $productIds = [];
-        $products = [];
-        foreach ($userProducts as $userProduct) {
-            $productIds[] = $userProduct['product_id'];
-        }
-        foreach ($productIds as $productId) {
-            $products[] = Product::getById($productId);
-        }
-        if(isset($userProduct['quantity']) ){
-            foreach ($products as &$product) {
-                foreach ($userProducts as $userProduct) {
-                    if ($product->getId() === $userProduct['product_id']) {
-                        $product['quantity'] = $userProduct['quantity'];
-                    }
-                }
-            }
-        }
-        unset($product);
-        return $products;
+        return FavoriteProduct::getAllByUserId($userId);
     }
     public function addFavoriteProduct(): void
     {
@@ -59,10 +39,9 @@ class FavoriteController
         } else {
             $productId = $_POST['id-product'];
             $userId = $_SESSION['user_id'];
-            $favoriteProduct = new FavoriteProduct();
-            $oneFavoriteProduct = $favoriteProduct->getOne($userId, $productId);
+            $oneFavoriteProduct = FavoriteProduct::getOne($userId, $productId);
             if (!$oneFavoriteProduct) {
-                $favoriteProduct->create($userId, $productId);
+                FavoriteProduct::create($userId, $productId);
             }
         }
         $products = $this->getUserProducts($_SESSION['user_id']);
@@ -78,10 +57,9 @@ class FavoriteController
         } else {
             $productId = $_POST['id-product'];
             $userId = $_SESSION['user_id'];
-            $favoriteProduct = new FavoriteProduct();
-            $oneFavoriteProduct = $favoriteProduct->getOne($userId, $productId);
+            $oneFavoriteProduct = FavoriteProduct::getOne($userId, $productId);
             if ($oneFavoriteProduct) {
-                $favoriteProduct->remove($userId, $productId);
+                FavoriteProduct::remove($userId, $productId);
             }
         }
         $products = $this->getUserProducts($_SESSION['user_id']);
