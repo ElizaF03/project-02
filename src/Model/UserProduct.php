@@ -33,10 +33,13 @@ public function getQuantity():int{
         $stmt = self::getPdo()->prepare("SELECT * FROM user_products WHERE user_id = :user_id");
         $stmt->execute(['user_id' => $userId]);
         $userProducts= $stmt->fetchAll();
+        if (empty($userProducts)) {
+            return [];
+        }
         foreach ($userProducts as $userProduct) {
             $user=User::getById($userProduct["user_id"]);
             $product=Product::getById($userProduct["product_id"]);
-            $result[$userProduct['id']] = new self ($userProduct["id"], $user, $product, $userProduct['quantity']);
+            $result[$userProduct['id']] = self::hydrate($userProduct, $user, $product);
         }
         return $result;
     }
@@ -57,10 +60,13 @@ public function getQuantity():int{
         if($product===null){
             return null;
         }
-        $obj = new self($result["id"], $user, $product, $result['quantity']);
+        return self::hydrate($result, $user, $product);
+    }
+    private static function hydrate(array $data, User $user, Product $product): UserProduct
+    {
+        $obj = new self($data["id"], $user, $product, $data["quantity"]);
         return $obj;
     }
-
     public static function create(int $userId, int $productId, int $quantity = 1): void
     {
         $stmt = self::getPdo()->prepare('INSERT INTO user_products (user_id, product_id, quantity) VALUES(:user_id, :product_id, :quantity)');

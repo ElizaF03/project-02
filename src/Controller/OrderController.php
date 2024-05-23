@@ -7,50 +7,27 @@ use Model\Product;
 use Model\UserProduct;
 class OrderController
 {
-    public function getOrder()
+    public function getOrder(): void
     {
         session_start();
         if (!isset($_SESSION['user_id'])) {
             header('Location: login');
         } else {
-            $products=$this->getUserProducts($_SESSION['user_id']);
-            $totalPrice=$this->calcTotalPrice($products);
+            $userProducts = UserProduct::getAllByUserId($_SESSION['user_id']);
+            $totalPrice=$this->calcTotalPrice($userProducts);
             require_once '../View/order.php';
         }
-    }
-    public function getUserProducts(int $userId): ?array
-    {
-        $userProducts = UserProduct::getAllByUserId($userId);
-        $productIds = [];
-        $products = [];
-        foreach ($userProducts as $userProduct) {
-            $productIds[] = $userProduct['product_id'];
-        }
-        foreach ($productIds as $productId) {
-            $products[] = Product::getById($productId);
-        }
-        if(isset($userProduct['quantity']) ){
-            foreach ($products as &$product) {
-                foreach ($userProducts as $userProduct) {
-                    if ($product->getId()=== $userProduct->getId()) {
-                        $product['quantity'] = $userProduct->getQuantity();
-                    }
-                }
-            }
-        }
-        unset($product);
-        return $products;
     }
 
     public function calcTotalPrice($products): float|int
     {
         $totalPrice = 0;
         foreach ($products as $product) {
-            $totalPrice += $product['quantity'] * $product['price'];
+            $totalPrice += $product->getQuantity() * $product->getProduct()->getPrice();
         }
         return $totalPrice;
     }
-    private function validate($firstName, $lastName, $address, $phone, $totalPrice): array
+    private function validate(string $firstName, string $lastName, string $address, string $phone, int|float $totalPrice): array
     {
         $errors = [];
         if (strlen($firstName) < 2) {
@@ -99,15 +76,14 @@ class OrderController
             Order::addInfo($_SESSION['user_id'], $firstName, $lastName, $address, $phone, $totalPrice, $date);
             $userProducts = UserProduct::getAllByUserId($_SESSION['user_id']);
             $order = Order::getOrder($_SESSION['user_id']);
-            $orderId = $order['id'];
-            $orderProduct = new OrderProduct();
+            $orderId = $order->getId();
             foreach ($userProducts as $product) {
-                $orderProduct->create($orderId, $product['product_id'], $product['quantity']);
+                OrderProduct::create($orderId, $product->getProduct()->getId(), $product->getQuantity());
             }
             UserProduct::removeAll($_SESSION['user_id']);
             header('Location: /catalog');
         } else {
-            $products=$this->getUserProducts($_SESSION['user_id']);
+            $userProducts = UserProduct::getAllByUserId($_SESSION['user_id']);
             require_once '../View/order.php';
         }
     }

@@ -13,7 +13,7 @@ class FavoriteController
         if (!isset($_SESSION['user_id'])) {
             header('Location: login');
         } else {
-            $products = $this->getUserProducts($_SESSION['user_id']);
+            $products = FavoriteProduct::getAllByUserId($_SESSION['user_id']);
             $sum=$this->getTotalQuantity($_SESSION['user_id']);
             require_once './../View/favorites.php';
         }

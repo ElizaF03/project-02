@@ -34,8 +34,8 @@ class ReviewController
     {
         $grades=[];
         foreach ($reviews as $review){
-            $grades[]=$review['grade'];
+            $grades[]=$review->getGrade();
         }
-        return array_sum($grades)/count($grades);
+        return round(array_sum($grades)/count($grades),1);
     }
 }

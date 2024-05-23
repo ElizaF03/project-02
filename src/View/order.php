@@ -39,16 +39,16 @@
                     <div class="left-column">
                         <ul class="food-list">
 
-                            <?php foreach ($products as $product): ?>
+                            <?php foreach ($userProducts as $userProduct): ?>
                                 <li class="food-list__item">
                                     <div class="food-info">
                                         <img class="food-image"
-                                             src=<?php echo $product['img_url']; ?>/>
-                                        <div class="food-buy-amount"><?php echo $product['quantity']; ?> x</div>
-                                        <div class="food-name"><?php echo $product['name']; ?>
+                                             src=<?php echo $userProduct->getProduct()->getImgUrl(); ?>/>
+                                        <div class="food-buy-amount"><?php echo $userProduct->getQuantity(); ?> x</div>
+                                        <div class="food-name"><?php echo $userProduct->getProduct()->getName(); ?>
                                         </div>
                                     </div>
-                                    <div class="food-price"><?php echo $product['price']; ?> $</div>
+                                    <div class="food-price"><?php echo $userProduct->getProduct()->getPrice(); ?> $</div>
 
                                 </li>
 

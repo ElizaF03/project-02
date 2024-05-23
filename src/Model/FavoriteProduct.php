@@ -5,12 +5,13 @@ class FavoriteProduct extends Model
 
 
 {
+
     private int $id;
     private int $userId;
     private Product $product;
 
 
-    public function __construct(int $id,int $userId, Product $product)
+    public function __construct(int $id, int $userId, Product $product)
     {
         $this->id = $id;
         $this->userId = $userId;
@@ -37,7 +38,10 @@ class FavoriteProduct extends Model
         $stmt = self::getPdo()->prepare('SELECT * FROM favorite_user_products JOIN products ON favorite_user_products.product_id=products.id WHERE product_id =:product_id AND user_id =:user_id');
         $stmt->execute(['product_id' => $productId, 'user_id' => $userId]);
         $result = $stmt->fetch();
-        $product =  Product::getById($result['product_id']);
+        if($result===false){
+            return null;
+        }
+        $product = Product::getById($result['product_id']);
         $obj = new self($result["id"], $result['user_id'], $product);
         return $obj;
     }
@@ -48,10 +52,16 @@ class FavoriteProduct extends Model
         $stmt->execute(['user_id' => $userId]);
         $favoriteProducts = $stmt->fetchAll();
         foreach ($favoriteProducts as $favoriteProduct) {
-            $product =  Product::getById($favoriteProduct['product_id']);
-            $result[$favoriteProduct['id']] = new self ($favoriteProduct["id"], $favoriteProduct['user_id'], $product);
+            $product = Product::getById($favoriteProduct['product_id']);
+            $result[$favoriteProduct['id']] = self::hydrate($favoriteProduct, $product);
         }
         return $result;
+    }
+
+    private static function hydrate(array $data, Product $product): FavoriteProduct
+    {
+        $obj = new self($data["id"], $data['user_id'], $product);
+        return $obj;
     }
 
     public static function create(int $userId, int $productId): void

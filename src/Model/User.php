@@ -52,10 +52,10 @@ class User extends Model
         if ($result === false) {
             return null;
         } else {
-            $obj = new self($result["id"], $result["username"], $result["email"], $result["password"]);
-            return $obj;
+            return self::hydrate($result);
         }
     }
+
     public static function getById(int $id): ?User
     {
         $stmt = self::getPdo()->prepare("SELECT * FROM users WHERE id = :id");
@@ -64,8 +64,13 @@ class User extends Model
         if ($result === false) {
             return null;
         } else {
-            $obj = new self($result["id"], $result["username"], $result["email"], $result["password"]);
-            return $obj;
+            return self::hydrate($result);
         }
+    }
+
+    private static function hydrate(array $data): User
+    {
+        $obj = new self($data["id"], $data["username"], $data["email"], $data["password"]);
+        return $obj;
     }
 }

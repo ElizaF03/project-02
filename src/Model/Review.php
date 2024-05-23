@@ -56,7 +56,7 @@ class Review extends Model
         $stmt->execute(array('product_id' => $productId));
         $reviews = $stmt->fetchAll();
         foreach ($reviews as $review) {
-            $result[$review['id']] = new self($review['id'], $review['user_id'], $review['product_id'], $review['grade'], $review['review']);
+            $result[$review['id']] =  self::hydrate($review);
         }
         return $result;
     }
@@ -66,7 +66,14 @@ class Review extends Model
         $stmt = self::getPdo()->prepare('SELECT * FROM reviews WHERE user_id = :user_id AND product_id = :product_id');
         $stmt->execute(array('user_id' => $userId, 'product_id' => $productId));
         $result = $stmt->fetch();
-        $obj = new self($result['id'], $result['user_id'], $result['product_id'], $result['grade'], $result['review']);
+        if($result===false){
+            return null;
+        }
+        return self::hydrate($result);
+    }
+    private static function hydrate(array $data): Review
+    {
+        $obj = new self($data["id"], $data['user_id'], $data['product_id'], $data['grade'], $data['review']);
         return $obj;
     }
 }
