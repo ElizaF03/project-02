@@ -10,7 +10,7 @@ use Controller\ReviewController;
 
 require_once '../Autoloader.php';
 
-$path=dirname(__DIR__);
+$path = dirname(__DIR__);
 Autoloader::registarte($path);
 
 

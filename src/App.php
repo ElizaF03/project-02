@@ -1,5 +1,7 @@
 <?php
 
+use Request\RegistrationRequest;
+
 class App
 {
     private array $routes = [
@@ -17,9 +19,10 @@ class App
                 echo "Метод $requestMethod не поддерживается для адреса $requestUri";
             }
             $object = new $class();
-            $object->$method();
+            $request = new RegistrationRequest($requestUri, $requestMethod, $_POST);
+            $object->$method($request);
         } else {
-            require_once './View/404.html';
+            require_once '../View/404.html';
         }
     }
 
@@ -28,6 +31,7 @@ class App
         $this->routes[$route]['GET'] =
             ['class' => $class, 'method' => $method];
     }
+
     public function post(string $route, string $class, string $method): void
     {
         $this->routes[$route]['POST'] =
