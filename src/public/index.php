@@ -7,6 +7,7 @@ use Controller\ProductCardController;
 use Controller\ProductController;
 use Controller\UserController;
 use Controller\ReviewController;
+use Request\RegistrationRequest;
 
 require_once '../Autoloader.php';
 
@@ -16,9 +17,9 @@ Autoloader::registarte($path);
 
 $app = new App();
 $app->get('/login', UserController::class, 'getLogin');
-$app->post('/login', UserController::class, 'login');
+$app->post('/login', UserController::class, 'login', \Request\LoginRequest::class);
 $app->get('/registration', UserController::class, 'getRegistration');
-$app->post('/registration', UserController::class, 'registration');
+$app->post('/registration', UserController::class, 'registration', RegistrationRequest::class);
 $app->get('/logout', UserController::class, 'logout');
 $app->get('/catalog', ProductController::class, 'getCatalog');
 $app->post('/product-card', ProductCardController::class, 'getProductCard');

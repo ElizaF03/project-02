@@ -28,6 +28,11 @@ public function getProduct():Product{
 public function getQuantity():int{
     return $this->quantity;
 }
+
+    /**
+     * @param int $userId
+     * @return UserProduct[]
+     */
     public static function getAllByUserId(int $userId): array
     {
         $stmt = self::getPdo()->prepare("SELECT * FROM user_products WHERE user_id = :user_id");

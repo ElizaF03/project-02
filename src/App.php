@@ -13,28 +13,39 @@ class App
         $requestMethod = $_SERVER['REQUEST_METHOD'];
         if (isset($this->routes[$requestUri])) {
             if (isset($this->routes[$requestUri][$requestMethod])) {
-                $method = $this->routes[$requestUri]["$requestMethod"]['method'];
-                $class = $this->routes[$requestUri]["$requestMethod"]['class'];
+                $handler = $this->routes[$requestUri][$requestMethod];
+                $method = $handler['method'];
+                $class = $handler['class'];
+                $requestClass = $handler['request'];
             } else {
                 echo "Метод $requestMethod не поддерживается для адреса $requestUri";
             }
             $object = new $class();
-            $request = new RegistrationRequest($requestUri, $requestMethod, $_POST);
-            $object->$method($request);
+            if ($requestClass !== null) {
+                $request = new $requestClass($requestUri, $requestMethod, $_POST);
+                $object->$method($request);
+            }else{
+                $object->$method();
+            }
+
         } else {
             require_once '../View/404.html';
         }
     }
 
-    public function get(string $route, string $class, string $method): void
+    public function get(string $route, string $class, string $method, string $requestClass = null): void
     {
-        $this->routes[$route]['GET'] =
-            ['class' => $class, 'method' => $method];
+        $this->routes[$route]['GET'] = [
+            'class' => $class,
+            'method' => $method,
+            'request' => $requestClass];
     }
 
-    public function post(string $route, string $class, string $method): void
+    public function post(string $route, string $class, string $method, string $requestClass = null): void
     {
-        $this->routes[$route]['POST'] =
-            ['class' => $class, 'method' => $method];
+        $this->routes[$route]['POST'] = [
+            'class' => $class,
+            'method' => $method,
+            'request' => $requestClass];
     }
 }
