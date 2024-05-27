@@ -4,20 +4,21 @@ namespace Controller;
 
 use Model\Product;
 use Model\Review;
+use Request\ReviewRequest;
 
 class ReviewController
 {
 
-    public function addReview()
+    public function addReview(ReviewRequest $request)
     {
         session_start();
         if (!isset($_SESSION['user_id'])) {
             header('Location: login');
         } else {
-            $productId = $_POST['id-product'];
             $userId = $_SESSION['user_id'];
-            $grade = $_POST['grade'];
-            $reviewText = $_POST['review'];
+            $productId = $request->getProductId();
+            $grade = $request->getGrade();
+            $reviewText = $request->getReview();
             $review=Review::getOne($userId, $productId);
             if(!$review){
                 Review::create($userId, $productId,$grade, $reviewText);
@@ -30,12 +31,13 @@ class ReviewController
 
     }
 
-    public function calcRating($reviews): float|int
+    public function calcRating($reviews): float
     {
         $grades=[];
         foreach ($reviews as $review){
             $grades[]=$review->getGrade();
         }
-        return round(array_sum($grades)/count($grades),1);
+        $numb=array_sum($grades)/count($grades);
+        return round($numb,1);
     }
 }
