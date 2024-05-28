@@ -75,19 +75,19 @@ public function getQuantity():int{
     public static function create(int $userId, int $productId, int $quantity = 1): void
     {
         $stmt = self::getPdo()->prepare('INSERT INTO user_products (user_id, product_id, quantity) VALUES(:user_id, :product_id, :quantity)');
-        $stmt->execute(array('user_id' => $userId, 'product_id' => $productId, 'quantity' => $quantity));
+        $stmt->execute(['user_id' => $userId, 'product_id' => $productId, 'quantity' => $quantity]);
     }
 
     public static function remove(int $userId, int $productId): void
     {
         $stmt = self::getPdo()->prepare("DELETE FROM user_products WHERE user_id=:user_id AND product_id=:product_id");
-        $stmt->execute(array('user_id' => $userId, 'product_id' => $productId));
+        $stmt->execute(['user_id' => $userId, 'product_id' => $productId]);
     }
 
     public static function removeAll(int $userId): void
     {
         $stmt = self::getPdo()->prepare("DELETE FROM user_products WHERE user_id=:user_id");
-        $stmt->execute(array('user_id' => $userId));
+        $stmt->execute(['user_id' => $userId]);
     }
 
     public static function plusQuantity(int $userId, int $productId)

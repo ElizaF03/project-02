@@ -5,15 +5,22 @@ namespace Controller;
 use Model\Product;
 use Model\UserProduct;
 use Request\ProductRequest;
+use Service\AuthenticationService;
 
 class ProductController
 {
+    private AuthenticationService $authenticationService;
+
+    public function __construct()
+    {
+        $this->authenticationService = new AuthenticationService();
+    }
+
     public function getCatalog()
     {
         session_start();
         $products = Product::getAll();
-
-        if (!isset($_SESSION['user_id'])) {
+        if (!$this->authenticationService->check()) {
             $sum = 0;
         } else {
             $sum = $this->getTotalQuantity($_SESSION['user_id']);
@@ -22,17 +29,6 @@ class ProductController
         require_once '../View/catalog.php';
     }
 
-    public function getProductCard(ProductRequest $request)
-    {
-        session_start();
-        if (!isset($_SESSION['user_id'])) {
-            $sum = 0;
-        } else {
-            $sum = $this->getTotalQuantity($_SESSION['user_id']);
-        }
-        $product = Product::getById($request->getProductId());
-        require_once '../View/product-card.php';
-    }
 
     public function getTotalQuantity(int $userId): int
     {

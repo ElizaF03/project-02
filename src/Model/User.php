@@ -41,7 +41,7 @@ class User extends Model
     {
         $password = password_hash($password, PASSWORD_DEFAULT);
         $stmt = self::getPdo()->prepare('INSERT INTO users (username, email, password) VALUES(:username, :email, :password)');
-        $stmt->execute(array('username' => $username, 'email' => $email, 'password' => $password));
+        $stmt->execute(['username' => $username, 'email' => $email, 'password' => $password]);
     }
 
     public static function getUserByEmail(string $email): ?User

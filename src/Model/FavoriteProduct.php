@@ -67,12 +67,12 @@ class FavoriteProduct extends Model
     public static function create(int $userId, int $productId): void
     {
         $stmt = self::getPdo()->prepare('INSERT INTO favorite_user_products (user_id, product_id) VALUES(:user_id, :product_id)');
-        $stmt->execute(array('user_id' => $userId, 'product_id' => $productId));
+        $stmt->execute(['user_id' => $userId, 'product_id' => $productId]);
     }
 
     public static function remove(int $userId, int $productId): void
     {
         $stmt = self::getPdo()->prepare("DELETE FROM favorite_user_products WHERE user_id=:user_id AND product_id=:product_id");
-        $stmt->execute(array('user_id' => $userId, 'product_id' => $productId));
+        $stmt->execute(['user_id' => $userId, 'product_id' => $productId]);
     }
 }
