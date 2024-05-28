@@ -4,6 +4,7 @@ namespace Controller;
 
 use Model\Product;
 use Model\UserProduct;
+use Request\ProductRequest;
 
 class ProductController
 {
@@ -21,7 +22,7 @@ class ProductController
         require_once '../View/catalog.php';
     }
 
-    public function getProductCard()
+    public function getProductCard(ProductRequest $request)
     {
         session_start();
         if (!isset($_SESSION['user_id'])) {
@@ -29,7 +30,7 @@ class ProductController
         } else {
             $sum = $this->getTotalQuantity($_SESSION['user_id']);
         }
-        $product = Product::getById($_POST['id-product']);
+        $product = Product::getById($request->getProductId());
         require_once '../View/product-card.php';
     }
 

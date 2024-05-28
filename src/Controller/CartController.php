@@ -4,6 +4,8 @@ namespace Controller;
 
 use Model\Product;
 use Model\UserProduct;
+use Request\CartRequest;
+use Request\ProductRequest;
 
 class CartController
 {
@@ -28,13 +30,13 @@ class CartController
         return $totalPrice;
     }
 
-    public function addProduct(): void
+    public function addProduct(ProductRequest $request): void
     {
         session_start();
         if (!isset($_SESSION['user_id'])) {
             header('Location: login');
         } else {
-            $productId = $_POST['id-product'];
+            $productId = $request->getProductId();
             $userId = $_SESSION['user_id'];
             $oneUserProduct = UserProduct::getOne($userId, $productId);
             if (!$oneUserProduct) {
@@ -46,13 +48,13 @@ class CartController
         header('Location: /catalog');
     }
 
-    public function removeProduct(): void
+    public function removeProduct(ProductRequest $request): void
     {
         session_start();
         if (!isset($_SESSION['user_id'])) {
             header('Location: login');
         } else {
-            $productId = $_POST['id-product'];
+            $productId = $request->getProductId();
             $userId = $_SESSION['user_id'];
             $oneUserProduct = UserProduct::getOne($userId, $productId);
             if ($oneUserProduct) {

@@ -4,6 +4,7 @@ namespace Controller;
 use Model\FavoriteProduct;
 use Model\Product;
 use Model\UserProduct;
+use Request\ProductRequest;
 
 class FavoriteController
 {
@@ -31,13 +32,13 @@ class FavoriteController
     {
         return FavoriteProduct::getAllByUserId($userId);
     }
-    public function addFavoriteProduct(): void
+    public function addFavoriteProduct(ProductRequest $request): void
     {
         session_start();
         if (!isset($_SESSION['user_id'])) {
             header('Location: login');
         } else {
-            $productId = $_POST['id-product'];
+            $productId = $request->getProductId();
             $userId = $_SESSION['user_id'];
             $oneFavoriteProduct = FavoriteProduct::getOne($userId, $productId);
             if (!$oneFavoriteProduct) {
@@ -49,13 +50,13 @@ class FavoriteController
         require_once './../View/favorites.php';
     }
 
-    public function removeFavoriteProduct(): void
+    public function removeFavoriteProduct(ProductRequest $request): void
     {
         session_start();
         if (!isset($_SESSION['user_id'])) {
             header('Location: login');
         } else {
-            $productId = $_POST['id-product'];
+            $productId = $request->getProductId();
             $userId = $_SESSION['user_id'];
             $oneFavoriteProduct = FavoriteProduct::getOne($userId, $productId);
             if ($oneFavoriteProduct) {
