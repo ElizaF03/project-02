@@ -5,9 +5,17 @@ namespace Controller;
 use Model\User;
 use Request\LoginRequest;
 use Request\RegistrationRequest;
+use Service\AuthenticationService;
 
 class UserController
 {
+
+    private AuthenticationService $authenticationService;
+
+    public function __construct()
+    {
+        $this->authenticationService = new AuthenticationService();
+    }
     public function getRegistration(): void
     {
         require_once '../View/get_registration.php';
@@ -52,8 +60,8 @@ class UserController
             $user = User::getUserByEmail($email);
             if ($user) {
                 if (password_verify($password, $user->getPassword())) {
-                    session_start();
-                    $_SESSION['user_id'] = $user->getId();
+                    $this->authenticationService->authenticate($user->getId());
+                   // $_SESSION['user_id'] = $user->getId();
                     header('Location: /catalog');
                 } else {
                     $errors['password'] = 'Incorrect password';

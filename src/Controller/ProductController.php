@@ -18,12 +18,12 @@ class ProductController
 
     public function getCatalog()
     {
-        session_start();
+
         $products = Product::getAll();
         if (!$this->authenticationService->check()) {
             $sum = 0;
         } else {
-            $sum = $this->getTotalQuantity($_SESSION['user_id']);
+            $sum = $this->getTotalQuantity($this->authenticationService->getSession());
 
         }
         require_once '../View/catalog.php';

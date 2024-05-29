@@ -21,7 +21,7 @@ class CartController
         if (!$this->authenticationService->check()) {
             header('Location: login');
         }
-        $userProducts = UserProduct::getAllByUserId($_SESSION['user_id']);
+        $userProducts = UserProduct::getAllByUserId($this->authenticationService->getSession());
         $totalPrice = $this->calcTotalPrice($userProducts);
         require_once './../View/cart.php';
     }
@@ -42,7 +42,7 @@ class CartController
             header('Location: login');
         }
         $productId = $request->getProductId();
-        $userId = $_SESSION['user_id'];
+        $userId = $this->authenticationService->getSession();
         $oneUserProduct = UserProduct::getOne($userId, $productId);
         if (!$oneUserProduct) {
             UserProduct::create($userId, $productId);
@@ -58,7 +58,7 @@ class CartController
             header('Location: login');
         }
         $productId = $request->getProductId();
-        $userId = $_SESSION['user_id'];
+        $userId = $this->authenticationService->getSession();
         $oneUserProduct = UserProduct::getOne($userId, $productId);
         if ($oneUserProduct) {
             if ($oneUserProduct->getQuantity() === 1) {
