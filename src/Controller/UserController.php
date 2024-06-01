@@ -16,11 +16,11 @@ class UserController
     {
         $this->authenticationService = new AuthenticationService();
     }
+
     public function getRegistration(): void
     {
         require_once '../View/get_registration.php';
     }
-
 
     public function registration(RegistrationRequest $request): void
     {
@@ -50,27 +50,19 @@ class UserController
     }
 
 
-
     public function login(LoginRequest $request): void
     {
         $errors = $request->validate();
         if (empty($errors)) {
             $email = $request->getEmail();
             $password = $request->getPassword();
-            $user = User::getUserByEmail($email);
-            if ($user) {
-                if (password_verify($password, $user->getPassword())) {
-                    $this->authenticationService->authenticate($user->getId());
-                   // $_SESSION['user_id'] = $user->getId();
-                    header('Location: /catalog');
-                } else {
-                    $errors['password'] = 'Incorrect password';
-                }
+            $result = $this->authenticationService->authenticate($email, $password);
+            if ($result) {
+                header('Location: /catalog');
             } else {
-                $errors['email'] = 'User is not registered';
+                $errors['email'] = 'Login or password is incorrect';
             }
         }
         require_once '../View/get_login.php';
     }
-
 }
