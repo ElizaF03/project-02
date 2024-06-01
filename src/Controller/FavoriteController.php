@@ -19,11 +19,12 @@ class FavoriteController
 
     public function getFavoriteProducts(): void
     {
-        if (!$this->authenticationService->check()) {
+        $user = $this->authenticationService->getUser();
+        if ($user === null) {
             header('Location: login');
         }
-        $products = FavoriteProduct::getAllByUserId($_SESSION['user_id']);
-        $sum = $this->getTotalQuantity($_SESSION['user_id']);
+        $products = FavoriteProduct::getAllByUserId($user->getId());
+        $sum = $this->getTotalQuantity($user->getId());
         require_once './../View/favorites.php';
     }
 
@@ -37,39 +38,36 @@ class FavoriteController
         return $sum;
     }
 
-    public function getUserProducts($userId): ?array
-    {
-        return FavoriteProduct::getAllByUserId($userId);
-    }
-
     public function addFavoriteProduct(ProductRequest $request): void
-    {
-        if (!$this->authenticationService->check()) {
+    { $user = $this->authenticationService->getUser();
+        if ($user === null)
+          {
             header('Location: login');
         }
         $productId = $request->getProductId();
-        $userId = $_SESSION['user_id'];
+        $userId = $user->getId();
         $oneFavoriteProduct = FavoriteProduct::getOne($userId, $productId);
         if (!$oneFavoriteProduct) {
             FavoriteProduct::create($userId, $productId);
         }
-        $products = $this->getUserProducts($userId);
+        $products = FavoriteProduct::getAllByUserId($userId);
         $sum = $this->getTotalQuantity($userId);
         require_once './../View/favorites.php';
     }
 
     public function removeFavoriteProduct(ProductRequest $request): void
     {
-        if (!$this->authenticationService->check()) {
+        $user = $this->authenticationService->getUser();
+        if ($user === null)  {
             header('Location: login');
         }
         $productId = $request->getProductId();
-        $userId = $_SESSION['user_id'];
+        $userId = $user->getId();
         $oneFavoriteProduct = FavoriteProduct::getOne($userId, $productId);
         if ($oneFavoriteProduct) {
             FavoriteProduct::remove($userId, $productId);
         }
-        $products = $this->getUserProducts($userId);
+        $products = FavoriteProduct::getAllByUserId($userId);
         $sum = $this->getTotalQuantity($userId);
         require_once './../View/favorites.php';
     }

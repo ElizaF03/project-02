@@ -5,24 +5,27 @@ namespace Controller;
 use Model\Product;
 use Model\UserProduct;
 use Request\ProductRequest;
+use Service\AuthenticationCookie;
 use Service\AuthenticationService;
 
 class ProductController
 {
     private AuthenticationService $authenticationService;
+    private AuthenticationCookie  $authenticationCookie;
 
     public function __construct()
     {
         $this->authenticationService = new AuthenticationService();
+        $this->authenticationCookie = new AuthenticationCookie();
     }
 
     public function getCatalog()
     {
         $products = Product::getAll();
-        if ($this->authenticationService->check()) {
-            $sum = 0;
+        if (!$this->authenticationCookie->check()) {
+              $sum = 0;
         } else {
-            $sum = $this->getTotalQuantity($this->authenticationService->getUser()->getId());
+            $sum = $this->getTotalQuantity($this->authenticationCookie->getUser()->getId());
         }
         require_once '../View/catalog.php';
     }

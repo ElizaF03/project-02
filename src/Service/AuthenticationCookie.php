@@ -4,11 +4,11 @@ namespace Service;
 
 use Model\User;
 
-class AuthenticationService implements Authentication
+class AuthenticationCookie implements Authentication
 {
     public function check(): bool
     {
-        if (isset($_SESSION['user_id'])) {
+        if (isset($_COOKIE['user_id'])) {
             return true;
         } else {
             return false;
@@ -17,11 +17,10 @@ class AuthenticationService implements Authentication
 
     public function getUser(): ?User
     {
-        session_start();
         if (!$this->check()) {
             return null;
         } else {
-            $userId = $_SESSION['user_id'];
+            $userId = $_COOKIE['user_id'];
             return User::getById($userId);
         }
     }
@@ -31,8 +30,7 @@ class AuthenticationService implements Authentication
         $user = User::getUserByEmail($email);
         if ($user) {
             if (password_verify($password, $user->getPassword())) {
-                session_start();
-                $_SESSION['user_id'] = $user->getId();
+                setcookie('user_id', $user->getId(), time() + (86400 * 30), "/");
                 header('Location: /catalog');
                 return true;
             } else {
@@ -45,9 +43,7 @@ class AuthenticationService implements Authentication
 
     public function logout(): void
     {
-        session_start();
-        $_SESSION['user_id'] = null;
-        session_destroy();
+        setcookie('user_id', '', time() - 3600);
         // TODO: Implement logout() method.
     }
 }

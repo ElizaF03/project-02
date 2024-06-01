@@ -5,16 +5,19 @@ namespace Controller;
 use Model\User;
 use Request\LoginRequest;
 use Request\RegistrationRequest;
+use Service\AuthenticationCookie;
 use Service\AuthenticationService;
 
 class UserController
 {
 
     private AuthenticationService $authenticationService;
+    private AuthenticationCookie  $authenticationCookie;
 
     public function __construct()
     {
         $this->authenticationService = new AuthenticationService();
+        $this->authenticationCookie = new AuthenticationCookie();
     }
 
     public function getRegistration(): void
@@ -43,9 +46,7 @@ class UserController
 
     public function logout(): void
     {
-        session_start();
-        $_SESSION['user_id'] = '';
-        session_destroy();
+        $this->authenticationCookie->logout();
         header('Location: /login');
     }
 
@@ -56,7 +57,7 @@ class UserController
         if (empty($errors)) {
             $email = $request->getEmail();
             $password = $request->getPassword();
-            $result = $this->authenticationService->authenticate($email, $password);
+            $result = $this->authenticationCookie->authenticate($email, $password);
             if ($result) {
                 header('Location: /catalog');
             } else {

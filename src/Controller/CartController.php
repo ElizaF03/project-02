@@ -6,19 +6,22 @@ use Model\Product;
 use Model\UserProduct;
 use Request\ProductRequest;
 use Service\AuthenticationService;
+use Service\AuthenticationCookie;
 
 class CartController
 {
     private AuthenticationService $authenticationService;
+    private AuthenticationCookie $authenticationCookie;
 
     public function __construct()
     {
         $this->authenticationService = new AuthenticationService();
+        $this->authenticationCookie = new AuthenticationCookie();
     }
 
     public function getCart(): void
     {
-        $user=$this->authenticationService->getUser();
+        $user=$this->authenticationCookie->getUser();
         if ($user===null) {
             header('Location: login');
         }
@@ -39,11 +42,11 @@ class CartController
 
     public function addProduct(ProductRequest $request): void
     {
-        if (!$this->authenticationService->check()) {
+        if (!$this->authenticationCookie->check()) {
             header('Location: login');
         }
         $productId = $request->getProductId();
-        $userId = $this->authenticationService->getUser()->getId();
+        $userId = $this->authenticationCookie->getUser()->getId();
         $oneUserProduct = UserProduct::getOne($userId, $productId);
         if (!$oneUserProduct) {
             UserProduct::create($userId, $productId);
@@ -55,7 +58,7 @@ class CartController
 
     public function removeProduct(ProductRequest $request): void
     {
-        if (!$this->authenticationService->check()) {
+        if (!$this->authenticationCookie->check()) {
             header('Location: login');
         }
         $productId = $request->getProductId();

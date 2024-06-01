@@ -51,6 +51,9 @@ class FavoriteProduct extends Model
         $stmt = self::getPdo()->prepare('SELECT * FROM favorite_user_products JOIN products ON favorite_user_products.product_id=products.id WHERE user_id =:user_id');
         $stmt->execute(['user_id' => $userId]);
         $favoriteProducts = $stmt->fetchAll();
+        if (empty($favoriteProducts)) {
+            return [];
+        }
         foreach ($favoriteProducts as $favoriteProduct) {
             $product = Product::getById($favoriteProduct['product_id']);
             $result[$favoriteProduct['id']] = self::hydrate($favoriteProduct, $product);
