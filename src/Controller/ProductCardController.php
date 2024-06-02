@@ -11,7 +11,6 @@ class ProductCardController
 
     public function getProductCard(ProductRequest $request)
     {
-        session_start();
         $reviews=Review::getByProductId($request->getProductId());
         $product=Product::getById($request->getProductId());
         if($reviews){
@@ -19,7 +18,6 @@ class ProductCardController
         }else{
             $rating='no ratings';
         }
-
         require_once '../View/product-card.php';
     }
     public function calcRating($reviews): float|int

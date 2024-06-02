@@ -8,32 +8,35 @@ use Model\OrderProduct;
 use Model\Product;
 use Model\UserProduct;
 use Request\OrderRequest;
+use Service\AuthenticationCookie;
 use Service\AuthenticationService;
 
 class OrderController
 {
     private AuthenticationService $authenticationService;
+    private AuthenticationCookie  $authenticationCookie;
 
     public function __construct()
     {
         $this->authenticationService = new AuthenticationService();
+        $this->authenticationCookie = new AuthenticationCookie();
     }
 
     public function getOrder(): void
     {
-        if (!$this->authenticationService->check()) {
+        if (!$this->authenticationCookie->check()) {
             header('Location: login');
         }
-        $userProducts = UserProduct::getAllByUserId($_SESSION['user_id']);
+        $userProducts = UserProduct::getAllByUserId($this->authenticationCookie->getUser()->getId());
         $totalPrice = $this->calcTotalPrice($userProducts);
         require_once '../View/order.php';
     }
 
-    public function calcTotalPrice($products): float|int
+    public function calcTotalPrice($userProducts): float|int
     {
         $totalPrice = 0;
-        foreach ($products as $product) {
-            $totalPrice += $product->getQuantity() * $product->getProduct()->getPrice();
+        foreach ($userProducts as $userProduct) {
+            $totalPrice += $userProduct->getQuantity() * $userProduct->getProduct()->getPrice();
         }
         return $totalPrice;
     }
@@ -41,11 +44,11 @@ class OrderController
 
     public function makeOrder(OrderRequest $request): void
     {
-        if (!$this->authenticationService->check()) {
+        if (!$this->authenticationCookie->check()) {
             header('Location: login');
         }
         $errors = $request->validate();
-        $userId = $_SESSION['user_id'];
+        $userId = $this->authenticationCookie->getUser()->getId();
         if (empty($errors)) {
             $firstName = $request->getFirstName();
             $lastName = $request->getLastName();
