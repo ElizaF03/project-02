@@ -2,27 +2,23 @@
 
 namespace Controller;
 
-use Model\Product;
 use Model\UserProduct;
 use Request\ProductRequest;
-use Service\AuthenticationService;
-use Service\AuthenticationCookie;
+use Service\AuthenticationInterface;
 
 class CartController
 {
-    private AuthenticationService $authenticationService;
-    private AuthenticationCookie $authenticationCookie;
+    private AuthenticationInterface $authenticationService;
 
-    public function __construct()
+    public function __construct(AuthenticationInterface $authenticationService)
     {
-        $this->authenticationService = new AuthenticationService();
-        $this->authenticationCookie = new AuthenticationCookie();
+        $this->authenticationService = $authenticationService;
     }
 
     public function getCart(): void
     {
-        $user=$this->authenticationCookie->getUser();
-        if ($user===null) {
+        $user = $this->authenticationService->getUser();
+        if ($user === null) {
             header('Location: login');
         }
         $userProducts = UserProduct::getAllByUserId($user->getId());
@@ -42,11 +38,11 @@ class CartController
 
     public function addProduct(ProductRequest $request): void
     {
-        if (!$this->authenticationCookie->check()) {
+        if (!$this->authenticationService->check()) {
             header('Location: login');
         }
         $productId = $request->getProductId();
-        $userId = $this->authenticationCookie->getUser()->getId();
+        $userId = $this->authenticationService->getUser()->getId();
         $oneUserProduct = UserProduct::getOne($userId, $productId);
         if (!$oneUserProduct) {
             UserProduct::create($userId, $productId);
@@ -58,7 +54,7 @@ class CartController
 
     public function removeProduct(ProductRequest $request): void
     {
-        if (!$this->authenticationCookie->check()) {
+        if (!$this->authenticationService->check()) {
             header('Location: login');
         }
         $productId = $request->getProductId();

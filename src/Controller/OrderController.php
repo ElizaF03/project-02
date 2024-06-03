@@ -5,29 +5,25 @@ namespace Controller;
 use DateTime;
 use Model\Order;
 use Model\OrderProduct;
-use Model\Product;
 use Model\UserProduct;
 use Request\OrderRequest;
-use Service\AuthenticationCookie;
-use Service\AuthenticationService;
+use Service\AuthenticationInterface;
 
 class OrderController
 {
-    private AuthenticationService $authenticationService;
-    private AuthenticationCookie  $authenticationCookie;
+    private AuthenticationInterface $authenticationService;
 
-    public function __construct()
+    public function __construct(AuthenticationInterface $authenticationService)
     {
-        $this->authenticationService = new AuthenticationService();
-        $this->authenticationCookie = new AuthenticationCookie();
+        $this->authenticationService = $authenticationService;
     }
 
     public function getOrder(): void
     {
-        if (!$this->authenticationCookie->check()) {
+        if (!$this->authenticationService->check()) {
             header('Location: login');
         }
-        $userProducts = UserProduct::getAllByUserId($this->authenticationCookie->getUser()->getId());
+        $userProducts = UserProduct::getAllByUserId($this->authenticationService->getUser()->getId());
         $totalPrice = $this->calcTotalPrice($userProducts);
         require_once '../View/order.php';
     }
@@ -44,11 +40,11 @@ class OrderController
 
     public function makeOrder(OrderRequest $request): void
     {
-        if (!$this->authenticationCookie->check()) {
+        if (!$this->authenticationService->check()) {
             header('Location: login');
         }
         $errors = $request->validate();
-        $userId = $this->authenticationCookie->getUser()->getId();
+        $userId = $this->authenticationService->getUser()->getId();
         if (empty($errors)) {
             $firstName = $request->getFirstName();
             $lastName = $request->getLastName();

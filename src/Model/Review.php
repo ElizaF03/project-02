@@ -19,7 +19,7 @@ class Review extends Model
         $this->review = $review;
     }
 
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -55,6 +55,9 @@ class Review extends Model
         $stmt = self::getPdo()->prepare('SELECT * FROM reviews WHERE product_id = :product_id ORDER BY id DESC');
         $stmt->execute(['product_id' => $productId]);
         $reviews = $stmt->fetchAll();
+        if (empty($reviews)) {
+            return [];
+        }
         foreach ($reviews as $review) {
             $result[$review['id']] =  self::hydrate($review);
         }

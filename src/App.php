@@ -20,11 +20,12 @@ class App
             } else {
                 echo "Метод $requestMethod не поддерживается для адреса $requestUri";
             }
-            $object = new $class();
+            $authService = new \Service\AuthenticationCookieService();
+            $object = new $class($authService);
             if ($requestClass !== null) {
                 $request = new $requestClass($requestUri, $requestMethod, $_POST);
                 $object->$method($request);
-            }else{
+            } else {
                 $object->$method();
             }
 

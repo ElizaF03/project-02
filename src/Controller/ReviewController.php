@@ -5,26 +5,23 @@ namespace Controller;
 use Model\Product;
 use Model\Review;
 use Request\ReviewRequest;
-use Service\AuthenticationCookie;
-use Service\AuthenticationService;
+use Service\AuthenticationInterface;
 
 class ReviewController
 {
-    private AuthenticationService $authenticationService;
-    private AuthenticationCookie  $authenticationCookie;
+    private AuthenticationInterface $authenticationService;
 
-    public function __construct()
+    public function __construct(AuthenticationInterface $authenticationService)
     {
-        $this->authenticationService = new AuthenticationService();
-        $this->authenticationCookie = new AuthenticationCookie();
+        $this->authenticationService = $authenticationService;
     }
 
     public function addReview(ReviewRequest $request)
     {
-        if (!$this->authenticationCookie->check()) {
+        if (!$this->authenticationService->check()) {
             header('Location: login');
         }
-        $userId = $this->authenticationCookie->getUser()->getId();
+        $userId = $this->authenticationService->getUser()->getId();
         $productId = $request->getProductId();
         $grade = $request->getGrade();
         $reviewText = $request->getReview();

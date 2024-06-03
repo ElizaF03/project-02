@@ -4,10 +4,11 @@ namespace Service;
 
 use Model\User;
 
-class AuthenticationService implements Authentication
+class AuthenticationSessionService implements AuthenticationInterface
 {
     public function check(): bool
     {
+        session_start();
         if (isset($_SESSION['user_id'])) {
             return true;
         } else {
@@ -17,7 +18,6 @@ class AuthenticationService implements Authentication
 
     public function getUser(): ?User
     {
-        session_start();
         if (!$this->check()) {
             return null;
         } else {
@@ -26,14 +26,13 @@ class AuthenticationService implements Authentication
         }
     }
 
-    public function authenticate(string $email, string $password):bool
+    public function authenticate(string $email, string $password): bool
     {
         $user = User::getUserByEmail($email);
         if ($user) {
             if (password_verify($password, $user->getPassword())) {
                 session_start();
                 $_SESSION['user_id'] = $user->getId();
-                header('Location: /catalog');
                 return true;
             } else {
                 return false;
@@ -48,6 +47,5 @@ class AuthenticationService implements Authentication
         session_start();
         $_SESSION['user_id'] = null;
         session_destroy();
-        // TODO: Implement logout() method.
     }
 }

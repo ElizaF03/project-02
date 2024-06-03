@@ -4,7 +4,7 @@ namespace Service;
 
 use Model\User;
 
-class AuthenticationCookie implements Authentication
+class AuthenticationCookieService implements AuthenticationInterface
 {
     public function check(): bool
     {
@@ -25,13 +25,12 @@ class AuthenticationCookie implements Authentication
         }
     }
 
-    public function authenticate(string $email, string $password):bool
+    public function authenticate(string $email, string $password): bool
     {
         $user = User::getUserByEmail($email);
         if ($user) {
             if (password_verify($password, $user->getPassword())) {
                 setcookie('user_id', $user->getId(), time() + (86400 * 30), "/");
-                header('Location: /catalog');
                 return true;
             } else {
                 return false;
@@ -44,6 +43,5 @@ class AuthenticationCookie implements Authentication
     public function logout(): void
     {
         setcookie('user_id', '', time() - 3600);
-        // TODO: Implement logout() method.
     }
 }

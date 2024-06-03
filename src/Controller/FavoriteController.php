@@ -3,18 +3,17 @@
 namespace Controller;
 
 use Model\FavoriteProduct;
-use Model\Product;
 use Model\UserProduct;
 use Request\ProductRequest;
-use Service\AuthenticationService;
+use Service\AuthenticationInterface;
 
 class FavoriteController
 {
-    private AuthenticationService $authenticationService;
+    private AuthenticationInterface $authenticationService;
 
-    public function __construct()
+    public function __construct(AuthenticationInterface $authenticationService)
     {
-        $this->authenticationService = new AuthenticationService();
+        $this->authenticationService = $authenticationService;
     }
 
     public function getFavoriteProducts(): void
@@ -39,9 +38,9 @@ class FavoriteController
     }
 
     public function addFavoriteProduct(ProductRequest $request): void
-    { $user = $this->authenticationService->getUser();
-        if ($user === null)
-          {
+    {
+        $user = $this->authenticationService->getUser();
+        if ($user === null) {
             header('Location: login');
         }
         $productId = $request->getProductId();
@@ -58,7 +57,7 @@ class FavoriteController
     public function removeFavoriteProduct(ProductRequest $request): void
     {
         $user = $this->authenticationService->getUser();
-        if ($user === null)  {
+        if ($user === null) {
             header('Location: login');
         }
         $productId = $request->getProductId();
