@@ -5,15 +5,17 @@ namespace Controller;
 use Model\Product;
 use Model\UserProduct;
 use Service\AuthenticationInterface;
+use Service\CartService;
 
 class ProductController
 {
     private AuthenticationInterface $authenticationService;
+    private CartService $cartService;
 
-
-    public function __construct(AuthenticationInterface $authenticationService)
+    public function __construct(AuthenticationInterface $authenticationService, CartService $cartService)
     {
         $this->authenticationService = $authenticationService;
+        $this->cartService = $cartService;
     }
 
     public function getCatalog()
@@ -22,18 +24,9 @@ class ProductController
         if (!$this->authenticationService->check()) {
             $sum = 0;
         } else {
-            $sum = $this->getTotalQuantity($this->authenticationService->getUser()->getId());
+            $sum = $this->cartService->getTotalQuantity($this->authenticationService->getUser()->getId());
         }
         require_once '../View/catalog.php';
     }
 
-    public function getTotalQuantity(int $userId): int
-    {
-        $userProducts = UserProduct::getAllByUserId($userId);
-        $sum = 0;
-        foreach ($userProducts as $userProduct) {
-            $sum += $userProduct->getQuantity();
-        }
-        return $sum;
-    }
 }

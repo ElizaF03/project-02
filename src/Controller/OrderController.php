@@ -8,14 +8,18 @@ use Model\OrderProduct;
 use Model\UserProduct;
 use Request\OrderRequest;
 use Service\AuthenticationInterface;
+use Service\CartService;
+use Service\OrderService;
 
 class OrderController
 {
     private AuthenticationInterface $authenticationService;
+    private CartService $cartService;
 
-    public function __construct(AuthenticationInterface $authenticationService)
+    public function __construct(AuthenticationInterface $authenticationService, CartService $cartService)
     {
         $this->authenticationService = $authenticationService;
+        $this->cartService = $cartService;
     }
 
     public function getOrder(): void
@@ -24,19 +28,9 @@ class OrderController
             header('Location: login');
         }
         $userProducts = UserProduct::getAllByUserId($this->authenticationService->getUser()->getId());
-        $totalPrice = $this->calcTotalPrice($userProducts);
+        $totalPrice = $this->cartService->calcTotalPrice($userProducts);
         require_once '../View/order.php';
     }
-
-    public function calcTotalPrice($userProducts): float|int
-    {
-        $totalPrice = 0;
-        foreach ($userProducts as $userProduct) {
-            $totalPrice += $userProduct->getQuantity() * $userProduct->getProduct()->getPrice();
-        }
-        return $totalPrice;
-    }
-
 
     public function makeOrder(OrderRequest $request): void
     {

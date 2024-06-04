@@ -5,14 +5,17 @@ namespace Controller;
 use Model\UserProduct;
 use Request\ProductRequest;
 use Service\AuthenticationInterface;
+use Service\CartService;
 
 class CartController
 {
     private AuthenticationInterface $authenticationService;
+    private CartService $cartService;
 
-    public function __construct(AuthenticationInterface $authenticationService)
+    public function __construct(AuthenticationInterface $authenticationService, CartService $cartService)
     {
         $this->authenticationService = $authenticationService;
+        $this->cartService = $cartService;
     }
 
     public function getCart(): void
@@ -22,18 +25,8 @@ class CartController
             header('Location: login');
         }
         $userProducts = UserProduct::getAllByUserId($user->getId());
-        $totalPrice = $this->calcTotalPrice($userProducts);
+        $totalPrice = $this->cartService->calcTotalPrice($userProducts);
         require_once './../View/cart.php';
-    }
-
-
-    public function calcTotalPrice($userProducts): float|int
-    {
-        $totalPrice = 0;
-        foreach ($userProducts as $userProduct) {
-            $totalPrice += $userProduct->getQuantity() * $userProduct->getProduct()->getPrice();
-        }
-        return $totalPrice;
     }
 
     public function addProduct(ProductRequest $request): void

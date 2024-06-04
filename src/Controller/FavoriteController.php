@@ -6,14 +6,17 @@ use Model\FavoriteProduct;
 use Model\UserProduct;
 use Request\ProductRequest;
 use Service\AuthenticationInterface;
+use Service\CartService;
 
 class FavoriteController
 {
     private AuthenticationInterface $authenticationService;
+    private CartService $cartService;
 
-    public function __construct(AuthenticationInterface $authenticationService)
+    public function __construct(AuthenticationInterface $authenticationService, CartService $cartService)
     {
         $this->authenticationService = $authenticationService;
+        $this->cartService = $cartService;
     }
 
     public function getFavoriteProducts(): void
@@ -23,19 +26,10 @@ class FavoriteController
             header('Location: login');
         }
         $products = FavoriteProduct::getAllByUserId($user->getId());
-        $sum = $this->getTotalQuantity($user->getId());
+        $sum = $this->cartService->getTotalQuantity($user->getId());
         require_once './../View/favorites.php';
     }
 
-    public function getTotalQuantity(int $userId): int
-    {
-        $userProducts = UserProduct::getAllByUserId($userId);
-        $sum = 0;
-        foreach ($userProducts as $userProduct) {
-            $sum += $userProduct->getQuantity();
-        }
-        return $sum;
-    }
 
     public function addFavoriteProduct(ProductRequest $request): void
     {
@@ -50,7 +44,7 @@ class FavoriteController
             FavoriteProduct::create($userId, $productId);
         }
         $products = FavoriteProduct::getAllByUserId($userId);
-        $sum = $this->getTotalQuantity($userId);
+        $sum = $this->cartService->getTotalQuantity($userId);
         require_once './../View/favorites.php';
     }
 
@@ -67,7 +61,7 @@ class FavoriteController
             FavoriteProduct::remove($userId, $productId);
         }
         $products = FavoriteProduct::getAllByUserId($userId);
-        $sum = $this->getTotalQuantity($userId);
+        $sum = $this->cartService->getTotalQuantity($userId);
         require_once './../View/favorites.php';
     }
 }

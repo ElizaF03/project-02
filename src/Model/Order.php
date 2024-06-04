@@ -82,4 +82,5 @@ class Order extends Model
         $obj = new self($result['id'], $userId, $result['first_name'], $result['last_name'], $result['address'], $result['phone'], $result['total_price'], $result['date']);
         return $obj;
     }
+
 }

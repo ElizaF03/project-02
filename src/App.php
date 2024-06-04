@@ -21,7 +21,8 @@ class App
                 echo "Метод $requestMethod не поддерживается для адреса $requestUri";
             }
             $authService = new \Service\AuthenticationCookieService();
-            $object = new $class($authService);
+            $cartService = new \Service\CartService();
+            $object = new $class($authService, $cartService);
             if ($requestClass !== null) {
                 $request = new $requestClass($requestUri, $requestMethod, $_POST);
                 $object->$method($request);
