@@ -15,11 +15,13 @@ class OrderController
 {
     private AuthenticationInterface $authenticationService;
     private CartService $cartService;
+    private OrderService $orderService;
 
-    public function __construct(AuthenticationInterface $authenticationService, CartService $cartService)
+    public function __construct(AuthenticationInterface $authenticationService, CartService $cartService, OrderService $orderService)
     {
         $this->authenticationService = $authenticationService;
         $this->cartService = $cartService;
+        $this->orderService = $orderService;
     }
 
     public function getOrder(): void
@@ -47,14 +49,8 @@ class OrderController
             $totalPrice = $request->getTotalPrice();
             $date = new DateTime();
             $date = $date->format('Y-m-d H:i:s');
-            Order::addInfo($userId, $firstName, $lastName, $address, $phone, $totalPrice, $date);
-            $userProducts = UserProduct::getAllByUserId($userId);
-            $order = Order::getOrder($userId);
-            $orderId = $order->getId();
-            foreach ($userProducts as $userProduct) {
-                OrderProduct::create($orderId, $userProduct->getProduct()->getId(), $userProduct->getQuantity());
-            }
-            UserProduct::removeAll($userId);
+            $data=['first-name'=>$firstName, 'last-name'=>$lastName, 'address'=>$address, 'phone'=>$phone, 'total_price'=>$totalPrice, 'date'=>$date];
+            $this->orderService->createOrder($userId, $data);
             header('Location: /catalog');
         } else {
             $userProducts = UserProduct::getAllByUserId($userId);

@@ -22,7 +22,8 @@ class App
             }
             $authService = new \Service\AuthenticationCookieService();
             $cartService = new \Service\CartService();
-            $object = new $class($authService, $cartService);
+            $orderService = new \Service\OrderService();
+            $object = new $class($authService, $cartService, $orderService);
             if ($requestClass !== null) {
                 $request = new $requestClass($requestUri, $requestMethod, $_POST);
                 $object->$method($request);
