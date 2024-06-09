@@ -21,10 +21,11 @@ class ProductController
     public function getCatalog()
     {
         $products = Product::getAll();
-        if (!$this->authenticationService->check()) {
+        $user = $this->authenticationService->getUser();
+        if ($user === null) {
             $sum = 0;
         } else {
-            $sum = $this->cartService->getTotalQuantity($this->authenticationService->getUser()->getId());
+            $sum = $this->cartService->getTotalQuantity($user->getId());
         }
         require_once '../View/catalog.php';
     }

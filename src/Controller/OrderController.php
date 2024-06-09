@@ -26,10 +26,11 @@ class OrderController
 
     public function getOrder(): void
     {
-        if (!$this->authenticationService->check()) {
+        $user = $this->authenticationService->getUser();
+        if ($user === null) {
             header('Location: login');
         }
-        $userProducts = UserProduct::getAllByUserId($this->authenticationService->getUser()->getId());
+        $userProducts = UserProduct::getAllByUserId($user->getId());
         $totalPrice = $this->cartService->calcTotalPrice($userProducts);
         require_once '../View/order.php';
     }

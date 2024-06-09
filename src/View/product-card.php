@@ -12,7 +12,7 @@
                 <a href="/favorites" class="button">Favorites</a>
 
                 <a href="/catalog" class="button">Catalog</a>
-                <!--  <a href="/cart" class="button">Cart <span>(<?php echo $sum; ?>)</span></a>  -->
+                <a href="/cart" class="button">Cart <span>(<?php echo $sum; ?>)</span></a>
                 <a href="/logout" class="button">Exit</a>
             </div>
             <div class="section-titles">

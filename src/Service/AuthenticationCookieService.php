@@ -30,7 +30,7 @@ class AuthenticationCookieService implements AuthenticationInterface
         $user = User::getUserByEmail($email);
         if ($user) {
             if (password_verify($password, $user->getPassword())) {
-                setcookie('user_id', $user->getId(), time() + (86400 * 30), "/");
+                setcookie('user_id', $user->getId(), time() + 86400, "/");
                 return true;
             } else {
                 return false;

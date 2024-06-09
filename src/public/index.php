@@ -7,7 +7,6 @@ use Controller\ProductCardController;
 use Controller\ProductController;
 use Controller\UserController;
 use Controller\ReviewController;
-use Request\CartRequest;
 use Request\LoginRequest;
 use Request\OrderRequest;
 use Request\ProductRequest;

@@ -49,6 +49,9 @@ use AllowDynamicProperties;
     {
         $stmt = self::getPdo()->query("SELECT * FROM products");
         $products = $stmt->fetchAll();
+        if (empty($products)) {
+            return [];
+        }
         foreach ($products as $product) {
             $result[$product['id']] = self::hydrate($product);
         }

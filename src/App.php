@@ -20,17 +20,14 @@ class App
             } else {
                 echo "Метод $requestMethod не поддерживается для адреса $requestUri";
             }
-            $authService = new \Service\AuthenticationCookieService();
-            $cartService = new \Service\CartService();
-            $orderService = new \Service\OrderService();
-            $object = new $class($authService, $cartService, $orderService);
+           $container = new Container();
+            $object = $container->get($class);
             if ($requestClass !== null) {
                 $request = new $requestClass($requestUri, $requestMethod, $_POST);
                 $object->$method($request);
             } else {
                 $object->$method();
             }
-
         } else {
             require_once '../View/404.html';
         }

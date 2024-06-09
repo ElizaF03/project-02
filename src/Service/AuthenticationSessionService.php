@@ -8,7 +8,6 @@ class AuthenticationSessionService implements AuthenticationInterface
 {
     public function check(): bool
     {
-        session_start();
         if (isset($_SESSION['user_id'])) {
             return true;
         } else {
@@ -18,6 +17,7 @@ class AuthenticationSessionService implements AuthenticationInterface
 
     public function getUser(): ?User
     {
+        session_start();
         if (!$this->check()) {
             return null;
         } else {

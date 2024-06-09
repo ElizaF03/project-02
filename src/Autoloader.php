@@ -2,7 +2,7 @@
 
 class Autoloader
 {
-    public static function registarte(string $path)
+    public static function registarte(string $path): void
     {
         $autoload = function (string $className) use ($path) {
             $className = str_replace('\\', '/', $className);

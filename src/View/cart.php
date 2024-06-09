@@ -24,7 +24,7 @@
                     <li class="food-list__item">
                         <div class="food-info">
                             <img class="food-image"
-                                 src=<?php echo $userProduct->getProduct()->getImgUrl(); ?>/>
+                                 src=<?php echo $userProduct->getProduct()->getImgUrl(); ?>>
                             <div class="food-buy-amount"><?php echo $userProduct->getQuantity(); ?> x</div>
                             <div class="food-name"><?php echo $userProduct->getProduct()->getName(); ?>
                             </div>

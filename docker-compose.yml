@@ -16,7 +16,7 @@ services:
     build: docker
     restart: always
     volumes:
-      - ./docker/conf/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+      - ./docker/conf/php/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
       - .:/var/www/html
     env_file:
       - .env
