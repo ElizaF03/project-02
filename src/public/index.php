@@ -13,13 +13,14 @@ use Request\ProductRequest;
 use Request\RegistrationRequest;
 use Request\ReviewRequest;
 
+
 require_once '../Autoloader.php';
 
 $path = dirname(__DIR__);
 Autoloader::registarte($path);
 
-
-$app = new App();
+$container = new Container();
+$app = new App($container);
 $app->get('/login', UserController::class, 'getLogin');
 $app->post('/login', UserController::class, 'login', LoginRequest::class);
 $app->get('/registration', UserController::class, 'getRegistration');

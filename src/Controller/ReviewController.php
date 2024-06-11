@@ -6,22 +6,26 @@ use Model\Product;
 use Model\Review;
 use Request\ReviewRequest;
 use Service\AuthenticationInterface;
+use Service\CartService;
 
 class ReviewController
 {
     private AuthenticationInterface $authenticationService;
+    private CartService $cartService;
 
-    public function __construct(AuthenticationInterface $authenticationService)
+    public function __construct(AuthenticationInterface $authenticationService, CartService $cartService)
     {
         $this->authenticationService = $authenticationService;
+        $this->cartService = $cartService;
     }
 
     public function addReview(ReviewRequest $request)
     {
-        if (!$this->authenticationService->check()) {
+        $user = $this->authenticationService->getUser();
+        if ($user === null) {
             header('Location: login');
         }
-        $userId = $this->authenticationService->getUser()->getId();
+        $userId = $user->getId();
         $productId = $request->getProductId();
         $grade = $request->getGrade();
         $reviewText = $request->getReview();
@@ -32,6 +36,7 @@ class ReviewController
         $reviews = Review::getByProductId($productId);
         $rating = $this->calcRating($reviews);
         $product = Product::getById($productId);
+        $sum=$this->cartService->getTotalQuantity($userId);
         require_once '../View/product-card.php';
     }
 
