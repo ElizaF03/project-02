@@ -3,6 +3,7 @@
 namespace Controller;
 
 use Model\User;
+use Repository\UserRepository;
 use Request\LoginRequest;
 use Request\RegistrationRequest;
 use Service\AuthenticationInterface;
@@ -30,7 +31,7 @@ class UserController
             $username = $request->getName();
             $email = $request->getEmail();
             $password = $request->getPassword();
-            User::addInfo($username, $email, $password);
+             UserRepository::class->addInfo($username, $email, $password);
             header('Location: /login');
         } else {
             require_once '../View/get_registration.php';

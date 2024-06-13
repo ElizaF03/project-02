@@ -12,7 +12,7 @@ class Container
         return $object;
     }
 
-    public function set(string $className, callable $func): void
+    public function set(string $className, callable $func)
     {
         $this->services[$className] = $func;
     }

@@ -6,6 +6,7 @@ use DateTime;
 use Model\Order;
 use Model\OrderProduct;
 use Model\UserProduct;
+use Repository\UserProductRepository;
 use Request\OrderRequest;
 use Service\AuthenticationInterface;
 use Service\CartService;
@@ -16,12 +17,14 @@ class OrderController
     private AuthenticationInterface $authenticationService;
     private CartService $cartService;
     private OrderService $orderService;
+    private UserProductRepository $userProductRepository;
 
-    public function __construct(AuthenticationInterface $authenticationService, CartService $cartService, OrderService $orderService)
+    public function __construct(AuthenticationInterface $authenticationService, CartService $cartService, OrderService $orderService, UserProductRepository $userProductRepository)
     {
         $this->authenticationService = $authenticationService;
         $this->cartService = $cartService;
         $this->orderService = $orderService;
+        $this->userProductRepository = $userProductRepository;
     }
 
     public function getOrder(): void
@@ -30,7 +33,7 @@ class OrderController
         if ($user === null) {
             header('Location: login');
         }
-        $userProducts = UserProduct::getAllByUserId($user->getId());
+        $userProducts = $this->userProductRepository->getAllByUserId($user->getId());
         $totalPrice = $this->cartService->calcTotalPrice($userProducts);
         require_once '../View/order.php';
     }
@@ -54,7 +57,7 @@ class OrderController
             $this->orderService->createOrder($userId, $data);
             header('Location: /catalog');
         } else {
-            $userProducts = UserProduct::getAllByUserId($userId);
+            $userProducts = $this->userProductRepository->getAllByUserId($userId);
             require_once '../View/order.php';
         }
     }

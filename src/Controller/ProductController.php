@@ -4,6 +4,7 @@ namespace Controller;
 
 use Model\Product;
 use Model\UserProduct;
+use Repository\ProductRepository;
 use Service\AuthenticationInterface;
 use Service\CartService;
 
@@ -11,16 +12,18 @@ class ProductController
 {
     private AuthenticationInterface $authenticationService;
     private CartService $cartService;
+    private ProductRepository $productRepository;
 
-    public function __construct(AuthenticationInterface $authenticationService, CartService $cartService)
+    public function __construct(AuthenticationInterface $authenticationService, CartService $cartService, ProductRepository $productRepository)
     {
         $this->authenticationService = $authenticationService;
         $this->cartService = $cartService;
+        $this->productRepository = $productRepository;
     }
 
     public function getCatalog()
     {
-        $products = Product::getAll();
+        $products =   $this->productRepository->getAll();
         $user = $this->authenticationService->getUser();
         if ($user === null) {
             $sum = 0;

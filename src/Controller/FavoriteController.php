@@ -4,6 +4,7 @@ namespace Controller;
 
 use Model\FavoriteProduct;
 use Model\UserProduct;
+use Repository\FavoriteRepository;
 use Request\ProductRequest;
 use Service\AuthenticationInterface;
 use Service\CartService;
@@ -12,11 +13,13 @@ class FavoriteController
 {
     private AuthenticationInterface $authenticationService;
     private CartService $cartService;
+    private FavoriteRepository $favoriteRepository;
 
-    public function __construct(AuthenticationInterface $authenticationService, CartService $cartService)
+    public function __construct(AuthenticationInterface $authenticationService, CartService $cartService, FavoriteRepository $favoriteRepository)
     {
         $this->authenticationService = $authenticationService;
         $this->cartService = $cartService;
+        $this->favoriteRepository = $favoriteRepository;
     }
 
     public function getFavoriteProducts(): void
@@ -25,7 +28,7 @@ class FavoriteController
         if ($user === null) {
             header('Location: login');
         }
-        $products = FavoriteProduct::getAllByUserId($user->getId());
+        $products = $this->favoriteRepository->getAllByUserId($user->getId());
         $sum = $this->cartService->getTotalQuantity($user->getId());
         require_once './../View/favorites.php';
     }
@@ -39,11 +42,11 @@ class FavoriteController
         }
         $productId = $request->getProductId();
         $userId = $user->getId();
-        $oneFavoriteProduct = FavoriteProduct::getOne($userId, $productId);
+        $oneFavoriteProduct = $this->favoriteRepository->getOne($userId, $productId);
         if (!$oneFavoriteProduct) {
             FavoriteProduct::create($userId, $productId);
         }
-        $products = FavoriteProduct::getAllByUserId($userId);
+        $products = $this->favoriteRepository->getAllByUserId($userId);
         $sum = $this->cartService->getTotalQuantity($userId);
         require_once './../View/favorites.php';
     }
@@ -56,11 +59,11 @@ class FavoriteController
         }
         $productId = $request->getProductId();
         $userId = $user->getId();
-        $oneFavoriteProduct = FavoriteProduct::getOne($userId, $productId);
+        $oneFavoriteProduct = $this->favoriteRepository->getOne($userId, $productId);
         if ($oneFavoriteProduct) {
             FavoriteProduct::remove($userId, $productId);
         }
-        $products = FavoriteProduct::getAllByUserId($userId);
+        $products = $this->favoriteRepository->getAllByUserId($userId);
         $sum = $this->cartService->getTotalQuantity($userId);
         require_once './../View/favorites.php';
     }

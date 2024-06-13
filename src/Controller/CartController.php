@@ -3,6 +3,7 @@
 namespace Controller;
 
 use Model\UserProduct;
+use Repository\UserProductRepository;
 use Request\ProductRequest;
 use Service\AuthenticationInterface;
 use Service\CartService;
@@ -11,11 +12,13 @@ class CartController
 {
     private AuthenticationInterface $authenticationService;
     private CartService $cartService;
+    private UserProductRepository $userProductRepository;
 
-    public function __construct(AuthenticationInterface $authenticationService, CartService $cartService)
+    public function __construct(AuthenticationInterface $authenticationService, CartService $cartService, UserProductRepository $userProductRepository)
     {
         $this->authenticationService = $authenticationService;
         $this->cartService = $cartService;
+        $this->userProductRepository = $userProductRepository;
     }
 
     public function getCart(): void
@@ -24,7 +27,7 @@ class CartController
         if ($user === null) {
             header('Location: login');
         }
-        $userProducts = UserProduct::getAllByUserId($user->getId());
+        $userProducts = $this->userProductRepository->getAllByUserId($user->getId());
         $totalPrice = $this->cartService->calcTotalPrice($userProducts);
         require_once './../View/cart.php';
     }
@@ -36,11 +39,11 @@ class CartController
         }
         $productId = $request->getProductId();
         $userId = $this->authenticationService->getUser()->getId();
-        $oneUserProduct = UserProduct::getOne($userId, $productId);
+        $oneUserProduct = $this->userProductRepository->getOne($userId, $productId);
         if (!$oneUserProduct) {
-            UserProduct::create($userId, $productId);
+            $this->userProductRepository->create($userId, $productId);
         } else {
-            UserProduct::plusQuantity($userId, $productId);
+            $this->userProductRepository->plusQuantity($userId, $productId);
         }
         header('Location: /catalog');
     }
@@ -52,12 +55,12 @@ class CartController
         }
         $productId = $request->getProductId();
         $userId = $this->authenticationService->getUser()->getId();
-        $oneUserProduct = UserProduct::getOne($userId, $productId);
+        $oneUserProduct = $this->userProductRepository->getOne($userId, $productId);
         if ($oneUserProduct) {
             if ($oneUserProduct->getQuantity() === 1) {
-                UserProduct::remove($userId, $productId);
+                $this->userProductRepository->remove($userId, $productId);
             } else {
-                UserProduct::minusQuantity($userId, $productId);
+                $this->userProductRepository->minusQuantity($userId, $productId);
             }
         }
         header('Location: /catalog');
