@@ -14,7 +14,7 @@ class ProductRepository extends Repository
 
     public function getAll(): array
     {
-        $stmt = $this->getPdo()->query("SELECT * FROM products");
+        $stmt = $this->pdo->query("SELECT * FROM products");
         $products = $stmt->fetchAll();
         if (empty($products)) {
             return [];
@@ -27,7 +27,7 @@ class ProductRepository extends Repository
 
     public function getById(int $id): ?Product
     {
-        $stmt = $this->getPdo()->prepare("SELECT * FROM products WHERE id=:id");
+        $stmt = $this->pdo->prepare("SELECT * FROM products WHERE id=:id");
         $stmt->execute(['id' => $id]);
         $product = $stmt->fetch();
         if ($product === false) {

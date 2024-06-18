@@ -2,15 +2,17 @@
 
 namespace Entity;
 
+use Repository\ProductRepository;
+
 class Favorite
 {
     private int $id;
     private int $userId;
-    private Product $product;
+    private ProductRepository $product;
 
 
 
-    public function __construct(int $id, int $userId, Product $product)
+    public function __construct(int $id, int $userId, ProductRepository $product)
     {
         $this->id = $id;
         $this->userId = $userId;

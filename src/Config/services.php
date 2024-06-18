@@ -7,53 +7,77 @@ use Controller\ProductCardController;
 use Controller\ProductController;
 use Controller\ReviewController;
 use Controller\UserController;
+use Repository\FavoriteRepository;
+use Repository\ProductRepository;
+use Repository\ReviewRepository;
+use Repository\UserProductRepository;
+use Repository\UserRepository;
+use Service\AuthenticationSessionService;
+use Service\CartService;
+use Service\OrderService;
 
 return [
-    CartController::class => function () {
-        $authService = new \Service\AuthenticationSessionService();
-        $cartService = new \Service\CartService();
-        $userProductRepository=new \Repository\UserProductRepository();
-        $object = new CartController($authService, $cartService, $userProductRepository);
-        return $object;
+    CartController::class => function (Container $container) {
+        $authService = new AuthenticationSessionService();
+        $userRepository = new UserRepository();
+        $productRepository = new ProductRepository();
+        $userProductRepository = new UserProductRepository($userRepository, $productRepository);
+        $cartService = new CartService($userProductRepository);
+        return new CartController($authService, $cartService, $userProductRepository);
     },
-    FavoriteController::class => function () {
-        $authService = new \Service\AuthenticationSessionService();
-        $cartService = new \Service\CartService();
-        $favoriteRepository=new \Repository\FavoriteRepository();
-        $object = new \Controller\FavoriteController($authService, $cartService, $favoriteRepository);
-        return $object;
+    FavoriteController::class => function (Container $container) {
+        $authService = new AuthenticationSessionService();
+        $userRepository = new UserRepository();
+        $productRepository = new ProductRepository();
+        $userProductRepository = new UserProductRepository($userRepository, $productRepository);
+        $cartService = new CartService($userProductRepository);
+        $favoriteRepository = new FavoriteRepository($productRepository);
+        return new \Controller\FavoriteController($authService, $cartService, $favoriteRepository);
     },
-    OrderController::class => function () {
-        $authService = new \Service\AuthenticationSessionService();
-        $cartService = new \Service\CartService();
-        $orderService = new \Service\OrderService();
-        $userProductRepository=new \Repository\UserProductRepository();
-        $object = new \Controller\OrderController($authService, $cartService, $orderService, $userProductRepository);
-        return $object;
+    OrderController::class => function (Container $container) {
+        $authService = new AuthenticationSessionService();
+        $userRepository = new UserRepository();
+        $productRepository = new ProductRepository();
+        $userProductRepository = new UserProductRepository($userRepository, $productRepository);
+        $cartService = new CartService($userProductRepository);
+        $orderService = new OrderService();
+        return new \Controller\OrderController($authService, $cartService, $orderService, $userProductRepository);
     },
-    ReviewController::class => function () {
-        $authService = new \Service\AuthenticationSessionService();
-        $cartService = new \Service\CartService();
-        $object = new \Controller\ReviewController($authService, $cartService);
-        return $object;
+    ReviewController::class => function (Container $container) {
+        $authService = new AuthenticationSessionService();
+        $userRepository = new UserRepository();
+        $productRepository = new ProductRepository();
+        $userProductRepository = new UserProductRepository($userRepository, $productRepository);
+        $cartService = new CartService($userProductRepository);
+        $reviewRepository = new ReviewRepository();
+        return new \Controller\ReviewController($authService, $cartService, $reviewRepository, $productRepository);
     },
     UserController::class => function () {
-        $authService = new \Service\AuthenticationSessionService();
-        $object = new \Controller\UserController($authService);
-        return $object;
+        $authService = new AuthenticationSessionService();
+        $userRepository = new UserRepository();
+        return new \Controller\UserController($authService, $userRepository);
     },
-    ProductController::class => function () {
-        $authService = new \Service\AuthenticationSessionService();
-        $cartService = new \Service\CartService();
-        $productRepository=new \Repository\ProductRepository();
-        $object = new \Controller\ProductController($authService, $cartService, $productRepository);
-        return $object;
+    ProductCardController::class => function (Container $container) {
+        $authService = new AuthenticationSessionService();
+        $userRepository = new UserRepository();
+        $productRepository = new ProductRepository();
+        $userProductRepository = new UserProductRepository($userRepository, $productRepository);
+        $cartService = new CartService($userProductRepository);
+        return new \Controller\ProductCardController($authService, $cartService, $productRepository);
     },
-    ProductCardController::class => function () {
-        $authService = new \Service\AuthenticationSessionService();
-        $cartService = new \Service\CartService();
-        $productRepository=new \Repository\ProductRepository();
-        $object = new \Controller\ProductCardController($authService, $cartService, $productRepository);
-        return $object;
+    ProductController::class => function (Container $container) {
+        $authService = new AuthenticationSessionService();
+        $productRepository = new ProductRepository();
+        $cartService = $container->get(CartService::class);
+        return new ProductController($authService, $cartService, $productRepository);
+    },
+    CartService::class => function (Container $container) {
+        $userProductRepository = $container->get(UserProductRepository::class);
+        return new CartService($userProductRepository);
+    },
+    UserProductRepository::class => function () {
+        $userRepository = new UserRepository();
+        $productRepository = new ProductRepository();
+        return new UserProductRepository($userRepository, $productRepository);
     },
 ];

@@ -26,7 +26,7 @@ class App
             } else {
                 echo "Метод $requestMethod не поддерживается для адреса $requestUri";
             }
-            $services = require_once './../Config/services.php';
+            $services = require_once '../Config/services.php';
             foreach ($services as $key => $service) {
                 if ($class === $key) {
                     $this->container->set($class, $service);

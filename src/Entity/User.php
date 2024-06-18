@@ -2,7 +2,7 @@
 
 namespace Entity;
 
-class User
+class User extends \Repository\UserRepository
 {
     private int $id;
     private string $username;

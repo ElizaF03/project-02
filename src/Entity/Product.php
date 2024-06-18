@@ -2,7 +2,7 @@
 
 namespace Entity;
 
-class Product
+class Product extends \Repository\ProductRepository
 {
     private int $id;
     private string $name;
@@ -11,6 +11,7 @@ class Product
 
     public function __construct(int $id, string $name, float $price, string $img_url)
     {
+        parent::__construct();
         $this->id = $id;
         $this->name = $name;
         $this->price = $price;

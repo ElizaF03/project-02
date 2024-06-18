@@ -23,7 +23,7 @@ class ProductController
 
     public function getCatalog()
     {
-        $products =   $this->productRepository->getAll();
+        $products =  $this->productRepository->getAll();
         $user = $this->authenticationService->getUser();
         if ($user === null) {
             $sum = 0;

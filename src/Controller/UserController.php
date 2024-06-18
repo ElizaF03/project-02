@@ -12,11 +12,13 @@ class UserController
 {
 
     private AuthenticationInterface $authenticationService;
+    private UserRepository $userRepository;
 
 
-    public function __construct(AuthenticationInterface $authenticationService)
+    public function __construct(AuthenticationInterface $authenticationService, UserRepository $userRepository)
     {
         $this->authenticationService = $authenticationService;
+        $this->userRepository = $userRepository;
     }
 
     public function getRegistration(): void
@@ -31,7 +33,7 @@ class UserController
             $username = $request->getName();
             $email = $request->getEmail();
             $password = $request->getPassword();
-             UserRepository::class->addInfo($username, $email, $password);
+             $this->userRepository->addInfo($username, $email, $password);
             header('Location: /login');
         } else {
             require_once '../View/get_registration.php';

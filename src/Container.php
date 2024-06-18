@@ -5,14 +5,13 @@ class Container
     private array $services = [];
 
 
-    public function get(string $class): object
+    public function get(string $class)
     {
         $func = $this->services[$class];
-        $object = $func();
-        return $object;
+        return $func($this);
     }
 
-    public function set(string $className, callable $func)
+    public function set(string $className, callable $func): void
     {
         $this->services[$className] = $func;
     }

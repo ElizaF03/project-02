@@ -2,14 +2,17 @@
 
 namespace Entity;
 
+use Repository\ProductRepository;
+use Repository\UserRepository;
+
 class UserProduct
 {
     private int $id;
-    private User $user;
+    private UserRepository $user;
 
-    private Product $product;
+    private ProductRepository $product;
     private int $quantity;
-    public function __construct(int $id, User $user, Product $product, int $quantity)
+    public function __construct(int $id, UserRepository $user, ProductRepository $product, int $quantity)
     {
         $this->id = $id;
         $this->user = $user;
@@ -19,10 +22,10 @@ class UserProduct
     public function getId():int {
         return $this->id;
     }
-    public function getUser():User{
+    public function getUser():UserRepository{
         return $this->user;
     }
-    public function getProduct():Product{
+    public function getProduct():ProductRepository{
         return $this->product;
     }
     public function getQuantity():int{
