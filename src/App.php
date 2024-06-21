@@ -26,13 +26,13 @@ class App
             } else {
                 echo "Метод $requestMethod не поддерживается для адреса $requestUri";
             }
-            $services = require_once '../Config/services.php';
-            foreach ($services as $key => $service) {
-                if ($class === $key) {
-                    $this->container->set($class, $service);
+            $this->container->setServices(require_once '../Config/services.php');
+            foreach ($this->container->getServices() as $key => $service) {
+                $this->container->set($class, $service);
+                if ($key === $class) {
+                    $object = $this->container->get($class);
                 }
             }
-            $object = $this->container->get($class);
             if ($requestClass !== null) {
                 $request = new $requestClass($requestUri, $requestMethod, $_POST);
                 $object->$method($request);
