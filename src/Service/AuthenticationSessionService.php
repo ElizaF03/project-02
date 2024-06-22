@@ -2,10 +2,15 @@
 
 namespace Service;
 
-use Model\User;
+use Entity\User;
+use Repository\UserRepository;
 
 class AuthenticationSessionService implements AuthenticationInterface
 {
+    private $userRepository;
+    public function __construct(UserRepository $userRepository){
+        $this->userRepository = $userRepository;
+    }
     public function check(): bool
     {
         if (isset($_SESSION['user_id'])) {
@@ -22,13 +27,13 @@ class AuthenticationSessionService implements AuthenticationInterface
             return null;
         } else {
             $userId = $_SESSION['user_id'];
-            return User::getById($userId);
+            return $this->userRepository->getById($userId);
         }
     }
 
     public function authenticate(string $email, string $password): bool
     {
-        $user = User::getUserByEmail($email);
+        $user = $this->userRepository->getUserByEmail($email);
         if ($user) {
             if (password_verify($password, $user->getPassword())) {
                 session_start();

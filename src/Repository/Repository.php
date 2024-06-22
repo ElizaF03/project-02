@@ -23,6 +23,6 @@ class Repository
         $port = getenv('DB_PORT');
         $user = getenv('DB_USER');
         $password = getenv('DB_PASSWORD');
-        return self::$pdo = new PDO("pgsql:host=$host;port=$port;dbname=$db", "$user", "$password");
+        return $this->pdo= new PDO("pgsql:host=$host;port=$port;dbname=$db", "$user", "$password");
     }
 }

@@ -19,7 +19,7 @@ require_once '../Autoloader.php';
 $path = dirname(__DIR__);
 Autoloader::registarte($path);
 
-$container = new Container();
+$container = new Container(require_once '../Config/services.php');
 $app = new App($container);
 $app->get('/login', UserController::class, 'getLogin');
 $app->post('/login', UserController::class, 'login', LoginRequest::class);

@@ -2,7 +2,7 @@
 
 namespace Service;
 
-use Model\User;
+use Entity\User;
 
 interface AuthenticationInterface
 {

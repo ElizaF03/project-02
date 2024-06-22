@@ -2,16 +2,16 @@
 
 class Container
 {
-    private array $services = [];
+     private array $services = [];
+     public function __construct($services = []){
+         $this->services = $services;
+     }
 
     /**
-     * @param array $services
+     * @return array
      */
-    public function setServices(array $services): void
+    public function getServices(): array
     {
-        $this->services = $services;
-    }
-    public function getServices(): array{
         return $this->services;
     }
     public function get(string $class)
