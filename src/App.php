@@ -17,28 +17,35 @@ class App
     {
         $requestUri = $_SERVER['REQUEST_URI'];
         $requestMethod = $_SERVER['REQUEST_METHOD'];
-        if (isset($this->routes[$requestUri])) {
-            if (isset($this->routes[$requestUri][$requestMethod])) {
-                $handler = $this->routes[$requestUri][$requestMethod];
-                $method = $handler['method'];
-                $class = $handler['class'];
-                $requestClass = $handler['request'];
-            } else {
-                echo "Метод $requestMethod не поддерживается для адреса $requestUri";
-            }
-            foreach ($this->container->getServices() as $key => $service) {
-                $this->container->set($class, $service);
-                if ($key === $class) {
-                    $object = $this->container->get($class);
+        try {
+            if (isset($this->routes[$requestUri])) {
+                if (isset($this->routes[$requestUri][$requestMethod])) {
+                    $handler = $this->routes[$requestUri][$requestMethod];
+                    $method = $handler['method'];
+                    $class = $handler['class'];
+                    $requestClass = $handler['request'];
+                } else {
+                    echo "Метод $requestMethod не поддерживается для адреса $requestUri";
                 }
-            }
-            if ($requestClass !== null) {
-                $request = new $requestClass($requestUri, $requestMethod, $_POST);
-                $object->$method($request);
+                foreach ($this->container->getServices() as $key => $service) {
+                    $this->container->set($class, $service);
+                    if ($key === $class) {
+                        $object = $this->container->get($class);
+                    }
+                }
+                if ($requestClass !== null) {
+                    $request = new $requestClass($requestUri, $requestMethod, $_POST);
+                    $object->$method($request);
+                } else {
+                    $object->$method();
+                }
             } else {
-                $object->$method();
+                require_once '../View/404.html';
             }
-        } else {
+        } catch (Throwable $exception) {
+            $massage= $exception->getMessage().PHP_EOL.$exception->getFile().PHP_EOL.'line:'.$exception->getLine();
+            $logger = new Logger();
+            $logger->log($massage);
             require_once '../View/404.html';
         }
     }

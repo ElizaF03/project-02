@@ -1,0 +1,31 @@
+2024-06-24 13:07:51
+Call to undefined method Controller\CartController::getCar()2024-06-24 13:08:17
+Call to undefined method Controller\CartController::getCar()2024-06-24 13:08:28
+Call to undefined method Controller\CartController::getCar()2024-06-24 13:09:41
+Call to undefined method Controller\CartController::getCar()2024-06-24 13:10:28
+Call to undefined method Controller\CartController::getCar()2024-06-24 13:11:14
+Call to undefined method Controller\CartController::getCar()2024-06-24 13:12:13
+Call to undefined method Controller\CartController::getCar()Call to undefined method Controller\CartController::getCar()Call to undefined method Controller\CartController::getCar()2024-06-24 13:15:46
+Call to undefined method Controller\CartController::getCar()2024-06-24 13:17:44
+Array2024-06-24 13:19:21
+Call to undefined method Controller\CartController::getCar(),0,/var/www/html/src/App.php,402024-06-24 13:19:55
+Call to undefined method Controller\CartController::getCar(),/var/www/html/src/App.php,40
+2024-06-24 13:20:23
+Call to undefined method Controller\CartController::getCar(),/var/www/html/src/App.php,40
+2024-06-24 13:25:47
+Call to undefined method Controller\ProductController::getCatalo(),/var/www/html/src/App.php,40
+2024-06-24 13:31:08
+Call to undefined method Controller\ProductController::getCatalo(), /var/www/html/src/App.php, 40
+2024-06-24 13:34:10
+
+Call to undefined method Controller\ProductController::getCatalo()
+/var/www/html/src/App.php
+40
+2024-06-24 13:37:54
+Call to undefined method Controller\ProductController::getCatalo()
+/var/www/html/src/App.php
+string:40
+2024-06-24 13:38:28
+Call to undefined method Controller\ProductController::getCatalo()
+/var/www/html/src/App.php
+line:40
