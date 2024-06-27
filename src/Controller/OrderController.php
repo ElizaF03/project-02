@@ -40,11 +40,12 @@ class OrderController
 
     public function makeOrder(OrderRequest $request): void
     {
-        if (!$this->authenticationService->check()) {
+        $user = $this->authenticationService->getUser();
+        if ($user === null) {
             header('Location: login');
         }
         $errors = $request->validate();
-        $userId = $this->authenticationService->getUser()->getId();
+        $userId = $user->getId();
         if (empty($errors)) {
             $firstName = $request->getFirstName();
             $lastName = $request->getLastName();

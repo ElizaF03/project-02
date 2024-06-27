@@ -3,6 +3,7 @@
 namespace Repository;
 
 use Entity\Order;
+use Entity\UserProduct;
 
 class OrderRepository extends Repository
 {
@@ -20,7 +21,24 @@ class OrderRepository extends Repository
         if ($result === false) {
             return null;
         }
-        $obj = new Order($result['id'], $userId, $result['first_name'], $result['last_name'], $result['address'], $result['phone'], $result['total_price'], $result['date']);
+        $obj = $this->hydrate($result, $userId);
         return $obj;
+    }
+    public function getAll($userId): array
+    {
+        $stmt = $this->pdo->prepare('SELECT * FROM orders WHERE user_id = :user_id');
+        $stmt->execute(['user_id' => $userId]);
+        $userOrders = $stmt->fetchAll();
+        if (empty($userOrders)) {
+            return [];
+        }
+        foreach ($userOrders as $userOrder) {
+            $result[$userOrder['id']] = $this->hydrate($userOrder, $userId);
+        }
+        return $result;
+    }
+    private function hydrate(array $result, $userId): Order
+    {
+        return new Order($result['id'], $userId, $result['first_name'], $result['last_name'], $result['address'], $result['phone'], $result['total_price'], $result['date']);
     }
 }

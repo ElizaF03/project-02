@@ -51,7 +51,7 @@ class UserProductRepository extends Repository
 
     private function hydrate(array $data, UserRepository $userRepository, ProductRepository $productRepository): UserProduct
     {
-        $obj = new \Entity\UserProduct($data["id"], $userRepository, $productRepository, $data["quantity"]);
+        $obj = new UserProduct($data["id"], $userRepository, $productRepository, $data["quantity"]);
         return $obj;
     }
 

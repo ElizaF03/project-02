@@ -18,6 +18,7 @@ use Repository\UserRepository;
 use Service\AuthenticationSessionService;
 use Service\CartService;
 use Service\OrderService;
+use Service\RatingService;
 
 return [
     CartController::class => function (Container $container) {
@@ -43,8 +44,11 @@ return [
         $authService = $container->get(AuthenticationSessionService::class);
         $productRepository = new ProductRepository();
         $cartService = $container->get(CartService::class);
+        $ratingService = $container->get(RatingService::class);
+        $orderRepository = $container->get(OrderRepository::class);
+        $orderProductRepository = $container->get(OrderProductRepository::class);
         $reviewRepository = new ReviewRepository();
-        return new ReviewController($authService, $cartService, $reviewRepository, $productRepository);
+        return new ReviewController($authService, $cartService, $ratingService, $reviewRepository, $orderRepository, $productRepository, $orderProductRepository);
     },
     UserController::class => function () {
         global $container;
@@ -56,7 +60,9 @@ return [
         $authService = $container->get(AuthenticationSessionService::class);
         $productRepository = new ProductRepository();
         $cartService = $container->get(CartService::class);
-        return new ProductCardController($authService, $cartService, $productRepository);
+        $ratingService = $container->get(RatingService::class);
+        $reviewRepository = $container->get(ReviewRepository::class);
+        return new ProductCardController($authService, $cartService, $ratingService, $productRepository, $reviewRepository);
     },
     ProductController::class => function (Container $container) {
         $authService = $container->get(AuthenticationSessionService::class);
@@ -75,6 +81,9 @@ return [
         $userProductRepository = $container->get(UserProductRepository::class);
         return new OrderService($orderRepository, $orderProductRepository, $userProductRepository, $repository);
     },
+    RatingService::class=>function () {
+    return new RatingService();
+    },
     AuthenticationSessionService::class => function (Container $container) {
         $userRepository = new UserRepository();
         return new AuthenticationSessionService($userRepository);
@@ -88,5 +97,21 @@ return [
         $productRepository = new ProductRepository();
         return new FavoriteRepository($productRepository);
     },
-
+    OrderRepository::class => function () {
+        return new OrderRepository();
+    },
+    OrderProductRepository::class => function (Container $container) {
+        return new OrderProductRepository();
+    },
+    ReviewRepository::class => function (Container $container) {
+        return new ReviewRepository();
+    },
+    PDO::class => function () {
+        $host = getenv('DB_HOST');
+        $db = getenv('DB_NAME');
+        $port = getenv('DB_PORT');
+        $user = getenv('DB_USER');
+        $password = getenv('DB_PASSWORD');
+        return new PDO("pgsql:host=$host;port=$port;dbname=$db", "$user", "$password");
+    },
 ];

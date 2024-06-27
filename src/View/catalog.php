@@ -24,12 +24,13 @@
                             <input type="text" value="<?php echo $product->getId(); ?>" name="id-product"
                                    hidden="hidden">
                             <button class="button-img" type="submit"><img class="restaurant-image"
-                                                                      src="<?php echo $product->getImgUrl(); ?>"/>
+                                                                          src="<?php echo $product->getImgUrl(); ?>"/>
                             </button>
                         </form>
 
-                        <div class="restaurant-name"><?php echo $product->getName(); ?></div>
+
                         <div class="restaurant-info">
+                            <div class="restaurant-name"><?php echo $product->getName(); ?></div>
                             <span class="restaurant-category"><?php echo $product->getPrice(); ?> $</span>
                             <div class="action">
                                 <form class="form" method="post" action="/add-product">
@@ -88,17 +89,20 @@
         margin-top: 10px;
 
     }
-.button-img{
-    position: relative;
-    padding: 0;
-    border: 0;
-    cursor: pointer;
-    img{
 
-        width: 100%;
-        height: 100%;
+    .button-img {
+        position: relative;
+        padding: 0;
+        border: 0;
+        cursor: pointer;
+
+        img {
+
+            width: 100%;
+            height: 100%;
+        }
     }
-}
+
     .button {
         display: flex;
         color: #006653;
@@ -145,16 +149,9 @@
         transform: scale(1.2);
     }
 
-    .category-list__item .category-name {
-        padding: 9px 18px 36px 18px;
-        font-size: 10px;
-        font-weight: bold;
-        color: black;
-    }
-
-
     .restaurant-list {
         display: flex;
+        justify-content: center;
         flex-wrap: wrap;
         gap: 25px;
         padding: 0;
@@ -162,12 +159,24 @@
         list-style-type: none;
     }
 
-    .restaurant-list__item .restaurant-image {
+    .restaurant-list__item {
         width: 350px;
-        height: 225px;
-        object-fit: cover;
-        border-radius: 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: white;
+    }
 
+    .button-img {
+        width: 210px;
+        height: 250px;
+        background-color: white;
+        img {
+            height: 100%;
+            width: 100%;
+            object-fit: contain;
+        }
     }
 
     .restaurant-list__item .restaurant-name {
@@ -175,7 +184,12 @@
         font-size: 26px;
     }
 
-    .restaurant-list__item .restaurant-info {
+    .restaurant-info {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
         margin-top: 12px;
         font-size: 10px;
     }

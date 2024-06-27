@@ -29,3 +29,79 @@ string:40
 Call to undefined method Controller\ProductController::getCatalo()
 /var/www/html/src/App.php
 line:40
+2024-06-24 13:52:50
+Cannot call constructor
+/var/www/html/src/Repository/UserProductRepository.php
+line:13
+2024-06-24 13:52:53
+Cannot call constructor
+/var/www/html/src/Repository/UserProductRepository.php
+line:13
+2024-06-24 13:52:54
+Cannot call constructor
+/var/www/html/src/Repository/UserProductRepository.php
+line:13
+2024-06-27 11:12:50
+Controller\ReviewController::__construct(): Argument #4 ($orderRepository) must be of type Repository\OrderRepository, Repository\ProductRepository given, called in /var/www/html/src/Config/services.php on line 47
+/var/www/html/src/Controller/ReviewController.php
+line:22
+2024-06-27 11:14:37
+Value of type null is not callable
+/var/www/html/src/Container.php
+line:20
+2024-06-27 11:16:25
+Value of type null is not callable
+/var/www/html/src/Container.php
+line:20
+2024-06-27 11:26:27
+There is no active transaction
+/var/www/html/src/Service/OrderService.php
+line:43
+2024-06-27 11:29:19
+There is no active transaction
+/var/www/html/src/Service/OrderService.php
+line:43
+2024-06-27 11:35:58
+There is no active transaction
+/var/www/html/src/Service/OrderService.php
+line:43
+2024-06-27 12:30:29
+Entity\Order::__construct(): Argument #1 ($id) must be of type int, null given, called in /var/www/html/src/Repository/OrderRepository.php on line 42
+/var/www/html/src/Entity/Order.php
+line:16
+2024-06-27 13:15:18
+There is no active transaction
+/var/www/html/src/Service/OrderService.php
+line:43
+2024-06-27 13:17:39
+There is no active transaction
+/var/www/html/src/Service/OrderService.php
+line:43
+2024-06-27 13:26:54
+Division by zero
+/var/www/html/src/Controller/ReviewController.php
+line:75
+2024-06-27 13:44:06
+Too few arguments to function Controller\ProductCardController::__construct(), 3 passed in /var/www/html/src/Config/services.php on line 62 and exactly 4 expected
+/var/www/html/src/Controller/ProductCardController.php
+line:21
+2024-06-27 13:44:10
+Too few arguments to function Controller\ProductCardController::__construct(), 3 passed in /var/www/html/src/Config/services.php on line 62 and exactly 4 expected
+/var/www/html/src/Controller/ProductCardController.php
+line:21
+2024-06-27 14:48:55
+Call to a member function getId() on null
+/var/www/html/src/Controller/CartController.php
+line:41
+2024-06-27 14:49:00
+Call to a member function getId() on null
+/var/www/html/src/Controller/FavoriteController.php
+line:44
+2024-06-27 14:49:06
+Call to a member function getId() on null
+/var/www/html/src/Controller/CartController.php
+line:30
+2024-06-27 14:49:15
+Call to a member function getId() on null
+/var/www/html/src/Controller/ReviewController.php
+line:43
