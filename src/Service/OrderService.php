@@ -2,6 +2,7 @@
 
 namespace Service;
 
+use Container;
 use Model\Order;
 use Model\OrderProduct;
 use Model\UserProduct;
@@ -29,6 +30,7 @@ class OrderService
     public function createOrder(int $userId, array $data): void
 
     {
+
             $this->orderRepository->addInfo($userId, $data['first-name'], $data['last-name'], $data['address'], $data['phone'], $data['total_price'], $data['date']);
             $userProducts = $this->userProductRepository->getAllByUserId($userId);
             $order=$this->orderRepository->getOrder($userId);

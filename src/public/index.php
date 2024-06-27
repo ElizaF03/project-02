@@ -20,7 +20,8 @@ $path = dirname(__DIR__);
 Autoloader::registarte($path);
 
 $container = new Container(require_once '../Config/services.php');
-$app = new App($container);
+$logger= new Logger();
+$app = new App($container, $logger);
 $app->get('/login', UserController::class, 'getLogin');
 $app->post('/login', UserController::class, 'login', LoginRequest::class);
 $app->get('/registration', UserController::class, 'getRegistration');

@@ -3,9 +3,14 @@
 namespace Service;
 
 use Model\User;
+use Repository\UserRepository;
 
 class AuthenticationCookieService implements AuthenticationInterface
 {
+    private UserRepository $userRepository;
+    public function __construct(UserRepository $userRepository){
+        $this->userRepository = $userRepository;
+    }
     public function check(): bool
     {
         if (isset($_COOKIE['user_id'])) {
@@ -15,13 +20,13 @@ class AuthenticationCookieService implements AuthenticationInterface
         }
     }
 
-    public function getUser(): ?User
+    public function getUser(): ?\Entity\User
     {
         if (!$this->check()) {
             return null;
         } else {
             $userId = $_COOKIE['user_id'];
-            return User::getById($userId);
+            return $this->userRepository->getById($userId);
         }
     }
 

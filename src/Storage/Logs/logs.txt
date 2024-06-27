@@ -105,3 +105,19 @@ line:30
 Call to a member function getId() on null
 /var/www/html/src/Controller/ReviewController.php
 line:43
+2024-06-27 14:56:38
+Call to a member function getId() on null
+/var/www/html/src/Controller/CartController.php
+line:41
+2024-06-27 14:57:30
+Value of type null is not callable
+/var/www/html/src/Container.php
+line:20
+2024-06-27 15:05:54
+Value of type null is not callable
+/var/www/html/src/Container.php
+line:20
+2024-06-27 15:24:08
+Call to undefined method Controller\ProductController::getCatalo()
+/var/www/html/src/App.php
+line:42

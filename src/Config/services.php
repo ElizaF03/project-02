@@ -15,6 +15,7 @@ use Repository\Repository;
 use Repository\ReviewRepository;
 use Repository\UserProductRepository;
 use Repository\UserRepository;
+use Service\AuthenticationInterface;
 use Service\AuthenticationSessionService;
 use Service\CartService;
 use Service\OrderService;
@@ -22,26 +23,26 @@ use Service\RatingService;
 
 return [
     CartController::class => function (Container $container) {
-        $authService = $container->get(AuthenticationSessionService::class);
+        $authService = $container->get(AuthenticationInterface::class);
         $userProductRepository = $container->get(UserProductRepository::class);
         $cartService = $container->get(CartService::class);
         return new CartController($authService, $cartService, $userProductRepository);
     },
     FavoriteController::class => function (Container $container) {
-        $authService = $container->get(AuthenticationSessionService::class);
+        $authService = $container->get(AuthenticationInterface::class);
         $cartService = $container->get(CartService::class);
         $favoriteRepository = $container->get(FavoriteRepository::class);
         return new FavoriteController($authService, $cartService, $favoriteRepository);
     },
     OrderController::class => function (Container $container) {
-        $authService = $container->get(AuthenticationSessionService::class);
+        $authService = $container->get(AuthenticationInterface::class);
         $userProductRepository = $container->get(UserProductRepository::class);
         $cartService = $container->get(CartService::class);
         $orderService = $container->get(OrderService::class);
         return new OrderController($authService, $cartService, $orderService, $userProductRepository);
     },
     ReviewController::class => function (Container $container) {
-        $authService = $container->get(AuthenticationSessionService::class);
+        $authService = $container->get(AuthenticationInterface::class);
         $productRepository = new ProductRepository();
         $cartService = $container->get(CartService::class);
         $ratingService = $container->get(RatingService::class);
@@ -52,12 +53,12 @@ return [
     },
     UserController::class => function () {
         global $container;
-        $authService = $container->get(AuthenticationSessionService::class);
+        $authService = $container->get(AuthenticationInterface::class);
         $userRepository = new UserRepository();
         return new UserController($authService, $userRepository);
     },
     ProductCardController::class => function (Container $container) {
-        $authService = $container->get(AuthenticationSessionService::class);
+        $authService = $container->get(AuthenticationInterface::class);
         $productRepository = new ProductRepository();
         $cartService = $container->get(CartService::class);
         $ratingService = $container->get(RatingService::class);
@@ -65,7 +66,7 @@ return [
         return new ProductCardController($authService, $cartService, $ratingService, $productRepository, $reviewRepository);
     },
     ProductController::class => function (Container $container) {
-        $authService = $container->get(AuthenticationSessionService::class);
+        $authService = $container->get(AuthenticationInterface::class);
         $productRepository = new ProductRepository();
         $cartService = $container->get(CartService::class);
         return new ProductController($authService, $cartService, $productRepository);
@@ -84,7 +85,7 @@ return [
     RatingService::class=>function () {
     return new RatingService();
     },
-    AuthenticationSessionService::class => function (Container $container) {
+    AuthenticationInterface::class=>function (Container $container) {
         $userRepository = new UserRepository();
         return new AuthenticationSessionService($userRepository);
     },

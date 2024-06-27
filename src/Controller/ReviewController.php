@@ -2,8 +2,6 @@
 
 namespace Controller;
 
-use Model\Product;
-use Model\Review;
 use Repository\OrderProductRepository;
 use Repository\OrderRepository;
 use Repository\ProductRepository;
@@ -61,5 +59,4 @@ class ReviewController
         $sum = $this->cartService->getTotalQuantity($userId);
         require_once '../View/product-card.php';
     }
-
 }

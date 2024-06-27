@@ -5,12 +5,14 @@ use Request\RegistrationRequest;
 class App
 {
     private Container $container;
+    private LoggerInterface $logger;
     private array $routes = [
     ];
 
-    public function __construct(Container $container)
+    public function __construct(Container $container, LoggerInterface $logger)
     {
         $this->container = $container;
+        $this->logger = $logger;
     }
 
     public function run(): void
@@ -44,8 +46,7 @@ class App
             }
         } catch (Throwable $exception) {
             $massage= $exception->getMessage().PHP_EOL.$exception->getFile().PHP_EOL.'line:'.$exception->getLine();
-            $logger = new Logger();
-            $logger->log($massage);
+           $this->logger->log($massage);
             require_once '../View/404.html';
         }
     }

@@ -2,7 +2,7 @@
 
 namespace Controller;
 
-use Model\User;
+
 use Repository\UserRepository;
 use Request\LoginRequest;
 use Request\RegistrationRequest;
