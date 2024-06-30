@@ -48,7 +48,7 @@ return [
         $ratingService = $container->get(RatingService::class);
         $orderRepository = $container->get(OrderRepository::class);
         $orderProductRepository = $container->get(OrderProductRepository::class);
-        $reviewRepository = new ReviewRepository();
+        $reviewRepository = $container->get(ReviewRepository::class);
         return new ReviewController($authService, $cartService, $ratingService, $reviewRepository, $orderRepository, $productRepository, $orderProductRepository);
     },
     UserController::class => function () {
@@ -76,7 +76,7 @@ return [
         return new CartService($userProductRepository);
     },
     OrderService::class => function (Container $container) {
-        $orderRepository = new OrderRepository();
+        $orderRepository = $container->get(OrderRepository::class);
         $orderProductRepository = new orderProductRepository();
         $repository = new Repository();
         $userProductRepository = $container->get(UserProductRepository::class);
