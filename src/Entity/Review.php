@@ -10,6 +10,7 @@ class Review
     private int $grade;
     private string $review;
 
+
     public function __construct(int $id, int $userId, int $productId, int $grade, string $review)
     {
         $this->id = $id;
@@ -17,6 +18,7 @@ class Review
         $this->productId = $productId;
         $this->grade = $grade;
         $this->review = $review;
+
     }
 
     public function getId(): int

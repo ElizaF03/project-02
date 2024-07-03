@@ -8,6 +8,7 @@ class Request
     protected string $method;
     protected array $data;
 
+
    public function __construct(string $uri, string $method, array $data = [])
     {
         $this->uri = $uri;
@@ -29,4 +30,5 @@ class Request
     {
         return $this->data;
     }
+
 }

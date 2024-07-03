@@ -8,6 +8,7 @@ use Controller\ProductController;
 use Controller\ReviewController;
 use Controller\UserController;
 use Repository\FavoriteRepository;
+use Repository\ImageRepository;
 use Repository\OrderProductRepository;
 use Repository\OrderRepository;
 use Repository\ProductRepository;
@@ -49,7 +50,8 @@ return [
         $orderRepository = $container->get(OrderRepository::class);
         $orderProductRepository = $container->get(OrderProductRepository::class);
         $reviewRepository = $container->get(ReviewRepository::class);
-        return new ReviewController($authService, $cartService, $ratingService, $reviewRepository, $orderRepository, $productRepository, $orderProductRepository);
+        $imageRepository = $container->get(ImageRepository::class);
+        return new ReviewController($authService, $cartService, $ratingService, $reviewRepository, $orderRepository, $productRepository, $orderProductRepository, $imageRepository);
     },
     UserController::class => function () {
         global $container;
@@ -106,6 +108,9 @@ return [
     },
     ReviewRepository::class => function (Container $container) {
         return new ReviewRepository();
+    },
+    ImageRepository::class=>function (Container $container) {
+    return new ImageRepository();
     },
     PDO::class => function () {
         $host = getenv('DB_HOST');

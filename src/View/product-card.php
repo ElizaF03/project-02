@@ -53,7 +53,7 @@
                 </div>
             </section>
             <section class="reviews">
-                <form class="form" method="post" action="/add-review">
+                <form class="form" method="post" action="/add-review" enctype="multipart/form-data">
                     <label class="label-grade">Your grade
                         <select name="grade" class="select-grade">
                             <option value="5" selected>5</option>
@@ -68,6 +68,7 @@
                            hidden="hidden">
                     <textarea class="textarea" name="review" id="review" cols="30" rows="10"
                               placeholder="Enter your review"></textarea>
+                    <input type="file" class="input-img" name="img" accept="image/png, image/jpeg" >
                     <button class="button" type="submit">Add review</button>
                 </form>
                 <ul class="reviews_items">
@@ -84,6 +85,10 @@
                                 </div>
                                 <div class="review_grade">
                                     Grade: <?php echo $review->getGrade(); ?>
+                                </div>
+
+                                <div class="review_img">
+                                    <img src="./../Storage/Files/54e65148fd53c96d2c2e4a7bec88f9d7df_2.jpg" alt="">
                                 </div>
                             </div>
                         </li>
@@ -122,7 +127,18 @@
         margin-top: 10px;
 
     }
-
+.input-img{
+    color: #006653;
+}
+.review_img{
+    width: 50px;
+    height: 50px;
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+}
     .rating {
         font-size: 22px;
         margin-top: 15px;

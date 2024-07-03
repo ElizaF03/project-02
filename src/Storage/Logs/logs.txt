@@ -121,3 +121,279 @@ line:20
 Call to undefined method Controller\ProductController::getCatalo()
 /var/www/html/src/App.php
 line:42
+2024-07-02 11:45:21
+Entity\Review::__construct(): Argument #6 ($img) must be of type string, null given, called in /var/www/html/src/Repository/ReviewRepository.php on line 41
+/var/www/html/src/Entity/Review.php
+line:14
+2024-07-02 11:57:28
+Entity\Review::__construct(): Argument #6 ($img) must be of type string, null given, called in /var/www/html/src/Repository/ReviewRepository.php on line 41
+/var/www/html/src/Entity/Review.php
+line:14
+2024-07-02 12:24:37
+Request\ReviewRequest::getImg(): Return value must be of type string, null returned
+/var/www/html/src/Request/ReviewRequest.php
+line:21
+2024-07-02 12:25:34
+Path cannot be empty
+/var/www/html/src/Controller/ReviewController.php
+line:52
+2024-07-02 12:32:30
+Path cannot be empty
+/var/www/html/src/Controller/ReviewController.php
+line:52
+2024-07-02 12:33:37
+Path cannot be empty
+/var/www/html/src/Controller/ReviewController.php
+line:53
+2024-07-02 12:35:28
+Path cannot be empty
+/var/www/html/src/Controller/ReviewController.php
+line:53
+2024-07-02 12:37:02
+Path cannot be empty
+/var/www/html/src/Controller/ReviewController.php
+line:52
+2024-07-02 12:38:01
+Path cannot be empty
+/var/www/html/src/Controller/ReviewController.php
+line:52
+2024-07-02 12:39:20
+Repository\ReviewRepository::create(): Argument #5 ($img) must be of type string, null given, called in /var/www/html/src/Controller/ReviewController.php on line 54
+/var/www/html/src/Repository/ReviewRepository.php
+line:9
+2024-07-02 12:41:10
+Repository\ReviewRepository::create(): Argument #5 ($img) must be of type string, null given, called in /var/www/html/src/Controller/ReviewController.php on line 54
+/var/www/html/src/Repository/ReviewRepository.php
+line:9
+2024-07-02 12:44:32
+SQLSTATE[42601]: Syntax error: 7 ERROR:  INSERT has more expressions than target columns
+LINE 1: ...er_id, product_id, grade, review) VALUES($1, $2, $3, $4, $5)
+                                                                    ^
+/var/www/html/src/Repository/ReviewRepository.php
+line:12
+2024-07-02 12:49:42
+SQLSTATE[42601]: Syntax error: 7 ERROR:  INSERT has more expressions than target columns
+LINE 1: ...er_id, product_id, grade, review) VALUES($1, $2, $3, $4, $5)
+                                                                    ^
+/var/www/html/src/Repository/ReviewRepository.php
+line:12
+2024-07-02 12:54:33
+SQLSTATE[42601]: Syntax error: 7 ERROR:  INSERT has more expressions than target columns
+LINE 1: ...er_id, product_id, grade, review) VALUES($1, $2, $3, $4, $5)
+                                                                    ^
+/var/www/html/src/Repository/ReviewRepository.php
+line:12
+2024-07-02 12:55:35
+SQLSTATE[42601]: Syntax error: 7 ERROR:  INSERT has more expressions than target columns
+LINE 1: ...er_id, product_id, grade, review) VALUES($1, $2, $3, $4, $5)
+                                                                    ^
+/var/www/html/src/Repository/ReviewRepository.php
+line:12
+2024-07-02 12:57:45
+SQLSTATE[42601]: Syntax error: 7 ERROR:  INSERT has more expressions than target columns
+LINE 1: ...er_id, product_id, grade, review) VALUES($1, $2, $3, $4, $5)
+                                                                    ^
+/var/www/html/src/Repository/ReviewRepository.php
+line:12
+2024-07-02 13:02:18
+SQLSTATE[42601]: Syntax error: 7 ERROR:  INSERT has more expressions than target columns
+LINE 1: ...er_id, product_id, grade, review) VALUES($1, $2, $3, $4, $5)
+                                                                    ^
+/var/www/html/src/Repository/ReviewRepository.php
+line:12
+2024-07-02 13:02:54
+SQLSTATE[42601]: Syntax error: 7 ERROR:  INSERT has more expressions than target columns
+LINE 1: ...er_id, product_id, grade, review) VALUES($1, $2, $3, $4, $5)
+                                                                    ^
+/var/www/html/src/Repository/ReviewRepository.php
+line:12
+2024-07-02 13:03:17
+Repository\ReviewRepository::create(): Argument #5 ($img) must be of type string, null given, called in /var/www/html/src/Controller/ReviewController.php on line 54
+/var/www/html/src/Repository/ReviewRepository.php
+line:9
+2024-07-02 13:05:17
+Too few arguments to function Request\Request::__construct(), 3 passed in /var/www/html/src/App.php on line 39 and exactly 4 expected
+/var/www/html/src/Request/Request.php
+line:12
+2024-07-02 13:06:57
+SQLSTATE[42601]: Syntax error: 7 ERROR:  INSERT has more expressions than target columns
+LINE 1: ...er_id, product_id, grade, review) VALUES($1, $2, $3, $4, $5)
+                                                                    ^
+/var/www/html/src/Repository/ReviewRepository.php
+line:12
+2024-07-02 13:25:31
+Entity\Review::__construct(): Argument #6 ($img) must be of type ?string, resource given, called in /var/www/html/src/Repository/ReviewRepository.php on line 41
+/var/www/html/src/Entity/Review.php
+line:14
+2024-07-02 13:28:16
+base64_decode(): Argument #1 ($string) must be of type string, resource given
+/var/www/html/src/View/product-card.php
+line:91
+2024-07-02 13:28:39
+base64_decode(): Argument #1 ($string) must be of type string, resource given
+/var/www/html/src/View/product-card.php
+line:91
+2024-07-02 13:29:22
+Entity\Review::__construct(): Argument #6 ($img) must be of type ?string, resource given, called in /var/www/html/src/Repository/ReviewRepository.php on line 41
+/var/www/html/src/Entity/Review.php
+line:14
+2024-07-02 13:30:11
+Entity\Review::__construct(): Argument #6 ($img) must be of type ?string, resource given, called in /var/www/html/src/Repository/ReviewRepository.php on line 41
+/var/www/html/src/Entity/Review.php
+line:14
+2024-07-02 13:30:30
+Entity\Review::__construct(): Argument #6 ($img) must be of type string, resource given, called in /var/www/html/src/Repository/ReviewRepository.php on line 41
+/var/www/html/src/Entity/Review.php
+line:14
+2024-07-02 13:31:21
+Entity\Review::__construct(): Argument #6 ($img) must be of type ?string, resource given, called in /var/www/html/src/Repository/ReviewRepository.php on line 41
+/var/www/html/src/Entity/Review.php
+line:14
+2024-07-02 13:31:37
+Entity\Review::__construct(): Argument #6 ($img) must be of type ?string, resource given, called in /var/www/html/src/Repository/ReviewRepository.php on line 41
+/var/www/html/src/Entity/Review.php
+line:14
+2024-07-02 13:33:55
+base64_decode(): Argument #1 ($string) must be of type string, resource given
+/var/www/html/src/View/product-card.php
+line:91
+2024-07-02 13:41:43
+SQLSTATE[42703]: Undefined column: 7 ERROR:  column "grade" of relation "reviews" does not exist
+LINE 1: INSERT INTO reviews(user_id, product_id, grade, review, img)...
+                                                 ^
+/var/www/html/src/Repository/ReviewRepository.php
+line:12
+2024-07-02 13:43:55
+base64_decode(): Argument #1 ($string) must be of type string, resource given
+/var/www/html/src/View/product-card.php
+line:91
+2024-07-02 13:43:58
+base64_decode(): Argument #1 ($string) must be of type string, resource given
+/var/www/html/src/View/product-card.php
+line:91
+2024-07-02 13:46:15
+base64_decode(): Argument #1 ($string) must be of type string, resource given
+/var/www/html/src/View/product-card.php
+line:91
+2024-07-02 13:47:14
+base64_decode(): Argument #1 ($string) must be of type string, resource given
+/var/www/html/src/View/product-card.php
+line:91
+2024-07-02 13:47:36
+base64_decode(): Argument #1 ($string) must be of type string, resource given
+/var/www/html/src/View/product-card.php
+line:91
+2024-07-02 13:48:14
+base64_encode(): Argument #1 ($string) must be of type string, resource given
+/var/www/html/src/View/product-card.php
+line:91
+2024-07-03 10:02:45
+SQLSTATE[42P01]: Undefined table: 7 ERROR:  relation "reviews" does not exist
+LINE 1: SELECT * FROM reviews WHERE product_id = $1 ORDER BY id DESC
+                      ^
+/var/www/html/src/Repository/ReviewRepository.php
+line:18
+2024-07-03 10:03:22
+SQLSTATE[42P01]: Undefined table: 7 ERROR:  relation "reviews" does not exist
+LINE 1: SELECT * FROM reviews WHERE product_id = $1 ORDER BY id DESC
+                      ^
+/var/www/html/src/Repository/ReviewRepository.php
+line:18
+2024-07-03 10:03:44
+SQLSTATE[42P01]: Undefined table: 7 ERROR:  relation "reviews" does not exist
+LINE 1: SELECT * FROM reviews WHERE product_id = $1 ORDER BY id DESC
+                      ^
+/var/www/html/src/Repository/ReviewRepository.php
+line:18
+2024-07-03 10:46:52
+Path cannot be empty
+/var/www/html/src/Controller/ReviewController.php
+line:71
+2024-07-03 11:31:31
+Too few arguments to function Repository\ReviewRepository::__construct(), 0 passed in /var/www/html/src/Config/services.php on line 108 and exactly 1 expected
+/var/www/html/src/Repository/ReviewRepository.php
+line:11
+2024-07-03 11:33:18
+Repository\ReviewRepository::hydrate(): Return value must be of type Entity\Review, null returned
+/var/www/html/src/Repository/ReviewRepository.php
+line:49
+2024-07-03 11:33:49
+Repository\ReviewRepository::hydrate(): Return value must be of type Entity\Review, null returned
+/var/www/html/src/Repository/ReviewRepository.php
+line:46
+2024-07-03 12:49:09
+Too few arguments to function Controller\ReviewController::__construct(), 7 passed in /var/www/html/src/Config/services.php on line 53 and exactly 8 expected
+/var/www/html/src/Controller/ReviewController.php
+line:27
+2024-07-03 12:51:11
+Call to a member function getId() on null
+/var/www/html/src/Controller/ReviewController.php
+line:63
+2024-07-03 12:56:19
+SQLSTATE[42703]: Undefined column: 7 ERROR:  column "review_id" of relation "favorite_user_products" does not exist
+LINE 1: INSERT INTO favorite_user_products (product_id, review_id, p...
+                                                        ^
+/var/www/html/src/Repository/ImageRepository.php
+line:10
+2024-07-03 12:57:26
+SQLSTATE[42703]: Undefined column: 7 ERROR:  column "path" of relation "images" does not exist
+LINE 1: INSERT INTO images (product_id, review_id, path) VALUES($1, ...
+                                                   ^
+/var/www/html/src/Repository/ImageRepository.php
+line:10
+2024-07-03 12:58:56
+SQLSTATE[HY093]: Invalid parameter number: :path
+/var/www/html/src/Repository/ImageRepository.php
+line:10
+2024-07-03 12:59:42
+SQLSTATE[23503]: Foreign key violation: 7 ERROR:  insert or update on table "images" violates foreign key constraint "images_review_id_key"
+DETAIL:  Key (review_id)=(1) is not present in table "reviews".
+/var/www/html/src/Repository/ImageRepository.php
+line:10
+2024-07-03 13:02:45
+SQLSTATE[23503]: Foreign key violation: 7 ERROR:  insert or update on table "images" violates foreign key constraint "images_review_id_fkey"
+DETAIL:  Key (review_id)=(1) is not present in table "reviews".
+/var/www/html/src/Repository/ImageRepository.php
+line:10
+2024-07-03 13:06:29
+Call to a member function getId() on null
+/var/www/html/src/Controller/ReviewController.php
+line:63
+2024-07-03 13:09:13
+Call to a member function getId() on null
+/var/www/html/src/Controller/ReviewController.php
+line:64
+2024-07-03 13:10:46
+SQLSTATE[23503]: Foreign key violation: 7 ERROR:  insert or update on table "images" violates foreign key constraint "images_review_id_fkey"
+DETAIL:  Key (review_id)=(1) is not present in table "reviews".
+/var/www/html/src/Repository/ImageRepository.php
+line:10
+2024-07-03 13:12:48
+SQLSTATE[23503]: Foreign key violation: 7 ERROR:  insert or update on table "images" violates foreign key constraint "images_review_id_fkey"
+DETAIL:  Key (review_id)=(1) is not present in table "reviews".
+/var/www/html/src/Repository/ImageRepository.php
+line:10
+2024-07-03 13:18:56
+Call to a member function getId() on null
+/var/www/html/src/Controller/ReviewController.php
+line:66
+2024-07-03 13:27:37
+Repository\ImageRepository::create(): Argument #3 ($img_url) must be of type string, null given, called in /var/www/html/src/Controller/ReviewController.php on line 67
+/var/www/html/src/Repository/ImageRepository.php
+line:7
+2024-07-03 13:37:05
+Entity\Image::__construct(): Argument #2 ($product) must be of type Repository\ProductRepository, int given, called in /var/www/html/src/Repository/ImageRepository.php on line 28
+/var/www/html/src/Entity/Image.php
+line:15
+2024-07-03 13:40:12
+Entity\Image::__construct(): Argument #2 ($product) must be of type Repository\ProductRepository, int given, called in /var/www/html/src/Repository/ImageRepository.php on line 28
+/var/www/html/src/Entity/Image.php
+line:15
+2024-07-03 13:45:48
+Entity\Image::__construct(): Argument #3 ($review) must be of type Repository\ReviewRepository, int given, called in /var/www/html/src/Repository/ImageRepository.php on line 28
+/var/www/html/src/Entity/Image.php
+line:15
+2024-07-03 13:47:07
+Object of class Entity\Image could not be converted to string
+/var/www/html/src/View/product-card.php
+line:91

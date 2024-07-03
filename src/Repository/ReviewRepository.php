@@ -31,14 +31,13 @@ class ReviewRepository extends Repository
         $stmt =  $this->pdo->prepare('SELECT * FROM reviews WHERE user_id = :user_id AND product_id = :product_id');
         $stmt->execute(['user_id' => $userId, 'product_id' => $productId]);
         $result = $stmt->fetch();
-        if($result===false){
+        if(empty($result)){
             return null;
         }
         return $this->hydrate($result);
     }
     private function hydrate(array $data): Review
     {
-        $obj = new Review($data["id"], $data['user_id'], $data['product_id'], $data['grade'], $data['review']);
-        return $obj;
+        return new Review($data["id"], $data['user_id'], $data['product_id'], $data['grade'], $data['review']);
     }
 }

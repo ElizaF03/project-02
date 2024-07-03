@@ -42,8 +42,7 @@ class FavoriteRepository extends Repository
 
     private function hydrate(array $data, ProductRepository $productRepository): Favorite
     {
-        $obj = new Favorite($data["id"], $data['user_id'], $productRepository);
-        return $obj;
+        return new Favorite($data["id"], $data['user_id'], $productRepository);
     }
 
     public function create(int $userId, int $productId): void

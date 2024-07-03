@@ -4,6 +4,8 @@ namespace Request;
 
 class ReviewRequest extends Request
 {
+
+
     public function getProductId(): string
     {
         return $this->data['id-product'];
@@ -16,4 +18,5 @@ class ReviewRequest extends Request
     {
         return $this->data['review'];
     }
+
 }
