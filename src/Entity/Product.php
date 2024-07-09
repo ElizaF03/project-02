@@ -2,7 +2,9 @@
 
 namespace Entity;
 
-class Product extends \Repository\ProductRepository
+use Repository\ProductRepository;
+
+class Product extends ProductRepository
 {
     private int $id;
     private string $name;

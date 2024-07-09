@@ -12,10 +12,10 @@ class ImageRepository extends Repository
         $stmt->execute(['product_id' => $productId, 'review_id' => $reviewId, 'img_url' => $img_url]);
     }
 
-    public function getOne(int $productId, int $reviewId): ?Image
+    public function getOne(int $reviewId): ?Image
     {
-        $stmt = $this->pdo->prepare('SELECT * FROM images WHERE product_id = :product_id AND review_id = :review_id');
-        $stmt->execute(['product_id' => $productId, 'review_id' => $reviewId]);
+        $stmt = $this->pdo->prepare('SELECT * FROM images WHERE review_id = :review_id');
+        $stmt->execute(['review_id' => $reviewId]);
         $result = $stmt->fetch();
         if (empty($result)) {
             return null;

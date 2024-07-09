@@ -30,6 +30,18 @@ class OrderService
         $this->repository = $repository;
     }
 
+    public function searchProductInOrders($orders, $productId): bool
+    {
+        foreach ($orders as $order) {
+            $orderId = $order->getId();
+            $productFromOrder = $this->orderProductRepository->getOne($orderId, $productId);
+            if ($productFromOrder !== null) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public function createOrder(int $userId, array $data): void
 
     {

@@ -21,7 +21,7 @@
         </section>
         <div class="wrapper">
             <section class="section">
-                <img class="restaurant-image" src="<?php echo $product->getImgUrl(); ?>"/>
+                <img class="restaurant-image" src="<?php echo $product->getImgUrl(); ?>">
 
                 <div class="restaurant-info">
                     <span class="restaurant-price">Price: <?php echo $product->getPrice(); ?> $</span>
@@ -53,7 +53,7 @@
                 </div>
             </section>
             <section class="reviews">
-                <form class="form" method="post" action="/add-review" enctype="multipart/form-data">
+                <form class="form" method="post" action="/add-review" enctype="multipart/form-data" <?php echo  $style; ?>>
                     <label class="label-grade">Your grade
                         <select name="grade" class="select-grade">
                             <option value="5" selected>5</option>
@@ -70,12 +70,13 @@
                               placeholder="Enter your review"></textarea>
                     <input type="file" class="input-img" name="img" accept="image/png, image/jpeg" >
                     <button class="button" type="submit">Add review</button>
+
                 </form>
                 <ul class="reviews_items">
                     <?php foreach ($reviews as $review): ?>
                         <li class="reviews_item">
 
-                            <div class="review_name_user">
+                            <div class="review_name_user" >
                                 User Id: <?php echo $review->getUserId(); ?>
                             </div>
                             <div class="review_body">
@@ -88,7 +89,7 @@
                                 </div>
 
                                 <div class="review_img">
-                                    <img src="./../Storage/Files/54e65148fd53c96d2c2e4a7bec88f9d7df_2.jpg" alt="">
+                                    <img src="<?php echo $review->getImage()->getPath(); ?>" alt="" <?php echo  $styleImg; ?>>
                                 </div>
                             </div>
                         </li>
@@ -136,7 +137,7 @@
     img{
         width: 100%;
         height: 100%;
-        object-fit: contain;
+        object-fit: cover;
     }
 }
     .rating {

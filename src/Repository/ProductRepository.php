@@ -8,8 +8,7 @@ class ProductRepository extends Repository
 {
     private function hydrate(array $data): Product
     {
-        $obj = new Product($data["id"], $data["name"], $data["price"], $data["img_url"]);
-        return $obj;
+        return new Product($data["id"], $data["name"], $data["price"], $data["img_url"]);
     }
 
     public function getAll(): array
@@ -33,8 +32,7 @@ class ProductRepository extends Repository
         if ($product === false) {
             return null;
         } else {
-            $obj = $this->hydrate($product);
-            return $obj;
+            return $this->hydrate($product);
         }
     }
 }

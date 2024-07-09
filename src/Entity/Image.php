@@ -2,18 +2,21 @@
 
 namespace Entity;
 
+use Repository\ImageRepository;
 use Repository\ProductRepository;
 use Repository\ReviewRepository;
 
-class Image
+class Image extends ImageRepository
 {
     private int $id;
     private int $productId;
     private int $reviewId;
     private string $path;
 
+
     public function __construct(int $id, int $productId, int$reviewId, string $path)
     {
+        parent::__construct();
         $this->id = $id;
         $this->productId = $productId;
         $this->reviewId = $reviewId;

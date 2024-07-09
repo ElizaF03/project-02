@@ -19,6 +19,7 @@ use Repository\UserRepository;
 use Service\AuthenticationInterface;
 use Service\AuthenticationSessionService;
 use Service\CartService;
+use Service\ImageService;
 use Service\OrderService;
 use Service\RatingService;
 
@@ -50,8 +51,9 @@ return [
         $orderRepository = $container->get(OrderRepository::class);
         $orderProductRepository = $container->get(OrderProductRepository::class);
         $reviewRepository = $container->get(ReviewRepository::class);
-        $imageRepository = $container->get(ImageRepository::class);
-        return new ReviewController($authService, $cartService, $ratingService, $reviewRepository, $orderRepository, $productRepository, $orderProductRepository, $imageRepository);
+        $imageService = $container->get(ImageService::class);
+        $orderService=$container->get(OrderService::class);
+        return new ReviewController($authService, $cartService, $ratingService, $reviewRepository, $orderRepository, $productRepository, $orderProductRepository, $imageService, $orderService);
     },
     UserController::class => function () {
         global $container;
@@ -65,7 +67,10 @@ return [
         $cartService = $container->get(CartService::class);
         $ratingService = $container->get(RatingService::class);
         $reviewRepository = $container->get(ReviewRepository::class);
-        return new ProductCardController($authService, $cartService, $ratingService, $productRepository, $reviewRepository);
+        $orderRepository = $container->get(OrderRepository::class);
+        $imageService= $container->get(ImageService::class);
+        $orderService=$container->get(OrderService::class);
+        return new ProductCardController($authService, $cartService, $ratingService, $productRepository, $reviewRepository, $orderRepository, $imageService, $orderService);
     },
     ProductController::class => function (Container $container) {
         $authService = $container->get(AuthenticationInterface::class);
@@ -87,6 +92,10 @@ return [
     RatingService::class=>function () {
     return new RatingService();
     },
+    ImageService::class=>function (Container $container) {
+        $imageRepository=$container->get(ImageRepository::class);
+        return new ImageService($imageRepository);
+    },
     AuthenticationInterface::class=>function (Container $container) {
         $userRepository = new UserRepository();
         return new AuthenticationSessionService($userRepository);
@@ -107,8 +116,10 @@ return [
         return new OrderProductRepository();
     },
     ReviewRepository::class => function (Container $container) {
-        return new ReviewRepository();
+    $imageRepository=$container->get(ImageRepository::class);
+        return new ReviewRepository($imageRepository);
     },
+
     ImageRepository::class=>function (Container $container) {
     return new ImageRepository();
     },

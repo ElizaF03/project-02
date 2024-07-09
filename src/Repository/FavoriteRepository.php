@@ -21,8 +21,7 @@ class FavoriteRepository extends Repository
             return null;
         }
         $product = $this->productRepository->getById($result['product_id']);
-        $obj = new Favorite ($result["id"], $result['user_id'], $product);
-        return $obj;
+        return new Favorite ($result["id"], $result['user_id'], $product);
     }
 
     public function getAllByUserId(int $userId): array

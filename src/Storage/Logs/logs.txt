@@ -397,3 +397,279 @@ line:15
 Object of class Entity\Image could not be converted to string
 /var/www/html/src/View/product-card.php
 line:91
+2024-07-04 14:53:29
+Call to a member function getId() on null
+/var/www/html/src/Controller/ReviewController.php
+line:45
+2024-07-07 16:00:31
+Call to a member function getPath() on null
+/var/www/html/src/Controller/ProductCardController.php
+line:40
+2024-07-07 16:01:32
+Call to a member function getPath() on null
+/var/www/html/src/Controller/ProductCardController.php
+line:40
+2024-07-07 16:12:17
+Controller\ProductCardController::__construct(): Argument #6 ($imageService) must be of type Service\ImageService, Repository\ImageRepository given, called in /var/www/html/src/Config/services.php on line 69
+/var/www/html/src/Controller/ProductCardController.php
+line:24
+2024-07-07 16:14:46
+Controller\ProductCardController::__construct(): Argument #6 ($imageService) must be of type Service\ImageService, null given, called in /var/www/html/src/Config/services.php on line 70
+/var/www/html/src/Controller/ProductCardController.php
+line:24
+2024-07-07 16:52:32
+Controller\ReviewController::__construct(): Argument #8 ($imageService) must be of type Service\ImageService, Repository\ImageRepository given, called in /var/www/html/src/Config/services.php on line 55
+/var/www/html/src/Controller/ReviewController.php
+line:29
+2024-07-07 16:54:42
+Controller\ReviewController::__construct(): Argument #8 ($imageService) must be of type Service\ImageService, Repository\ImageRepository given, called in /var/www/html/src/Config/services.php on line 55
+/var/www/html/src/Controller/ReviewController.php
+line:29
+2024-07-07 16:56:25
+Call to a member function getId() on null
+/var/www/html/src/Controller/ReviewController.php
+line:60
+2024-07-07 16:57:06
+Call to a member function getId() on null
+/var/www/html/src/Controller/ReviewController.php
+line:67
+2024-07-07 17:01:19
+Call to a member function getId() on null
+/var/www/html/src/Controller/ReviewController.php
+line:61
+2024-07-07 17:04:23
+Repository\ReviewRepository::create(): Argument #3 ($grade) must be of type int, null given, called in /var/www/html/src/Controller/ReviewController.php on line 59
+/var/www/html/src/Repository/ReviewRepository.php
+line:9
+2024-07-07 17:09:58
+Call to a member function getId() on null
+/var/www/html/src/Controller/ReviewController.php
+line:63
+2024-07-07 17:12:12
+Call to a member function getId() on null
+/var/www/html/src/Controller/ReviewController.php
+line:67
+2024-07-07 17:12:44
+Call to a member function getId() on null
+/var/www/html/src/Controller/ReviewController.php
+line:67
+2024-07-07 17:13:49
+Call to a member function getId() on null
+/var/www/html/src/Controller/ReviewController.php
+line:67
+2024-07-07 17:17:37
+Call to a member function getId() on null
+/var/www/html/src/Controller/ReviewController.php
+line:67
+2024-07-07 17:35:33
+Call to a member function getId() on null
+/var/www/html/src/Controller/ReviewController.php
+line:69
+2024-07-07 17:36:29
+Call to a member function getId() on null
+/var/www/html/src/Controller/ReviewController.php
+line:69
+2024-07-07 17:38:01
+Call to a member function getId() on null
+/var/www/html/src/Controller/ReviewController.php
+line:69
+2024-07-07 17:38:53
+Call to a member function getId() on null
+/var/www/html/src/Controller/ReviewController.php
+line:69
+2024-07-07 17:39:17
+Call to a member function getId() on null
+/var/www/html/src/Controller/ReviewController.php
+line:69
+2024-07-07 17:39:45
+Call to a member function getId() on null
+/var/www/html/src/Controller/ReviewController.php
+line:69
+2024-07-07 17:40:15
+Call to a member function getId() on null
+/var/www/html/src/Controller/ReviewController.php
+line:69
+2024-07-08 12:11:14
+Call to a member function getId() on null
+/var/www/html/src/Controller/ReviewController.php
+line:69
+2024-07-08 12:12:37
+Call to a member function getId() on null
+/var/www/html/src/Controller/ReviewController.php
+line:69
+2024-07-08 12:18:16
+Call to a member function getId() on null
+/var/www/html/src/Controller/ReviewController.php
+line:69
+2024-07-08 12:18:32
+Call to a member function getId() on null
+/var/www/html/src/Controller/ReviewController.php
+line:69
+2024-07-08 12:23:16
+Call to a member function getId() on null
+/var/www/html/src/Controller/ReviewController.php
+line:65
+2024-07-08 12:25:36
+Call to a member function getId() on null
+/var/www/html/src/Controller/ReviewController.php
+line:64
+2024-07-08 12:26:08
+Call to a member function getId() on null
+/var/www/html/src/Controller/ReviewController.php
+line:64
+2024-07-08 12:26:27
+Call to a member function getId() on null
+/var/www/html/src/Controller/ReviewController.php
+line:64
+2024-07-08 12:27:48
+Call to a member function getId() on null
+/var/www/html/src/Controller/ReviewController.php
+line:64
+2024-07-08 12:27:58
+Call to a member function getId() on null
+/var/www/html/src/Controller/ReviewController.php
+line:64
+2024-07-08 12:34:05
+Call to a member function getId() on null
+/var/www/html/src/Controller/ReviewController.php
+line:64
+2024-07-08 12:34:10
+Call to a member function getId() on null
+/var/www/html/src/Controller/ReviewController.php
+line:64
+2024-07-08 12:34:40
+Call to a member function getId() on null
+/var/www/html/src/Controller/ReviewController.php
+line:64
+2024-07-08 12:36:44
+Call to a member function getId() on null
+/var/www/html/src/Controller/ReviewController.php
+line:66
+2024-07-08 12:42:17
+Call to a member function getId() on null
+/var/www/html/src/Controller/ReviewController.php
+line:59
+2024-07-08 12:46:45
+Call to a member function getId() on null
+/var/www/html/src/Controller/ReviewController.php
+line:59
+2024-07-08 12:46:50
+Call to a member function getId() on null
+/var/www/html/src/Controller/ReviewController.php
+line:59
+2024-07-08 12:54:29
+Call to a member function getId() on null
+/var/www/html/src/Controller/ReviewController.php
+line:59
+2024-07-08 13:07:06
+Controller\ProductCardController::__construct(): Argument #6 ($orderRepository) must be of type Repository\OrderRepository, Service\ImageService given, called in /var/www/html/src/Config/services.php on line 70
+/var/www/html/src/Controller/ProductCardController.php
+line:28
+2024-07-08 13:11:03
+Call to a member function getId() on null
+/var/www/html/src/Controller/ReviewController.php
+line:59
+2024-07-08 13:30:38
+Too few arguments to function Controller\ReviewController::__construct(), 8 passed in /var/www/html/src/Config/services.php on line 55 and exactly 9 expected
+/var/www/html/src/Controller/ReviewController.php
+line:31
+2024-07-08 13:33:02
+Path cannot be empty
+/var/www/html/src/Service/ImageService.php
+line:17
+2024-07-08 13:35:29
+Call to a member function getPath() on null
+/var/www/html/src/Service/ImageService.php
+line:33
+2024-07-08 13:35:32
+Call to a member function getPath() on null
+/var/www/html/src/Service/ImageService.php
+line:33
+2024-07-08 13:37:44
+Call to a member function getPath() on null
+/var/www/html/src/Service/ImageService.php
+line:33
+2024-07-08 13:37:50
+Call to a member function getPath() on null
+/var/www/html/src/Service/ImageService.php
+line:33
+2024-07-08 13:37:55
+Call to a member function getPath() on null
+/var/www/html/src/Service/ImageService.php
+line:33
+2024-07-08 13:45:44
+Path cannot be empty
+/var/www/html/src/Service/ImageService.php
+line:17
+2024-07-08 13:47:50
+Container::set(): Argument #1 ($className) must be of type string, null given, called in /var/www/html/src/App.php on line 33
+/var/www/html/src/Container.php
+line:23
+2024-07-08 13:48:31
+Path cannot be empty
+/var/www/html/src/Service/ImageService.php
+line:17
+2024-07-08 13:52:46
+Path cannot be empty
+/var/www/html/src/Service/ImageService.php
+line:17
+2024-07-08 14:08:08
+Container::set(): Argument #1 ($className) must be of type string, null given, called in /var/www/html/src/App.php on line 33
+/var/www/html/src/Container.php
+line:23
+2024-07-08 14:09:16
+Container::set(): Argument #1 ($className) must be of type string, null given, called in /var/www/html/src/App.php on line 33
+/var/www/html/src/Container.php
+line:23
+2024-07-08 14:12:51
+Container::set(): Argument #1 ($className) must be of type string, null given, called in /var/www/html/src/App.php on line 33
+/var/www/html/src/Container.php
+line:23
+2024-07-08 14:16:20
+Path cannot be empty
+/var/www/html/src/Service/ImageService.php
+line:17
+2024-07-08 14:18:18
+Container::set(): Argument #1 ($className) must be of type string, null given, called in /var/www/html/src/App.php on line 33
+/var/www/html/src/Container.php
+line:23
+2024-07-08 14:19:10
+Path cannot be empty
+/var/www/html/src/Service/ImageService.php
+line:17
+2024-07-08 15:05:50
+Too few arguments to function Repository\ReviewRepository::__construct(), 0 passed in /var/www/html/src/Config/services.php on line 119 and exactly 1 expected
+/var/www/html/src/Repository/ReviewRepository.php
+line:10
+2024-07-08 15:07:14
+Repository\ReviewRepository::hydrate(): Argument #2 ($imageRepository) must be of type Repository\ImageRepository, null given, called in /var/www/html/src/Repository/ReviewRepository.php on line 30
+/var/www/html/src/Repository/ReviewRepository.php
+line:46
+2024-07-08 15:08:36
+Repository\ReviewRepository::hydrate(): Argument #2 ($imageRepository) must be of type Repository\ImageRepository, null given, called in /var/www/html/src/Repository/ReviewRepository.php on line 30
+/var/www/html/src/Repository/ReviewRepository.php
+line:46
+2024-07-08 15:11:14
+Entity\Review::__construct(): Argument #6 ($image) must be of type Repository\ImageRepository, null given, called in /var/www/html/src/Repository/ReviewRepository.php on line 48
+/var/www/html/src/Entity/Review.php
+line:17
+2024-07-08 15:11:17
+Entity\Review::__construct(): Argument #6 ($image) must be of type Repository\ImageRepository, null given, called in /var/www/html/src/Repository/ReviewRepository.php on line 48
+/var/www/html/src/Entity/Review.php
+line:17
+2024-07-08 15:12:04
+Cannot assign null to property Entity\Review::$image of type Repository\ImageRepository
+/var/www/html/src/Entity/Review.php
+line:24
+2024-07-09 12:50:51
+Repository\ReviewRepository::hydrate(): Argument #2 ($imageRepository) must be of type Repository\ImageRepository, null given, called in /var/www/html/src/Repository/ReviewRepository.php on line 30
+/var/www/html/src/Repository/ReviewRepository.php
+line:46
+2024-07-09 13:03:00
+Entity\Review::__construct(): Argument #6 ($image) must be of type Repository\ImageRepository, null given, called in /var/www/html/src/Repository/ReviewRepository.php on line 48
+/var/www/html/src/Entity/Review.php
+line:17
+2024-07-09 13:32:13
+Repository\ReviewRepository::hydrate(): Argument #2 ($imageRepository) must be of type Repository\ImageRepository, null given, called in /var/www/html/src/Repository/ReviewRepository.php on line 30
+/var/www/html/src/Repository/ReviewRepository.php
+line:46

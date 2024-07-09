@@ -14,7 +14,7 @@ class OrderProductRepository extends Repository
     }
     public function getOne(int $orderId, int $productId): ?OrderProduct
     {
-        $stmt = $this->pdo->prepare('SELECT * FROM order_products WHERE order_id = :order_id AND product_id = :product_id');
+        $stmt = $this->pdo->prepare('SELECT * FROM order_products WHERE order_id = :order_id AND product_id = :product_id ');
         $stmt->execute(['order_id' => $orderId, 'product_id' => $productId]);
         $result = $stmt->fetch();
         if ($result === false) {

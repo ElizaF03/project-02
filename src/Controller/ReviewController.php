@@ -10,6 +10,8 @@ use Repository\ReviewRepository;
 use Request\ReviewRequest;
 use Service\AuthenticationInterface;
 use Service\CartService;
+use Service\ImageService;
+use Service\OrderService;
 use Service\RatingService;
 use function Sodium\add;
 
@@ -22,9 +24,11 @@ class ReviewController
     private OrderRepository $orderRepository;
     private ProductRepository $productRepository;
     private OrderProductRepository $orderProductRepository;
-    private ImageRepository $imageRepository;
 
-    public function __construct(AuthenticationInterface $authenticationService, CartService $cartService, RatingService $ratingService, ReviewRepository $reviewRepository, OrderRepository $orderRepository, ProductRepository $productRepository, OrderProductRepository $orderProductRepository, ImageRepository $imageRepository)
+    private ImageService $imageService;
+    private  OrderService  $orderService;
+
+    public function __construct(AuthenticationInterface $authenticationService, CartService $cartService, RatingService $ratingService, ReviewRepository $reviewRepository, OrderRepository $orderRepository, ProductRepository $productRepository, OrderProductRepository $orderProductRepository, ImageService $imageService, OrderService  $orderService)
     {
         $this->authenticationService = $authenticationService;
         $this->cartService = $cartService;
@@ -33,7 +37,8 @@ class ReviewController
         $this->orderRepository = $orderRepository;
         $this->productRepository = $productRepository;
         $this->orderProductRepository = $orderProductRepository;
-        $this->imageRepository = $imageRepository;
+        $this->imageService = $imageService;
+        $this->orderService = $orderService;
     }
 
     public function addReview(ReviewRequest $request)
@@ -47,37 +52,26 @@ class ReviewController
         $orders = $this->orderRepository->getAll($userId);
         $review = $this->reviewRepository->getOne($userId, $productId);
         if (!empty($orders)) {
-            foreach ($orders as $order) {
-                $orderId = $order->getId();
-                $productFromOrder = $this->orderProductRepository->getOne($orderId, $productId);
-
-                if ($productFromOrder !== null && !$review) {
-                    $grade = $request->getGrade();
-                    $reviewText = $request->getReview();
-                    $this->reviewRepository->create($userId, $productId, $grade, $reviewText);
-                }
+            $productFromOrder = $this->orderService->searchProductInOrders($orders, $productId);
+            if ($productFromOrder && $review === null) {
+                $grade = $request->getGrade();
+                $reviewText = $request->getReview();
+                $this->reviewRepository->create($userId, $productId, $grade, $reviewText);
             }
-            $file = $_FILES['img'];
-            $name = mt_rand(0, 1000) . $file['name'];
-            $path = './../Storage/Files/' . $name;
-            if (isset($file)) {
-                $this->uploadImg($file, $name);
-            }
-            $review = $this->reviewRepository->getOne($userId, $productId);
-            $reviewId = $review->getId();
-            $this->imageRepository->create($productId, $reviewId, $path);
+            $reviewId = $this->reviewRepository->getOne($userId, $productId)->getId();
+            $this->imageService->addImage($productId, $reviewId);
         }
         $reviews = $this->reviewRepository->getByProductId($productId);
+        foreach ($reviews as $review) {
+            $reviewId=$review->getId();
+            $img = $this->imageService->getImage($reviewId);
+        }
         $rating = $this->ratingService->calcRating($reviews);
         $product = $this->productRepository->getById($productId);
         $sum = $this->cartService->getTotalQuantity($userId);
-        $img=$this->imageRepository->getOne($productId,$review->getId());
-        $path= $img->getPath();
+
+
         require_once '../View/product-card.php';
     }
 
-    public function uploadImg($file, $name)
-    {
-        copy($file['tmp_name'], './../Storage/Files/' . $name);
-    }
 }

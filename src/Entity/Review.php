@@ -2,6 +2,8 @@
 
 namespace Entity;
 
+use Repository\ImageRepository;
+
 class Review
 {
     private int $id;
@@ -9,15 +11,17 @@ class Review
     private int $productId;
     private int $grade;
     private string $review;
+    private ImageRepository $image;
 
 
-    public function __construct(int $id, int $userId, int $productId, int $grade, string $review)
+    public function __construct(int $id, int $userId, int $productId, int $grade, string $review, ImageRepository $image)
     {
         $this->id = $id;
         $this->userId = $userId;
         $this->productId = $productId;
         $this->grade = $grade;
         $this->review = $review;
+        $this->image = $image;
 
     }
 
@@ -44,5 +48,9 @@ class Review
     public function getReview()
     {
         return $this->review;
+    }
+    public function getImage(): Image
+    {
+        return $this->image;
     }
 }
