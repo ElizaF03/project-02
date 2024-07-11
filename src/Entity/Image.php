@@ -14,7 +14,7 @@ class Image extends ImageRepository
     private string $path;
 
 
-    public function __construct(int $id, int $productId, int$reviewId, string $path)
+    public  function __construct(int $id, int $productId, int$reviewId, string $path)
     {
         parent::__construct();
         $this->id = $id;

@@ -4,7 +4,7 @@ namespace Service;
 
 class RatingService
 {
-    public function calcRating(array $reviews): float|string
+    public function calcRating(array $reviews): float|false
     {
         if (!empty($reviews)) {
             $grades = [];
@@ -14,7 +14,7 @@ class RatingService
             $numb = round(array_sum($grades) / count($grades), 1);
             return $numb;
         } else {
-            return 'no ratings';
+            return  false;
         }
     }
 }

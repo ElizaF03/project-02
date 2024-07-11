@@ -673,3 +673,127 @@ line:17
 Repository\ReviewRepository::hydrate(): Argument #2 ($imageRepository) must be of type Repository\ImageRepository, null given, called in /var/www/html/src/Repository/ReviewRepository.php on line 30
 /var/www/html/src/Repository/ReviewRepository.php
 line:46
+2024-07-09 13:44:28
+Repository\ReviewRepository::hydrate(): Argument #2 ($imageRepository) must be of type Repository\ImageRepository, null given, called in /var/www/html/src/Repository/ReviewRepository.php on line 30
+/var/www/html/src/Repository/ReviewRepository.php
+line:46
+2024-07-09 13:46:34
+Entity\Review::__construct(): Argument #6 ($image) must be of type Repository\ImageRepository, null given, called in /var/www/html/src/Repository/ReviewRepository.php on line 48
+/var/www/html/src/Entity/Review.php
+line:17
+2024-07-09 13:48:24
+Cannot assign null to property Entity\Review::$image of type Repository\ImageRepository
+/var/www/html/src/Entity/Review.php
+line:24
+2024-07-09 13:50:10
+Repository\ReviewRepository::hydrate(): Argument #2 ($imageRepository) must be of type Repository\ImageRepository, null given, called in /var/www/html/src/Repository/ReviewRepository.php on line 30
+/var/www/html/src/Repository/ReviewRepository.php
+line:46
+2024-07-10 14:16:38
+Repository\ReviewRepository::hydrate(): Argument #2 ($imageRepository) must be of type Repository\ImageRepository, null given, called in /var/www/html/src/Repository/ReviewRepository.php on line 30
+/var/www/html/src/Repository/ReviewRepository.php
+line:46
+2024-07-10 14:28:32
+Repository\ReviewRepository::__construct(): Argument #1 ($image) must be of type ?Entity\Image, Repository\ImageRepository given, called in /var/www/html/src/Config/services.php on line 120
+/var/www/html/src/Repository/ReviewRepository.php
+line:11
+2024-07-10 14:31:57
+Value of type null is not callable
+/var/www/html/src/Container.php
+line:20
+2024-07-10 14:39:09
+Repository\ReviewRepository::hydrate(): Argument #2 ($image) must be of type Repository\ImageRepository, null given, called in /var/www/html/src/Repository/ReviewRepository.php on line 31
+/var/www/html/src/Repository/ReviewRepository.php
+line:47
+2024-07-10 14:43:31
+Repository\ReviewRepository::__construct(): Argument #1 ($image) must be of type ?Entity\Image, Repository\ImageRepository given, called in /var/www/html/src/Config/services.php on line 121
+/var/www/html/src/Repository/ReviewRepository.php
+line:11
+2024-07-10 14:46:28
+Repository\ReviewRepository::__construct(): Argument #1 ($image) must be of type ?Entity\Image, Repository\ImageRepository given, called in /var/www/html/src/Config/services.php on line 121
+/var/www/html/src/Repository/ReviewRepository.php
+line:11
+2024-07-11 03:19:42
+Repository\ReviewRepository::__construct(): Argument #1 ($image) must be of type ?Entity\Image, Repository\ImageRepository given, called in /var/www/html/src/Config/services.php on line 121
+/var/www/html/src/Repository/ReviewRepository.php
+line:11
+2024-07-11 12:43:58
+Cannot assign Repository\ImageRepository to property Repository\ReviewRepository::$image of type ?Entity\Image
+/var/www/html/src/Repository/ReviewRepository.php
+line:13
+2024-07-11 12:44:26
+Call to a member function getPath() on null
+/var/www/html/src/View/product-card.php
+line:92
+2024-07-11 12:44:38
+Call to a member function getPath() on null
+/var/www/html/src/View/product-card.php
+line:92
+2024-07-11 12:46:03
+Call to a member function getPath() on null
+/var/www/html/src/View/product-card.php
+line:92
+2024-07-11 12:48:43
+Repository\ReviewRepository::__construct(): Argument #1 ($image) must be of type ?Entity\Image, Repository\ImageRepository given, called in /var/www/html/src/Config/services.php on line 121
+/var/www/html/src/Repository/ReviewRepository.php
+line:11
+2024-07-11 12:48:45
+Repository\ReviewRepository::__construct(): Argument #1 ($image) must be of type ?Entity\Image, Repository\ImageRepository given, called in /var/www/html/src/Config/services.php on line 121
+/var/www/html/src/Repository/ReviewRepository.php
+line:11
+2024-07-11 13:07:04
+Call to a member function getPath() on null
+/var/www/html/src/View/product-card.php
+line:92
+2024-07-11 13:09:58
+Call to a member function getPath() on null
+/var/www/html/src/View/product-card.php
+line:92
+2024-07-11 13:11:12
+Call to a member function getPath() on null
+/var/www/html/src/View/product-card.php
+line:92
+2024-07-11 13:18:05
+Call to a member function getPath() on null
+/var/www/html/src/View/product-card.php
+line:92
+2024-07-11 13:18:08
+Call to a member function getPath() on null
+/var/www/html/src/View/product-card.php
+line:92
+2024-07-11 13:21:27
+Call to a member function getPath() on null
+/var/www/html/src/View/product-card.php
+line:92
+2024-07-11 13:21:46
+Call to a member function getPath() on null
+/var/www/html/src/View/product-card.php
+line:92
+2024-07-11 13:58:37
+SQLSTATE[42702]: Ambiguous column: 7 ERROR:  column reference "product_id" is ambiguous
+LINE 1: ...eviews.id=images.review_id WHERE user_id = $1 AND product_id...
+                                                             ^
+/var/www/html/src/Repository/ReviewRepository.php
+line:39
+2024-07-11 14:01:31
+SQLSTATE[42702]: Ambiguous column: 7 ERROR:  column reference "product_id" is ambiguous
+LINE 1: ...eviews.id=images.review_id WHERE user_id = $1 AND product_id...
+                                                             ^
+/var/www/html/src/Repository/ReviewRepository.php
+line:39
+2024-07-11 14:04:08
+SQLSTATE[42702]: Ambiguous column: 7 ERROR:  column reference "product_id" is ambiguous
+LINE 1: ...eviews.id=images.review_id WHERE user_id = $1 AND product_id...
+                                                             ^
+/var/www/html/src/Repository/ReviewRepository.php
+line:39
+2024-07-11 14:05:46
+SQLSTATE[42702]: Ambiguous column: 7 ERROR:  column reference "product_id" is ambiguous
+LINE 1: ...eviews.id=images.review_id WHERE user_id = $1 AND product_id...
+                                                             ^
+/var/www/html/src/Repository/ReviewRepository.php
+line:39
+2024-07-11 14:08:22
+Call to a member function getId() on null
+/var/www/html/src/Controller/ReviewController.php
+line:61

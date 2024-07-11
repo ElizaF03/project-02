@@ -69,8 +69,6 @@ class ReviewController
         $rating = $this->ratingService->calcRating($reviews);
         $product = $this->productRepository->getById($productId);
         $sum = $this->cartService->getTotalQuantity($userId);
-
-
         require_once '../View/product-card.php';
     }
 

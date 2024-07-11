@@ -49,11 +49,16 @@
 
                 </div>
                 <div class="rating">
-                    Rating: <span><?php echo $rating; ?></span>
+                    Rating: <span><?php if ($reviews) {if ($rating) {echo $rating;}} else {echo 'no rating';
+                        }
+                        ?></span>
                 </div>
             </section>
             <section class="reviews">
-                <form class="form" method="post" action="/add-review" enctype="multipart/form-data" <?php echo  $style; ?>>
+                <form class="form" method="post" action="/add-review"
+                      enctype="multipart/form-data" <?php if (!$productFromOrder) {
+                    echo "style='display: none'";
+                } ?>>
                     <label class="label-grade">Your grade
                         <select name="grade" class="select-grade">
                             <option value="5" selected>5</option>
@@ -68,7 +73,7 @@
                            hidden="hidden">
                     <textarea class="textarea" name="review" id="review" cols="30" rows="10"
                               placeholder="Enter your review"></textarea>
-                    <input type="file" class="input-img" name="img" accept="image/png, image/jpeg" >
+                    <input type="file" class="input-img" name="img" accept="image/png, image/jpeg">
                     <button class="button" type="submit">Add review</button>
 
                 </form>
@@ -76,7 +81,7 @@
                     <?php foreach ($reviews as $review): ?>
                         <li class="reviews_item">
 
-                            <div class="review_name_user" >
+                            <div class="review_name_user">
                                 User Id: <?php echo $review->getUserId(); ?>
                             </div>
                             <div class="review_body">
@@ -89,7 +94,11 @@
                                 </div>
 
                                 <div class="review_img">
-                                    <img src="<?php echo $review->getImage()->getPath(); ?>" alt="" <?php echo  $styleImg; ?>>
+                                    <img src="<?php if ($review->getImage()) {
+                                        echo $review->getImage()->getPath();
+                                    } ?>" alt="" <?php if (!$review->getImage()) {
+                                        echo "style='display: none'";
+                                    } ?>>
                                 </div>
                             </div>
                         </li>
@@ -128,18 +137,22 @@
         margin-top: 10px;
 
     }
-.input-img{
-    color: #006653;
-}
-.review_img{
-    width: 50px;
-    height: 50px;
-    img{
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+
+    .input-img {
+        color: #006653;
     }
-}
+
+    .review_img {
+        width: 50px;
+        height: 50px;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
     .rating {
         font-size: 22px;
         margin-top: 15px;

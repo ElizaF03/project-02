@@ -7,6 +7,7 @@ use Controller\ProductCardController;
 use Controller\ProductController;
 use Controller\ReviewController;
 use Controller\UserController;
+use Entity\Image;
 use Repository\FavoriteRepository;
 use Repository\ImageRepository;
 use Repository\OrderProductRepository;
@@ -115,14 +116,15 @@ return [
     OrderProductRepository::class => function (Container $container) {
         return new OrderProductRepository();
     },
-    ReviewRepository::class => function (Container $container) {
-    $imageRepository=$container->get(ImageRepository::class);
-        return new ReviewRepository($imageRepository);
+    ReviewRepository::class => function (Container $container)  {
+        $image=$container->get(ImageRepository::class);
+        return new ReviewRepository($image);
     },
 
     ImageRepository::class=>function (Container $container) {
     return new ImageRepository();
     },
+
     PDO::class => function () {
         $host = getenv('DB_HOST');
         $db = getenv('DB_NAME');

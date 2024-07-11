@@ -11,10 +11,10 @@ class Review
     private int $productId;
     private int $grade;
     private string $review;
-    private ImageRepository $image;
+    private ?ImageRepository $image;
 
 
-    public function __construct(int $id, int $userId, int $productId, int $grade, string $review, ImageRepository $image)
+    public function __construct(int $id, int $userId, int $productId, int $grade, string $review, ImageRepository $image= null)
     {
         $this->id = $id;
         $this->userId = $userId;
@@ -49,7 +49,7 @@ class Review
     {
         return $this->review;
     }
-    public function getImage(): Image
+    public function getImage(): ?Image
     {
         return $this->image;
     }

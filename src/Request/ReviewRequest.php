@@ -6,7 +6,7 @@ class ReviewRequest extends Request
 {
 
 
-    public function getProductId(): string
+    public function getProductId(): int
     {
         return $this->data['id-product'];
     }

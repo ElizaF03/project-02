@@ -29,9 +29,9 @@ class ImageService
     }
     public function getImage( int $reviewId): string|false
     {
-        $nameImage = $this->imageRepository->getOne($reviewId);
-        if($nameImage){
-            return $nameImage->getPath();
+        $image = $this->imageRepository->getOne($reviewId);
+        if($image){
+            return $image->getPath();
         }
       return false;
     }

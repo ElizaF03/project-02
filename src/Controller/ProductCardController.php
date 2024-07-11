@@ -42,33 +42,17 @@ class ProductCardController
         $reviews = $this->reviewRepository->getByProductId($request->getProductId());
         $product = $this->productRepository->getById($request->getProductId());
         $user = $this->authenticationService->getUser();
-        foreach ($reviews as $review) {
-                $reviewId=$review->getId();
-                $img = $this->imageService->getImage($reviewId);
-            if ($img) {
-                $styleImg = "";
-            } else {
-                $styleImg = "style='display: none'";
-            }  }
-
-
+        $userId = $user->getId();
         if ($user === null) {
             $sum = 0;
         } else {
-            $sum = $this->cartService->getTotalQuantity($user->getId());
+            $sum = $this->cartService->getTotalQuantity($userId);
         }
         if ($reviews) {
             $rating = $this->ratingService->calcRating($reviews);
-        } else {
-            $rating = 'no ratings';
         }
-        $orders = $this->orderRepository->getAll($user->getId());
+        $orders = $this->orderRepository->getAll($userId);
         $productFromOrder = $this->orderService->searchProductInOrders($orders, $product->getId());
-        if ($productFromOrder) {
-            $style = "";
-        } else {
-            $style = "style='display: none'";
-        }
         require_once '../View/product-card.php';
     }
 }
