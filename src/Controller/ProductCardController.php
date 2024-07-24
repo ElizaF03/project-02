@@ -37,7 +37,7 @@ class ProductCardController
         $this->orderService = $orderService;
     }
 
-    public function getProductCard(ProductRequest $request)
+    public function getProductCard(ProductRequest $request): void
     {
         $reviews = $this->reviewRepository->getByProductId($request->getProductId());
         $product = $this->productRepository->getById($request->getProductId());

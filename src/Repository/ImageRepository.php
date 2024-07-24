@@ -3,9 +3,14 @@
 namespace Repository;
 
 use Entity\Image;
+use ConnectionInterface;
 
-class ImageRepository extends Repository
+class ImageRepository
 {
+    private ConnectionInterface $connection;
+    public function __construct(ConnectionInterface $connection){
+        $this->connection = $connection;
+    }
     public function create(int $productId, int $reviewId, string $img_url): void
     {
         $stmt = $this->pdo->prepare('INSERT INTO images (product_id, review_id, img_url) VALUES(:product_id, :review_id, :img_url)');

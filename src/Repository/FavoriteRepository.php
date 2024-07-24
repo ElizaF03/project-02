@@ -4,17 +4,20 @@ namespace Repository;
 
 use Entity\Favorite;
 use Entity\Product;
+use ConnectionInterface;
 
-class FavoriteRepository extends Repository
+class FavoriteRepository
 {
     private ProductRepository $productRepository;
-    public function __construct(ProductRepository $productRepository){
-        parent::__construct();
+    private ConnectionInterface $connection;
+    public function __construct(ProductRepository $productRepository, ConnectionInterface $connection){
         $this->productRepository = $productRepository;
+        $this->connection = $connection;
     }
-    public function getOne(int $userId, int $productId): ?Favorite
+    public
+     function getOne(int $userId, int $productId): ?Favorite
     {
-        $stmt = $this->pdo->prepare('SELECT * FROM favorite_user_products JOIN products ON favorite_user_products.product_id=products.id WHERE product_id =:product_id AND user_id =:user_id');
+        $stmt = $this->connection->connect()->prepare('SELECT * FROM favorite_user_products JOIN products ON favorite_user_products.product_id=products.id WHERE product_id =:product_id AND user_id =:user_id');
         $stmt->execute(['product_id' => $productId, 'user_id' => $userId]);
         $result = $stmt->fetch();
         if($result===false){
@@ -26,7 +29,8 @@ class FavoriteRepository extends Repository
 
     public function getAllByUserId(int $userId): array
     {
-        $stmt = $this->pdo->prepare('SELECT * FROM favorite_user_products JOIN products ON favorite_user_products.product_id=products.id WHERE user_id =:user_id');
+        $pdo = $this->connection->connect();
+        $stmt = $pdo->prepare('SELECT * FROM favorite_user_products JOIN products ON favorite_user_products.product_id=products.id WHERE user_id =:user_id');
         $stmt->execute(['user_id' => $userId]);
         $favoriteProducts = $stmt->fetchAll();
         if (empty($favoriteProducts)) {
@@ -46,13 +50,15 @@ class FavoriteRepository extends Repository
 
     public function create(int $userId, int $productId): void
     {
-        $stmt = $this->pdo->prepare('INSERT INTO favorite_user_products (user_id, product_id) VALUES(:user_id, :product_id)');
+        $pdo = $this->connection->connect();
+        $stmt = $pdo->prepare('INSERT INTO favorite_user_products (user_id, product_id) VALUES(:user_id, :product_id)');
         $stmt->execute(['user_id' => $userId, 'product_id' => $productId]);
     }
 
     public function remove(int $userId, int $productId): void
     {
-        $stmt = $this->pdo->prepare("DELETE FROM favorite_user_products WHERE user_id=:user_id AND product_id=:product_id");
+        $pdo = $this->connection->connect();
+        $stmt = $pdo->prepare("DELETE FROM favorite_user_products WHERE user_id=:user_id AND product_id=:product_id");
         $stmt->execute(['user_id' => $userId, 'product_id' => $productId]);
     }
 }

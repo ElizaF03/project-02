@@ -7,13 +7,11 @@ use Controller\ProductCardController;
 use Controller\ProductController;
 use Controller\ReviewController;
 use Controller\UserController;
-use Entity\Image;
 use Repository\FavoriteRepository;
 use Repository\ImageRepository;
 use Repository\OrderProductRepository;
 use Repository\OrderRepository;
 use Repository\ProductRepository;
-use Repository\Repository;
 use Repository\ReviewRepository;
 use Repository\UserProductRepository;
 use Repository\UserRepository;
@@ -23,6 +21,7 @@ use Service\CartService;
 use Service\ImageService;
 use Service\OrderService;
 use Service\RatingService;
+
 
 return [
     CartController::class => function (Container $container) {
@@ -53,7 +52,7 @@ return [
         $orderProductRepository = $container->get(OrderProductRepository::class);
         $reviewRepository = $container->get(ReviewRepository::class);
         $imageService = $container->get(ImageService::class);
-        $orderService=$container->get(OrderService::class);
+        $orderService = $container->get(OrderService::class);
         return new ReviewController($authService, $cartService, $ratingService, $reviewRepository, $orderRepository, $productRepository, $orderProductRepository, $imageService, $orderService);
     },
     UserController::class => function () {
@@ -69,8 +68,8 @@ return [
         $ratingService = $container->get(RatingService::class);
         $reviewRepository = $container->get(ReviewRepository::class);
         $orderRepository = $container->get(OrderRepository::class);
-        $imageService= $container->get(ImageService::class);
-        $orderService=$container->get(OrderService::class);
+        $imageService = $container->get(ImageService::class);
+        $orderService = $container->get(OrderService::class);
         return new ProductCardController($authService, $cartService, $ratingService, $productRepository, $reviewRepository, $orderRepository, $imageService, $orderService);
     },
     ProductController::class => function (Container $container) {
@@ -86,18 +85,18 @@ return [
     OrderService::class => function (Container $container) {
         $orderRepository = $container->get(OrderRepository::class);
         $orderProductRepository = new orderProductRepository();
-        $repository = new Repository();
         $userProductRepository = $container->get(UserProductRepository::class);
-        return new OrderService($orderRepository, $orderProductRepository, $userProductRepository, $repository);
+        $connection = $container->get(Connection::class);
+        return new OrderService($orderRepository, $orderProductRepository, $userProductRepository, $connection);
     },
-    RatingService::class=>function () {
-    return new RatingService();
+    RatingService::class => function () {
+        return new RatingService();
     },
-    ImageService::class=>function (Container $container) {
-        $imageRepository=$container->get(ImageRepository::class);
+    ImageService::class => function (Container $container) {
+        $imageRepository = $container->get(ImageRepository::class);
         return new ImageService($imageRepository);
     },
-    AuthenticationInterface::class=>function (Container $container) {
+    AuthenticationInterface::class => function (Container $container) {
         $userRepository = new UserRepository();
         return new AuthenticationSessionService($userRepository);
     },
@@ -106,9 +105,10 @@ return [
         $productRepository = new ProductRepository();
         return new UserProductRepository($userRepository, $productRepository);
     },
-    FavoriteRepository::class => function () {
+    FavoriteRepository::class => function (Container $container) {
         $productRepository = new ProductRepository();
-        return new FavoriteRepository($productRepository);
+        $connection = $container->get(Connection::class);
+        return new FavoriteRepository($productRepository, $connection);
     },
     OrderRepository::class => function () {
         return new OrderRepository();
@@ -116,21 +116,16 @@ return [
     OrderProductRepository::class => function (Container $container) {
         return new OrderProductRepository();
     },
-    ReviewRepository::class => function (Container $container)  {
-        $image=$container->get(ImageRepository::class);
+    ReviewRepository::class => function (Container $container) {
+        $image = $container->get(ImageRepository::class);
         return new ReviewRepository($image);
     },
 
-    ImageRepository::class=>function (Container $container) {
-    return new ImageRepository();
+    ImageRepository::class => function (Container $container) {
+        return new ImageRepository();
     },
 
-    PDO::class => function () {
-        $host = getenv('DB_HOST');
-        $db = getenv('DB_NAME');
-        $port = getenv('DB_PORT');
-        $user = getenv('DB_USER');
-        $password = getenv('DB_PASSWORD');
-        return new PDO("pgsql:host=$host;port=$port;dbname=$db", "$user", "$password");
-    },
+    Connection::class => function () {
+        return new Connection();
+    }
 ];

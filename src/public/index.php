@@ -21,7 +21,8 @@ Autoloader::registarte($path);
 
 $container = new Container(require_once '../Config/services.php');
 $logger= new Logger();
-$app = new App($container, $logger);
+$connection= new Connection();
+$app = new App($container, $logger, $connection);
 $app->get('/login', UserController::class, 'getLogin');
 $app->post('/login', UserController::class, 'login', LoginRequest::class);
 $app->get('/registration', UserController::class, 'getRegistration');

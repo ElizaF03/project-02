@@ -6,6 +6,7 @@ class App
 {
     private Container $container;
     private LoggerInterface $logger;
+    
     private array $routes = [
     ];
 

@@ -13,21 +13,22 @@ use Repository\Repository;
 use Repository\UserProductRepository;
 use Repository\UserRepository;
 use Throwable;
+use ConnectionInterface;
 
 class OrderService
 {
     private OrderRepository $orderRepository;
     private OrderProductRepository $orderProductRepository;
     private UserProductRepository $userProductRepository;
-    private Repository $repository;
+    private ConnectionInterface $connection;
 
 
-    public function __construct(OrderRepository $orderRepository, OrderProductRepository $orderProductRepository, UserProductRepository $userProductRepository, Repository $repository)
+    public function __construct(OrderRepository $orderRepository, OrderProductRepository $orderProductRepository, UserProductRepository $userProductRepository, ConnectionInterface $connection)
     {
         $this->orderRepository = $orderRepository;
         $this->orderProductRepository = $orderProductRepository;
         $this->userProductRepository = $userProductRepository;
-        $this->repository = $repository;
+        $this->connection = $connection;
     }
 
     public function searchProductInOrders($orders, $productId): bool
@@ -45,8 +46,7 @@ class OrderService
     public function createOrder(int $userId, array $data): void
 
     {
-        global $container;
-        $pdo = $container->get(PDO::class);
+        $pdo = $this->connection->connect();
         $pdo->beginTransaction();
         try {
             $this->orderRepository->addInfo($userId, $data['first-name'], $data['last-name'], $data['address'], $data['phone'], $data['total_price'], $data['date']);
