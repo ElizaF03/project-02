@@ -4,24 +4,24 @@ namespace Repository;
 
 use Entity\Image;
 use Entity\Review;
+use ConnectionInterface;
 
-class ReviewRepository extends Repository
+class ReviewRepository
 {
     private ?ImageRepository $image;
-    public function __construct(ImageRepository $image=null){
-        parent::__construct();
+    private ConnectionInterface $connection;
+    public function __construct(ConnectionInterface $connection, ImageRepository $image=null){
+       $this->connection = $connection;
         $this->image= $image;
     }
     public function create(int $userId, int $productId, int $grade, string $review): void
     {
-        $stmt =  $this->pdo->prepare('INSERT INTO reviews(user_id, product_id, grade, review) VALUES(:user_id, :product_id, :grade, :review)');
-        $stmt->execute(['user_id' => $userId, 'product_id' => $productId, 'grade' => $grade, 'review' => $review]);
+        $this->connection->execute("INSERT INTO reviews(user_id, product_id, grade, review) VALUES(:user_id, :product_id, :grade, :review)", (['user_id' => $userId, 'product_id' => $productId, 'grade' => $grade, 'review' => $review]));
     }
 
     public function getByProductId(int $productId): array
     {
-        $stmt =  $this->pdo->prepare('SELECT * FROM reviews WHERE product_id = :product_id ORDER BY id DESC');
-        $stmt->execute(['product_id' => $productId]);
+        $stmt =  $this->connection->execute("SELECT * FROM reviews WHERE product_id = :product_id ORDER BY id DESC", (['product_id' => $productId]));
         $reviews = $stmt->fetchAll();
         if (empty($reviews)) {
             return [];
@@ -35,8 +35,7 @@ class ReviewRepository extends Repository
 
     public function getOne(int $userId, int $productId): ?Review
     {
-        $stmt =  $this->pdo->prepare('SELECT * FROM reviews JOIN images ON reviews.id=images.review_id WHERE reviews.user_id = :user_id AND reviews.product_id = :product_id');
-        $stmt->execute(['user_id' => $userId, 'product_id' => $productId]);
+        $stmt =  $this->connection->execute('SELECT * FROM reviews JOIN images ON reviews.id=images.review_id WHERE reviews.user_id = :user_id AND reviews.product_id = :product_id',(['user_id' => $userId, 'product_id' => $productId]));
         $result = $stmt->fetch();
         if(empty($result)){
             return null;

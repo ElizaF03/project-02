@@ -2,21 +2,24 @@
 
 namespace Repository;
 
+use ConnectionInterface;
 use Entity\User;
 
-class UserRepository extends Repository
+class UserRepository
 {
+    private ConnectionInterface $connection;
+    public function __construct(ConnectionInterface $connection){
+        $this->connection = $connection;
+    }
     public function addInfo(string $username, string $email, string $password): void
     {
         $password = password_hash($password, PASSWORD_DEFAULT);
-        $stmt =  $this->pdo->prepare('INSERT INTO users (username, email, password) VALUES(:username, :email, :password)');
-        $stmt->execute(['username' => $username, 'email' => $email, 'password' => $password]);
+         $this->connection->execute('INSERT INTO users (username, email, password) VALUES(:username, :email, :password)',(['username' => $username, 'email' => $email, 'password' => $password]));
     }
 
     public function getUserByEmail(string $email): ?User
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM users WHERE email = :email");
-        $stmt->execute(['email' => $email]);
+        $stmt = $this->connection->execute("SELECT * FROM users WHERE email = :email", (['email' => $email]));
         $result = $stmt->fetch();
         if ($result === false) {
             return null;
@@ -27,8 +30,7 @@ class UserRepository extends Repository
 
     public function getById(int $id): ?User
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM users WHERE id = :id");
-        $stmt->execute(['id' => $id]);
+        $stmt = $this->connection->execute("SELECT * FROM users WHERE id = :id",(['id' => $id]));
         $result = $stmt->fetch();
         if ($result === false) {
             return null;

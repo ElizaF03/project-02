@@ -13,7 +13,6 @@ class OrderProduct extends OrderProductRepository
 
     public function __construct(int $id, int $orderId, int $productId, int $quantity)
     {
-        parent::__construct();
         $this->id = $id;
         $this->orderId = $orderId;
         $this->productId = $productId;

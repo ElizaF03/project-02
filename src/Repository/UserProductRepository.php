@@ -3,21 +3,22 @@
 namespace Repository;
 
 use Entity\UserProduct;
-use Repository\Repository;
+use ConnectionInterface;
 
-class UserProductRepository extends Repository
+class UserProductRepository
 {
     private UserRepository $userRepository;
     private ProductRepository $productRepository;
-    public function __construct(UserRepository $userRepository, ProductRepository $productRepository){
+    private ConnectionInterface $connection;
+    public function __construct(UserRepository $userRepository, ProductRepository $productRepository, ConnectionInterface $connection){
        parent::__construct();
         $this->userRepository = $userRepository;
         $this->productRepository = $productRepository;
+        $this->connection = $connection;
     }
     public function getAllByUserId(int $userId): array
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM user_products WHERE user_id = :user_id");
-        $stmt->execute(['user_id' => $userId]);
+        $stmt = $this->connection->execute("SELECT * FROM user_products WHERE user_id = :user_id",(['user_id' => $userId]));
         $userProducts = $stmt->fetchAll();
         if (empty($userProducts)) {
             return [];
@@ -32,8 +33,7 @@ class UserProductRepository extends Repository
 
     public function getOne(int $userId, int $productId): ?UserProduct
     {
-        $stmt = $this->pdo->prepare('SELECT * FROM user_products WHERE product_id =:product_id AND user_id =:user_id');
-        $stmt->execute(['product_id' => $productId, 'user_id' => $userId]);
+        $stmt = $this->connection->execute('SELECT * FROM user_products WHERE product_id =:product_id AND user_id =:user_id',(['product_id' => $productId, 'user_id' => $userId]));
         $result = $stmt->fetch();
         if ($result === false) {
             return null;
@@ -51,39 +51,33 @@ class UserProductRepository extends Repository
 
     private function hydrate(array $data, UserRepository $userRepository, ProductRepository $productRepository): UserProduct
     {
-        $obj = new UserProduct($data["id"], $userRepository, $productRepository, $data["quantity"]);
-        return $obj;
+        return new UserProduct($data["id"], $userRepository, $productRepository, $data["quantity"]);
     }
 
     public function create(int $userId, int $productId, int $quantity = 1): void
     {
-        $stmt = $this->pdo->prepare('INSERT INTO user_products (user_id, product_id, quantity) VALUES(:user_id, :product_id, :quantity)');
-        $stmt->execute(['user_id' => $userId, 'product_id' => $productId, 'quantity' => $quantity]);
+        $this->connection->execute('INSERT INTO user_products (user_id, product_id, quantity) VALUES(:user_id, :product_id, :quantity)', (['user_id' => $userId, 'product_id' => $productId, 'quantity' => $quantity]));
     }
 
     public function remove(int $userId, int $productId): void
     {
-        $stmt = $this->pdo->prepare("DELETE FROM user_products WHERE user_id=:user_id AND product_id=:product_id");
-        $stmt->execute(['user_id' => $userId, 'product_id' => $productId]);
+        $this->connection->execute("DELETE FROM user_products WHERE user_id=:user_id AND product_id=:product_id",(['user_id' => $userId, 'product_id' => $productId]));
     }
 
     public function removeAll(int $userId): void
     {
-        $stmt = $this->pdo->prepare("DELETE FROM user_products WHERE user_id=:user_id");
-        $stmt->execute(['user_id' => $userId]);
+        $this->connection->execute("DELETE FROM user_products WHERE user_id=:user_id",(['user_id' => $userId]));
     }
 
     public function plusQuantity(int $userId, int $productId)
     {
-        $stmt = $this->pdo->prepare('UPDATE user_products SET quantity = quantity+1  WHERE product_id =:product_id AND user_id =:user_id');
-        $stmt->execute(['product_id' => $productId, 'user_id' => $userId]);
+        $stmt = $this->connection->execute('UPDATE user_products SET quantity = quantity+1  WHERE product_id =:product_id AND user_id =:user_id',(['product_id' => $productId, 'user_id' => $userId]));
         return $stmt->fetch();
     }
 
     public function minusQuantity(int $userId, int $productId)
     {
-        $stmt = $this->pdo->prepare('UPDATE user_products SET quantity = quantity-1  WHERE product_id =:product_id AND user_id =:user_id');
-        $stmt->execute(['product_id' => $productId, 'user_id' => $userId]);
+        $stmt = $this->connection->execute('UPDATE user_products SET quantity = quantity-1  WHERE product_id =:product_id AND user_id =:user_id', (['product_id' => $productId, 'user_id' => $userId]));
         return $stmt->fetch();
     }
 }

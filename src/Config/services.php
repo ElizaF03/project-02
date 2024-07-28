@@ -45,7 +45,7 @@ return [
     },
     ReviewController::class => function (Container $container) {
         $authService = $container->get(AuthenticationInterface::class);
-        $productRepository = new ProductRepository();
+        $productRepository = $container->get(ProductRepository::class);
         $cartService = $container->get(CartService::class);
         $ratingService = $container->get(RatingService::class);
         $orderRepository = $container->get(OrderRepository::class);
@@ -63,7 +63,7 @@ return [
     },
     ProductCardController::class => function (Container $container) {
         $authService = $container->get(AuthenticationInterface::class);
-        $productRepository = new ProductRepository();
+        $productRepository = $container->get(ProductRepository::class);
         $cartService = $container->get(CartService::class);
         $ratingService = $container->get(RatingService::class);
         $reviewRepository = $container->get(ReviewRepository::class);
@@ -74,7 +74,7 @@ return [
     },
     ProductController::class => function (Container $container) {
         $authService = $container->get(AuthenticationInterface::class);
-        $productRepository = new ProductRepository();
+        $productRepository = $container->get(ProductRepository::class);
         $cartService = $container->get(CartService::class);
         return new ProductController($authService, $cartService, $productRepository);
     },
@@ -84,7 +84,7 @@ return [
     },
     OrderService::class => function (Container $container) {
         $orderRepository = $container->get(OrderRepository::class);
-        $orderProductRepository = new orderProductRepository();
+        $orderProductRepository = $container->get(OrderProductRepository::class);
         $userProductRepository = $container->get(UserProductRepository::class);
         $connection = $container->get(Connection::class);
         return new OrderService($orderRepository, $orderProductRepository, $userProductRepository, $connection);
@@ -100,29 +100,42 @@ return [
         $userRepository = new UserRepository();
         return new AuthenticationSessionService($userRepository);
     },
-    UserProductRepository::class => function () {
+    ProductRepository::class => function (Container $container) {
+        $connection = $container->get(Connection::class);
+        return new ProductRepository($connection);
+    },
+    UserRepository::class=>function (Container $container) {
+        $connection = $container->get(Connection::class);
+        return new UserRepository($connection);
+    },
+    UserProductRepository::class => function (Container $container) {
         $userRepository = new UserRepository();
-        $productRepository = new ProductRepository();
-        return new UserProductRepository($userRepository, $productRepository);
+        $productRepository = $container->get(ProductRepository::class);
+        $connection=$container->get(Connection::class);
+        return new UserProductRepository($userRepository, $productRepository, $connection);
     },
     FavoriteRepository::class => function (Container $container) {
-        $productRepository = new ProductRepository();
+        $productRepository = $container->get(ProductRepository::class);
         $connection = $container->get(Connection::class);
         return new FavoriteRepository($productRepository, $connection);
     },
-    OrderRepository::class => function () {
-        return new OrderRepository();
+    OrderRepository::class => function (Container $container) {
+        $connection = $container->get(Connection::class);
+        return new OrderRepository($connection);
     },
     OrderProductRepository::class => function (Container $container) {
-        return new OrderProductRepository();
+        $connection = $container->get(Connection::class);
+        return new OrderProductRepository($connection);
     },
     ReviewRepository::class => function (Container $container) {
         $image = $container->get(ImageRepository::class);
-        return new ReviewRepository($image);
+        $connection = $container->get(Connection::class);
+        return new ReviewRepository($connection, $image);
     },
 
     ImageRepository::class => function (Container $container) {
-        return new ImageRepository();
+    $connection = $container->get(Connection::class);
+        return new ImageRepository($connection);
     },
 
     Connection::class => function () {

@@ -46,8 +46,8 @@ class OrderService
     public function createOrder(int $userId, array $data): void
 
     {
-        $pdo = $this->connection->connect();
-        $pdo->beginTransaction();
+        $pdo = $this->connection;
+        $this->connection->beginTransaction();
         try {
             $this->orderRepository->addInfo($userId, $data['first-name'], $data['last-name'], $data['address'], $data['phone'], $data['total_price'], $data['date']);
             $userProducts = $this->userProductRepository->getAllByUserId($userId);

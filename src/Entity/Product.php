@@ -13,7 +13,6 @@ class Product extends ProductRepository
 
     public function __construct(int $id, string $name, float $price, string $img_url)
     {
-        parent::__construct();
         $this->id = $id;
         $this->name = $name;
         $this->price = $price;

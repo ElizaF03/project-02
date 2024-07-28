@@ -809,3 +809,209 @@ line:30
 Call to a member function getId() on null
 /var/www/html/src/Controller/CartController.php
 line:30
+2024-07-24 11:45:48
+Too few arguments to function Repository\ImageRepository::__construct(), 0 passed in /var/www/html/src/Config/services.php on line 125 and exactly 1 expected
+/var/www/html/src/Repository/ImageRepository.php
+line:11
+2024-07-24 11:47:09
+Too few arguments to function Repository\ImageRepository::__construct(), 0 passed in /var/www/html/src/Entity/Image.php on line 19 and exactly 1 expected
+/var/www/html/src/Repository/ImageRepository.php
+line:11
+2024-07-24 14:31:07
+Too few arguments to function Repository\ImageRepository::__construct(), 0 passed in /var/www/html/src/Entity/Image.php on line 19 and exactly 1 expected
+/var/www/html/src/Repository/ImageRepository.php
+line:11
+2024-07-24 14:34:45
+Repository\ReviewRepository::hydrate(): Argument #2 ($image) must be of type ?Repository\ImageRepository, Entity\Image given, called in /var/www/html/src/Repository/ReviewRepository.php on line 31
+/var/www/html/src/Repository/ReviewRepository.php
+line:47
+2024-07-24 14:34:50
+Repository\ReviewRepository::hydrate(): Argument #2 ($image) must be of type ?Repository\ImageRepository, Entity\Image given, called in /var/www/html/src/Repository/ReviewRepository.php on line 31
+/var/www/html/src/Repository/ReviewRepository.php
+line:47
+2024-07-24 14:47:23
+Too few arguments to function Repository\OrderProductRepository::__construct(), 0 passed in /var/www/html/src/Config/services.php on line 87 and exactly 1 expected
+/var/www/html/src/Repository/OrderProductRepository.php
+line:12
+2024-07-24 15:54:19
+Call to undefined method Connection::prepare()
+/var/www/html/src/Repository/FavoriteRepository.php
+line:30
+2024-07-24 15:55:05
+SQLSTATE[08P01]: <<Unknown error>>: 7 ERROR:  bind message supplies 0 parameters, but prepared statement "pdo_stmt_00000001" requires 1
+/var/www/html/src/Connection.php
+line:23
+2024-07-24 15:55:40
+SQLSTATE[08P01]: <<Unknown error>>: 7 ERROR:  bind message supplies 0 parameters, but prepared statement "pdo_stmt_00000001" requires 1
+/var/www/html/src/Connection.php
+line:23
+2024-07-25 03:17:28
+Too few arguments to function Repository\ProductRepository::__construct(), 0 passed in /var/www/html/src/Config/services.php on line 109 and exactly 1 expected
+/var/www/html/src/Repository/ProductRepository.php
+line:11
+2024-07-25 03:17:31
+Too few arguments to function Repository\ProductRepository::__construct(), 0 passed in /var/www/html/src/Config/services.php on line 109 and exactly 1 expected
+/var/www/html/src/Repository/ProductRepository.php
+line:11
+2024-07-25 03:18:34
+Call to a member function query() on null
+/var/www/html/src/Repository/ProductRepository.php
+line:21
+2024-07-25 03:23:29
+SQLSTATE[42601]: Syntax error: 7 ERROR:  syntax error at or near "SELECT"
+LINE 1: SELECT * FROM SELECT * FROM products 
+                      ^
+/var/www/html/src/Connection.php
+line:32
+2024-07-25 03:24:11
+Too few arguments to function Repository\ProductRepository::__construct(), 0 passed in /var/www/html/src/Entity/Product.php on line 16 and exactly 1 expected
+/var/www/html/src/Repository/ProductRepository.php
+line:11
+2024-07-25 09:50:34
+Too few arguments to function Repository\ProductRepository::__construct(), 0 passed in /var/www/html/src/Entity/Product.php on line 16 and exactly 1 expected
+/var/www/html/src/Repository/ProductRepository.php
+line:11
+2024-07-25 10:05:02
+Repository\ProductRepository::__construct(): Argument #1 ($connection) must be of type ConnectionInterface, int given, called in /var/www/html/src/Entity/Product.php on line 18
+/var/www/html/src/Repository/ProductRepository.php
+line:11
+2024-07-25 10:05:50
+Cannot use [] for reading
+/var/www/html/src/Entity/Product.php
+line:18
+2024-07-25 10:06:44
+Repository\ProductRepository::__construct(): Argument #1 ($connection) must be of type ConnectionInterface, string given, called in /var/www/html/src/Entity/Product.php on line 18
+/var/www/html/src/Repository/ProductRepository.php
+line:11
+2024-07-25 10:07:53
+Repository\ProductRepository::__construct(): Argument #1 ($connection) must be of type ConnectionInterface, null given, called in /var/www/html/src/Entity/Product.php on line 18
+/var/www/html/src/Repository/ProductRepository.php
+line:11
+2024-07-28 04:53:24
+PDOStatement::execute(): Argument #1 ($params) must be of type ?array, string given
+/var/www/html/src/Connection.php
+line:20
+2024-07-28 04:53:25
+PDOStatement::execute(): Argument #1 ($params) must be of type ?array, string given
+/var/www/html/src/Connection.php
+line:20
+2024-07-28 04:58:00
+Connection::execute(): Argument #2 ($query) must be of type ?array, string given, called in /var/www/html/src/Repository/FavoriteRepository.php on line 31
+/var/www/html/src/Connection.php
+line:18
+2024-07-28 04:59:09
+Call to a member function fetchAll() on true
+/var/www/html/src/Repository/FavoriteRepository.php
+line:34
+2024-07-28 05:01:21
+Call to a member function fetchAll() on null
+/var/www/html/src/Repository/FavoriteRepository.php
+line:34
+2024-07-28 05:10:30
+Call to a member function prepare() on null
+/var/www/html/src/Repository/ProductRepository.php
+line:34
+2024-07-28 05:16:16
+Connection::execute(): Argument #1 ($stmt) must be of type string, array given, called in /var/www/html/src/Repository/FavoriteRepository.php on line 33
+/var/www/html/src/Connection.php
+line:20
+2024-07-28 05:17:56
+PDOStatement::execute(): Argument #1 ($params) must be of type ?array, string given
+/var/www/html/src/Connection.php
+line:23
+2024-07-28 05:18:33
+Connection::execute(): Argument #2 ($query) must be of type ?array, string given, called in /var/www/html/src/Repository/FavoriteRepository.php on line 32
+/var/www/html/src/Connection.php
+line:20
+2024-07-28 05:20:05
+Call to a member function fetchAll() on null
+/var/www/html/src/Repository/FavoriteRepository.php
+line:34
+2024-07-28 05:21:30
+Repository\FavoriteRepository::hydrate(): Argument #2 ($productRepository) must be of type Repository\ProductRepository, Entity\Product given, called in /var/www/html/src/Repository/FavoriteRepository.php on line 40
+/var/www/html/src/Repository/FavoriteRepository.php
+line:45
+2024-07-28 05:34:42
+Repository\FavoriteRepository::hydrate(): Argument #2 ($productRepository) must be of type Repository\ProductRepository, Entity\Product given, called in /var/www/html/src/Repository/FavoriteRepository.php on line 43
+/var/www/html/src/Repository/FavoriteRepository.php
+line:48
+2024-07-28 05:40:45
+Repository\FavoriteRepository::hydrate(): Argument #2 ($productRepository) must be of type Repository\ProductRepository, Entity\Product given, called in /var/www/html/src/Repository/FavoriteRepository.php on line 41
+/var/www/html/src/Repository/FavoriteRepository.php
+line:46
+2024-07-28 05:42:07
+Repository\ProductRepository::getById(): Return value must be of type ?Repository\ProductRepository, Entity\Product returned
+/var/www/html/src/Repository/ProductRepository.php
+line:40
+2024-07-28 05:42:47
+Repository\ProductRepository::__construct(): Argument #1 ($connection) must be of type ConnectionInterface, int given, called in /var/www/html/src/Repository/ProductRepository.php on line 16
+/var/www/html/src/Repository/ProductRepository.php
+line:11
+2024-07-28 05:59:28
+Repository\FavoriteRepository::hydrate(): Argument #2 ($productRepository) must be of type Repository\ProductRepository, Entity\Product given, called in /var/www/html/src/Repository/FavoriteRepository.php on line 41
+/var/www/html/src/Repository/FavoriteRepository.php
+line:46
+2024-07-28 07:20:15
+Repository\FavoriteRepository::hydrate(): Argument #2 ($productRepository) must be of type Repository\ProductRepository, Entity\Product given, called in /var/www/html/src/Repository/FavoriteRepository.php on line 40
+/var/www/html/src/Repository/FavoriteRepository.php
+line:45
+2024-07-28 07:27:42
+Repository\FavoriteRepository::hydrate(): Argument #2 ($productRepository) must be of type Repository\ProductRepository, Entity\Product given, called in /var/www/html/src/Repository/FavoriteRepository.php on line 40
+/var/www/html/src/Repository/FavoriteRepository.php
+line:45
+2024-07-28 07:31:11
+Too few arguments to function Entity\Product::__construct(), 4 passed in /var/www/html/src/Repository/ProductRepository.php on line 17 and exactly 5 expected
+/var/www/html/src/Entity/Product.php
+line:16
+2024-07-28 07:41:14
+Repository\FavoriteRepository::hydrate(): Argument #2 ($productRepository) must be of type Repository\ProductRepository, Entity\Product given, called in /var/www/html/src/Repository/FavoriteRepository.php on line 40
+/var/www/html/src/Repository/FavoriteRepository.php
+line:45
+2024-07-28 07:44:17
+Too few arguments to function Repository\ProductRepository::__construct(), 0 passed in /var/www/html/src/Entity/Product.php on line 18 and exactly 1 expected
+/var/www/html/src/Repository/ProductRepository.php
+line:11
+2024-07-28 07:45:21
+Repository\FavoriteRepository::hydrate(): Argument #2 ($productRepository) must be of type Repository\ProductRepository, Entity\Product given, called in /var/www/html/src/Repository/FavoriteRepository.php on line 40
+/var/www/html/src/Repository/FavoriteRepository.php
+line:45
+2024-07-28 07:46:13
+Call to a member function prepare() on null
+/var/www/html/src/Repository/OrderProductRepository.php
+line:22
+2024-07-28 08:04:43
+Call to a member function prepare() on null
+/var/www/html/src/Repository/OrderProductRepository.php
+line:22
+2024-07-28 08:22:15
+Connection::execute(): Argument #2 ($query) must be of type ?array, string given, called in /var/www/html/src/Repository/ReviewRepository.php on line 25
+/var/www/html/src/Connection.php
+line:17
+2024-07-28 08:27:50
+Connection::execute(): Argument #2 ($query) must be of type ?array, string given, called in /var/www/html/src/Repository/ImageRepository.php on line 22
+/var/www/html/src/Connection.php
+line:17
+2024-07-28 08:29:46
+Call to undefined method Connection::prepare()
+/var/www/html/src/Repository/OrderRepository.php
+line:32
+2024-07-28 08:30:37
+Connection::execute(): Argument #2 ($query) must be of type ?array, string given, called in /var/www/html/src/Repository/FavoriteRepository.php on line 22
+/var/www/html/src/Connection.php
+line:17
+2024-07-28 08:41:42
+Call to undefined method Connection::prepare()
+/var/www/html/src/Repository/OrderRepository.php
+line:32
+2024-07-28 08:48:44
+Call to a member function prepare() on null
+/var/www/html/src/Repository/OrderProductRepository.php
+line:22
+2024-07-28 08:50:57
+Too few arguments to function Repository\OrderProductRepository::__construct(), 0 passed in /var/www/html/src/Entity/OrderProduct.php on line 16 and exactly 1 expected
+/var/www/html/src/Repository/OrderProductRepository.php
+line:13
+2024-07-28 08:51:48
+Too few arguments to function Repository\ImageRepository::__construct(), 0 passed in /var/www/html/src/Entity/Image.php on line 19 and exactly 1 expected
+/var/www/html/src/Repository/ImageRepository.php
+line:11
