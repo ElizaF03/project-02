@@ -11,7 +11,6 @@ class UserProductRepository
     private ProductRepository $productRepository;
     private ConnectionInterface $connection;
     public function __construct(UserRepository $userRepository, ProductRepository $productRepository, ConnectionInterface $connection){
-       parent::__construct();
         $this->userRepository = $userRepository;
         $this->productRepository = $productRepository;
         $this->connection = $connection;

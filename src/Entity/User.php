@@ -2,7 +2,9 @@
 
 namespace Entity;
 
-class User extends \Repository\UserRepository
+use Repository\UserRepository;
+
+class User extends UserRepository
 {
     private int $id;
     private string $username;
@@ -11,7 +13,6 @@ class User extends \Repository\UserRepository
 
     public function __construct(int $id, string $username, string $email, string $password)
     {
-        parent::__construct();
         $this->id = $id;
         $this->username = $username;
         $this->email = $email;

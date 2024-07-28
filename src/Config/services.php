@@ -97,7 +97,7 @@ return [
         return new ImageService($imageRepository);
     },
     AuthenticationInterface::class => function (Container $container) {
-        $userRepository = new UserRepository();
+        $userRepository = $container->get(UserRepository::class);
         return new AuthenticationSessionService($userRepository);
     },
     ProductRepository::class => function (Container $container) {
@@ -109,7 +109,7 @@ return [
         return new UserRepository($connection);
     },
     UserProductRepository::class => function (Container $container) {
-        $userRepository = new UserRepository();
+        $userRepository = $container->get(UserRepository::class);
         $productRepository = $container->get(ProductRepository::class);
         $connection=$container->get(Connection::class);
         return new UserProductRepository($userRepository, $productRepository, $connection);

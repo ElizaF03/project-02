@@ -1015,3 +1015,19 @@ line:13
 Too few arguments to function Repository\ImageRepository::__construct(), 0 passed in /var/www/html/src/Entity/Image.php on line 19 and exactly 1 expected
 /var/www/html/src/Repository/ImageRepository.php
 line:11
+2024-07-28 09:09:38
+Too few arguments to function Repository\UserRepository::__construct(), 0 passed in /var/www/html/src/Config/services.php on line 100 and exactly 1 expected
+/var/www/html/src/Repository/UserRepository.php
+line:11
+2024-07-28 09:09:56
+Too few arguments to function Repository\UserRepository::__construct(), 0 passed in /var/www/html/src/Config/services.php on line 100 and exactly 1 expected
+/var/www/html/src/Repository/UserRepository.php
+line:11
+2024-07-28 09:11:58
+Too few arguments to function Repository\UserRepository::__construct(), 0 passed in /var/www/html/src/Config/services.php on line 100 and exactly 1 expected
+/var/www/html/src/Repository/UserRepository.php
+line:11
+2024-07-28 09:13:13
+Too few arguments to function Repository\UserRepository::__construct(), 0 passed in /var/www/html/src/Entity/User.php on line 14 and exactly 1 expected
+/var/www/html/src/Repository/UserRepository.php
+line:11
