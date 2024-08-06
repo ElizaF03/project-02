@@ -2,8 +2,8 @@
 
 namespace Repository;
 
-use Entity\UserProduct;
 use ConnectionInterface;
+use Entity\UserProduct;
 
 class UserProductRepository
 {
@@ -25,7 +25,7 @@ class UserProductRepository
         foreach ($userProducts as $userProduct) {
             $user = $this->userRepository->getById($userProduct["user_id"]);
             $product = $this->productRepository->getById($userProduct["product_id"]);
-            $result[$userProduct['id']] = $this->hydrate($userProduct, $user, $product);
+            $result[$userProduct['id']] = $this->hydrate($userProduct, $user);
         }
         return $result;
     }
@@ -45,12 +45,14 @@ class UserProductRepository
         if ($product === null) {
             return null;
         }
-        return $this->hydrate($result, $user, $product);
+        return $this->hydrate($result);
     }
 
-    private function hydrate(array $data, UserRepository $userRepository, ProductRepository $productRepository): UserProduct
+    private function hydrate(array $data): UserProduct
     {
-        return new UserProduct($data["id"], $userRepository, $productRepository, $data["quantity"]);
+        $user = $this->userRepository->getById($data["user_id"]);
+        $product = $this->productRepository->getById($data["product_id"]);
+        return new UserProduct($data["id"], $user, $product, $data["quantity"]);
     }
 
     public function create(int $userId, int $productId, int $quantity = 1): void

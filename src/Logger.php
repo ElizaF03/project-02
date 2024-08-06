@@ -1,5 +1,7 @@
 <?php
 
+
+
 class Logger implements LoggerInterface
 {
     public function log($message): void

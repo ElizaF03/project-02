@@ -1,5 +1,6 @@
 <?php
 
+
 class Autoloader
 {
     public static function registarte(string $path): void

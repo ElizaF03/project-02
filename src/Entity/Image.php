@@ -2,23 +2,19 @@
 
 namespace Entity;
 
-use Repository\ImageRepository;
-use Repository\ProductRepository;
-use Repository\ReviewRepository;
-
-class Image extends ImageRepository
+class Image
 {
     private int $id;
-    private int $productId;
-    private int $reviewId;
+    private Product $product;
+    private Review $review;
     private string $path;
 
 
-    public  function __construct(int $id, int $productId, int$reviewId, string $path)
+    public  function __construct(int $id, Product $product, Review $review, string $path)
     {
         $this->id = $id;
-        $this->productId = $productId;
-        $this->reviewId = $reviewId;
+        $this->product = $product;
+        $this->review = $review;
         $this->path = $path;
     }
 
@@ -27,14 +23,14 @@ class Image extends ImageRepository
         return $this->id;
     }
 
-    public function getProduct(): int
+    public function getProduct(): Product
     {
-        return $this->productId;
+        return $this->product;
     }
 
-    public function getReview(): int
+    public function getReview(): Review
     {
-        return $this->reviewId;
+        return $this->review;
     }
 
     public function getPath(): string

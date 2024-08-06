@@ -2,8 +2,9 @@
 
 namespace Repository;
 
-use Entity\Order;
 use ConnectionInterface;
+use Entity\Order;
+
 class OrderRepository
 {
     private ConnectionInterface $connection;

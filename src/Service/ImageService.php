@@ -27,11 +27,11 @@ class ImageService
             $this->imageRepository->create($productId, $reviewId, $image);
         }
     }
-    public function getImage( int $reviewId): string|false
+    public function getImage( int $reviewId)
     {
         $image = $this->imageRepository->getOne($reviewId);
         if($image){
-            return $image->getPath();
+            return $image;
         }
       return false;
     }

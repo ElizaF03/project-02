@@ -2,16 +2,18 @@
 
 namespace Repository;
 
-use Entity\Favorite;
 use ConnectionInterface;
+use Entity\Favorite;
 
 class FavoriteRepository
 {
+    private UserRepository $userRepository;
     private ProductRepository $productRepository;
     private ConnectionInterface $connection;
 
-    public function __construct(ProductRepository $productRepository, ConnectionInterface $connection)
+    public function __construct(UserRepository $userRepository,  ProductRepository $productRepository, ConnectionInterface $connection)
     {
+        $this->userRepository=$userRepository;
         $this->productRepository = $productRepository;
         $this->connection = $connection;
     }
@@ -24,8 +26,7 @@ class FavoriteRepository
         if ($result === false) {
             return null;
         }
-        $product = $this->productRepository->getById($result['product_id']);
-        return $this->hydrate($result, $product);
+        return $this->hydrate($result);
     }
 
     public function getAllByUserId(int $userId): array
@@ -36,15 +37,16 @@ class FavoriteRepository
             return [];
         }
         foreach ($favoriteProducts as $favoriteProduct) {
-            $product = $this->productRepository->getById($favoriteProduct['product_id']);
-            $result[$favoriteProduct['id']] = $this->hydrate($favoriteProduct, $product);
+            $result[$favoriteProduct['id']] = $this->hydrate($favoriteProduct);
         }
         return $result;
     }
 
-    private function hydrate(array $data, ProductRepository $productRepository): Favorite
+    private function hydrate(array $data): Favorite
     {
-        return new Favorite($data["id"], $data['user_id'], $productRepository);
+        $user = $this->userRepository->getById($data["user_id"]);
+        $product = $this->productRepository->getById($data['product_id']);
+        return new Favorite($data["id"], $user, $product);
     }
 
     public function create(int $userId, int $productId): void

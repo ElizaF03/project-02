@@ -2,8 +2,8 @@
 
 namespace Repository;
 
-use Entity\Product;
 use ConnectionInterface;
+use Entity\Product;
 
 class ProductRepository
 {
@@ -11,10 +11,6 @@ class ProductRepository
     public function __construct(ConnectionInterface $connection){
         $this->connection = $connection;
 
-    }
-    private function hydrate(array $data): Product
-    {
-        return new Product($data["id"], $data["name"], $data["price"], $data["img_url"]);
     }
 
     public function getAll(): array
@@ -32,13 +28,16 @@ class ProductRepository
 
     public function getById(int $id): ?Product
     {
-        $query=['id' => $id];
-        $stmt = $this->connection->execute("SELECT * FROM products WHERE id=:id",$query);
+        $stmt = $this->connection->execute("SELECT * FROM products WHERE id=:id",(['id' => $id]));
         $product = $stmt->fetch();
         if ($product === false) {
             return null;
         } else {
             return $this->hydrate($product);
         }
+    }
+    private function hydrate(array $data): Product
+    {
+        return new Product($data["id"], $data["name"], $data["price"], $data["img_url"]);
     }
 }

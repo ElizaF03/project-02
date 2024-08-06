@@ -82,7 +82,7 @@
                         <li class="reviews_item">
 
                             <div class="review_name_user">
-                                User Id: <?php echo $review->getUserId(); ?>
+                                User Id: <?php echo $review->getUser()->getId(); ?>
                             </div>
                             <div class="review_body">
 
@@ -94,9 +94,9 @@
                                 </div>
 
                                 <div class="review_img">
-                                    <img src="<?php if ($review->getImage()) {
-                                        echo $review->getImage()->getPath();
-                                    } ?>" alt="" <?php if (!$review->getImage()) {
+                                    <img src="<?php if ($getImage($review->getId())) {
+                                        echo $getImage($review->getId())->getPath();
+                                    } ?>" alt="" <?php if (!$getImage($review->getId())) {
                                         echo "style='display: none'";
                                     } ?>>
                                 </div>

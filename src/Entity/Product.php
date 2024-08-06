@@ -4,7 +4,7 @@ namespace Entity;
 
 use Repository\ProductRepository;
 
-class Product extends ProductRepository
+class Product
 {
     private int $id;
     private string $name;

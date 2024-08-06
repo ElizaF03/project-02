@@ -7,15 +7,15 @@ use Repository\ProductRepository;
 class Favorite
 {
     private int $id;
-    private int $userId;
-    private ProductRepository $product;
+    private User $user;
+    private Product $product;
 
 
 
-    public function __construct(int $id, int $userId, ProductRepository $product)
+    public function __construct(int $id, User $user, Product $product)
     {
         $this->id = $id;
-        $this->userId = $userId;
+        $this->user = $user;
         $this->product = $product;
     }
 
@@ -24,9 +24,9 @@ class Favorite
         return $this->id;
     }
 
-    public function getUserId(): int
+    public function getUser(): User
     {
-        return $this->userId;
+        return $this->user;
     }
 
     public function getProduct(): Product

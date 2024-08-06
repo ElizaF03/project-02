@@ -1,11 +1,14 @@
 <?php
 
+
 class Container
 {
-     private array $services = [];
-     public function __construct($services = []){
-         $this->services = $services;
-     }
+    private array $services = [];
+
+    public function __construct($services = [])
+    {
+        $this->services = $services;
+    }
 
     /**
      * @return array
@@ -14,6 +17,7 @@ class Container
     {
         return $this->services;
     }
+
     public function get(string $class)
     {
         $func = $this->services[$class];

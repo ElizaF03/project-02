@@ -2,18 +2,11 @@
 
 namespace Service;
 
-use Container;
-use Model\Order;
-use Model\OrderProduct;
-use Model\UserProduct;
-use PDO;
+use ConnectionInterface;
 use Repository\OrderProductRepository;
 use Repository\OrderRepository;
-use Repository\Repository;
 use Repository\UserProductRepository;
-use Repository\UserRepository;
 use Throwable;
-use ConnectionInterface;
 
 class OrderService
 {
@@ -58,8 +51,8 @@ class OrderService
             }
             $this->userProductRepository->removeAll($userId);
         } catch (Throwable $exception) {
-            $pdo->rollBack();
+            $this->connection->rollBack();
         }
-        $pdo->commit();
+        $this->connection->commit();
     }
 }

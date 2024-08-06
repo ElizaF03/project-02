@@ -2,9 +2,8 @@
 
 namespace Repository;
 
-use Entity\Order;
-use Entity\OrderProduct;
 use ConnectionInterface;
+use Entity\OrderProduct;
 
 class OrderProductRepository
 {

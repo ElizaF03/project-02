@@ -12,6 +12,7 @@ use Service\CartService;
 use Service\ImageService;
 use Service\OrderService;
 use Service\RatingService;
+use Service\ReviewService;
 
 class ProductCardController
 {
@@ -22,10 +23,10 @@ class ProductCardController
     private ProductRepository $productRepository;
     private ReviewRepository $reviewRepository;
     private OrderRepository $orderRepository;
-    private ImageService $imageService;
     private OrderService $orderService;
+    private ImageService $imageService;
 
-    public function __construct(AuthenticationInterface $authenticationService, CartService $cartService, RatingService $ratingService, ProductRepository $productRepository, ReviewRepository $reviewRepository, OrderRepository $orderRepository, ImageService $imageService, OrderService $orderService)
+    public function __construct(AuthenticationInterface $authenticationService, CartService $cartService, RatingService $ratingService, ProductRepository $productRepository, ReviewRepository $reviewRepository, OrderRepository $orderRepository, OrderService $orderService, ImageService $imageService)
     {
         $this->authenticationService = $authenticationService;
         $this->cartService = $cartService;
@@ -33,8 +34,8 @@ class ProductCardController
         $this->productRepository = $productRepository;
         $this->reviewRepository = $reviewRepository;
         $this->orderRepository = $orderRepository;
-        $this->imageService = $imageService;
         $this->orderService = $orderService;
+        $this->imageService = $imageService;
     }
 
     public function getProductCard(ProductRequest $request): void
@@ -51,6 +52,9 @@ class ProductCardController
         if ($reviews) {
             $rating = $this->ratingService->calcRating($reviews);
         }
+        $getImage = function ($reviewId) {
+        return $this->imageService->getImage($reviewId);
+    };
         $orders = $this->orderRepository->getAll($userId);
         $productFromOrder = $this->orderService->searchProductInOrders($orders, $product->getId());
         require_once '../View/product-card.php';
